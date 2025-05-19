@@ -76,4 +76,10 @@ class CartonAuditController extends Controller
     {
         //
     }
+
+    public function pickNpack()
+    {
+        return view('processqcmodule::templates.packaging.carton-audit.pick-n-pack');
+    }
+
 }

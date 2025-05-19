@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\ProcessQCModule\Http\Controllers\Laundy;
+namespace Modules\ProcessQCModule\Http\Controllers\Laundry;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class FinishingMeasurementInspectionController extends Controller
+class FinishingInspectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -76,4 +76,10 @@ class FinishingMeasurementInspectionController extends Controller
     {
         //
     }
+
+    public function measurement()
+    {
+        return view('processqcmodule::templates.laundry.finishing-inspection.measurement');
+    }
+
 }

@@ -3,22 +3,22 @@
         <li>
             <a
                 href="{{ route('accessory::packing-material.testing') }}"
-                class="{{ request()->routeIs('accessory::packing-material.testing') ? 'text-blue-500':'' }}">Testing</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::packing-material.testing') ? 'btn-primary':'btn-ghost' }}">Testing</a>
         </li>
         <li>
           <a
                 href="{{ route('accessory::packing-material.audit') }}"
-                class="{{ request()->routeIs('accessory::packing-material.audit') ? 'text-blue-500':'' }}">Audit</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::packing-material.audit') ? 'btn-primary':'btn-ghost' }}">Audit</a>
         </li>
         <li>
             <a
                 href="{{ route('accessory::packing-material.approval') }}"
-                class="{{ request()->routeIs('accessory::packing-material.approval') ? 'text-blue-500':'' }}">Approval</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::packing-material.approval') ? 'btn-primary':'btn-ghost' }}">Approval</a>
         </li>
         <li>
             <a
                 href="{{ route('accessory::packing-material.inspection') }}"
-                class="{{ request()->routeIs('accessory::packing-material.inspection') ? 'text-blue-500':'' }}">100% Inspection</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::packing-material.inspection') ? 'btn-primary':'btn-ghost' }}">100% Inspection</a>
         </li>
     </ul>
   </div>

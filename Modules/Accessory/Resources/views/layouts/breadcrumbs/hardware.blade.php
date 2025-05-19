@@ -3,22 +3,22 @@
         <li>
             <a
                 href="{{ route('accessory::hardware.testing') }}"
-                class="{{ request()->routeIs('accessory::hardware.testing') ? 'text-blue-500':'' }}">Testing</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::hardware.testing') ? 'btn-primary':'btn-ghost' }}">Testing</a>
         </li>
         <li>
           <a
                 href="{{ route('accessory::hardware.audit') }}"
-                class="{{ request()->routeIs('accessory::hardware.audit') ? 'text-blue-500':'' }}">Audit</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::hardware.audit') ? 'btn-priry':'btn-ghost' }}">Audit</a>
         </li>
         <li>
             <a
                 href="{{ route('accessory::hardware.approval') }}"
-                class="{{ request()->routeIs('accessory::hardware.approval') ? 'text-blue-500':'' }}">Approval</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::hardware.approval') ? 'btn-primry':'btn-ghost' }}">Approval</a>
         </li>
         <li>
             <a
                 href="{{ route('accessory::hardware.inspection') }}"
-                class="{{ request()->routeIs('accessory::hardware.inspection') ? 'text-blue-500':'' }}">100% Inspection</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::hardware.inspection') ? 'btn-prry':'btn-ghost' }}">100% Inspection</a>
         </li>
     </ul>
   </div>

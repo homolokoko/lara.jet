@@ -76,4 +76,15 @@ class InlineAuditController extends Controller
     {
         //
     }
+
+    public function inline()
+    {
+        return view('processqcmodule::templates.finishing.inline-audit.inline');
+    }
+
+    public function measurementAudit()
+    {
+        return view('processqcmodule::templates.finishing.inline-audit.measurement-audit');
+    }
+
 }

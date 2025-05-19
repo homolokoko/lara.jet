@@ -76,4 +76,10 @@ class SewingInspectionController extends Controller
     {
         //
     }
+
+    public function endline()
+    {
+        return view('processqcmodule::templates.finishing.sewing-inspection.endline');
+    }
+
 }

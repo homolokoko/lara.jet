@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\ProcessQCModule\Http\Controllers\Laundy;
+namespace Modules\ProcessQCModule\Http\Controllers\AssemblySewingOnline\EndlineAudit;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class SewingInspectionController extends Controller
+class InlineInspectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -76,4 +76,20 @@ class SewingInspectionController extends Controller
     {
         //
     }
+
+    public function setup()
+    {
+        return view('processqcmodule::templates.assembly-sewing-online.endline-audit.inline-inspection.setup');
+    }
+
+    public function report()
+    {
+        return view('processqcmodule::templates.assembly-sewing-online.endline-audit.inline-inspection.report');
+    }
+
+    public function inspector()
+    {
+        return view('processqcmodule::templates.assembly-sewing-online.endline-audit.inline-inspection.inspector');
+    }
+
 }

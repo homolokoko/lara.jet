@@ -76,4 +76,10 @@ class EndlineAuditController extends Controller
     {
         //
     }
+
+    public function inlineInspection()
+    {
+        return view('processqcmodule::templates.packaging.endline-audit.inline-inspection');
+    }
+
 }

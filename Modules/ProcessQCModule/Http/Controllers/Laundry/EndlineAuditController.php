@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\ProcessQCModule\Http\Controllers\Laundy;
+namespace Modules\ProcessQCModule\Http\Controllers\Laundry;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -76,4 +76,10 @@ class EndlineAuditController extends Controller
     {
         //
     }
+
+    public function inlineInspection()
+    {
+        return view('processqcmodule::templates.laundry.endline-audit.inline-inspection');
+    }
+
 }

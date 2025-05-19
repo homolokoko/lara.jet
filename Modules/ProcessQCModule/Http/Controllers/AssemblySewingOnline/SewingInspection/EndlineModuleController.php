@@ -14,7 +14,7 @@ class EndlineModuleController extends Controller
      */
     public function index()
     {
-        return view('processqcmodule::index');
+        return view('processqcmodule::templates.assembly-sewing-online.sewing-inspection.endline');
     }
 
     /**

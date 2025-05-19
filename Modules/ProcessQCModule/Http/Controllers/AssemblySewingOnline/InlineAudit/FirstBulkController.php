@@ -76,4 +76,19 @@ class FirstBulkController extends Controller
     {
         //
     }
+
+    public function setup()
+    {
+        return view('processqcmodule::templates.assembly-sewing-online.inline-audit.first-bulk.setup');
+    }
+
+    public function report()
+    {
+        return view('processqcmodule::templates.assembly-sewing-online.inline-audit.first-bulk.report');
+    }
+
+    public function inspector()
+    {
+        return view('processqcmodule::templates.assembly-sewing-online.inline-audit.first-bulk.inspector');
+    }
 }

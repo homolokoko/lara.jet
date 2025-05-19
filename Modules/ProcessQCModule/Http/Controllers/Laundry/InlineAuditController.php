@@ -76,4 +76,15 @@ class InlineAuditController extends Controller
     {
         //
     }
+
+    public function inlineAfterwash()
+    {
+        return view('processqcmodule::templates.laundry.inline-audit.inline-afterwash');
+    }
+
+    public function measurementAudit()
+    {
+        return view('processqcmodule::templates.laundry.inline-audit.measurement-audit');
+    }
+
 }

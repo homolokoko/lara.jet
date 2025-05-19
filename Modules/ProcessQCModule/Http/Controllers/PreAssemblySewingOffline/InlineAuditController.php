@@ -76,4 +76,10 @@ class InlineAuditController extends Controller
     {
         //
     }
+
+    public function offline()
+    {
+        return view('processqcmodule::pre-assembly-sewing-offline.inline-audit.offline');
+    }
+
 }

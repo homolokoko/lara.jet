@@ -76,4 +76,10 @@ class InlineAuditController extends Controller
     {
         //
     }
+
+    public function inlinePacking()
+    {
+        return view('processqcmodule::templates.packaging.inline-audit.inline-packing');
+    }
+
 }

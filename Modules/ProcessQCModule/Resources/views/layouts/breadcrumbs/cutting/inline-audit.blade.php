@@ -3,12 +3,12 @@
         <li>
             <a
                 href="{{ route('processqcmodule::cutting.inline-audit.inline-cutting') }}"
-                class="{{ request()->routeIs('processqcmodule::cutting.inline-audit.inline-cutting') ? 'text-blue-500':'' }}">Inline Cutting</a>
+                class="btn btn-xs {{ request()->routeIs('processqcmodule::cutting.inline-audit.inline-cutting') ? 'btn-primary':'btn-ghost' }}">Inline Cutting</a>
         </li>
         <li>
           <a
                 href="{{ route('processqcmodule::cutting.inline-audit.fabric-audit') }}"
-                class="{{ request()->routeIs('processqcmodule::cutting.inline-audit.fabric-audit') ? 'text-blue-500':'' }}">Fabric Audit</a>
+                class="btn btn-xs {{ request()->routeIs('processqcmodule::cutting.inline-audit.fabric-audit') ? 'btn-primary':'btn-ghost' }}">Fabric Audit</a>
         </li>
     </ul>
   </div>

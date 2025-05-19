@@ -3,22 +3,22 @@
         <li>
             <a
                 href="{{ route('accessory::sewing-trim.testing') }}"
-                class="{{ request()->routeIs('accessory::sewing-trim.testing') ? 'text-blue-500':'' }}">Testing</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::sewing-trim.testing') ? 'btn-primary':'btn-ghost' }}">Testing</a>
         </li>
         <li>
           <a
                 href="{{ route('accessory::sewing-trim.audit') }}"
-                class="{{ request()->routeIs('accessory::sewing-trim.audit') ? 'text-blue-500':'' }}">Audit</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::sewing-trim.audit') ? 'btn-primary':'btn-ghost' }}">Audit</a>
         </li>
         <li>
             <a
                 href="{{ route('accessory::sewing-trim.approval') }}"
-                class="{{ request()->routeIs('accessory::sewing-trim.approval') ? 'text-blue-500':'' }}">Approval</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::sewing-trim.approval') ? 'btn-primary':'btn-ghost' }}">Approval</a>
         </li>
         <li>
             <a
                 href="{{ route('accessory::sewing-trim.inspection') }}"
-                class="{{ request()->routeIs('accessory::sewing-trim.inspection') ? 'text-blue-500':'' }}">100% Inspection</a>
+                class="btn btn-xs {{ request()->routeIs('accessory::sewing-trim.inspection') ? 'btn-primary':'btn-ghost' }}">100% Inspection</a>
         </li>
     </ul>
   </div>

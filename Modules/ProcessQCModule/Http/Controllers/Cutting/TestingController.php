@@ -79,6 +79,6 @@ class TestingController extends Controller
 
     public function fabricTesting()
     {
-        return view();
+        return view('processqcmodule::cutting.testing.fabric-testing');
     }
 }

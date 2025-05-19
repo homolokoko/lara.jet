@@ -18,17 +18,17 @@
     </head>
     <body class="font-sans antialiased">
 
-        <div class="w-screen h-screen p-3 bg-gray-100">
+        <div class="w-screen h-screen">
             <!-- Page Content -->
-            <div class="flex w-full h-full gap-3">
-                <div class="w-1/4 h-full py-5 overflow-auto bg-gray-700 shadow-lg side rounded-2xl">
+            <div class="flex w-full h-full divide-x">
+                <div class="w-1/4 h-full py-5 overflow-auto bg-gray-700 shadow-lg side">
                   @include('layouts.side')
                 </div>
-                <div class="flex flex-col w-3/4 gap-3 main">
-                  <div class="w-full p-5 bg-gray-700 shadow-lg nav rounded-2xl">
+                <div class="flex flex-col w-3/4 divide-y main">
+                  <div class="w-full p-5 bg-gray-700 shadow-lg nav">
                     <h3 class="text-xl font-bold">TQMS Process Module</h3>
                   </div>
-                  <div class="w-full h-full p-5 overflow-auto bg-gray-700 shadow-lg content rounded-2xl">
+                  <div class="w-full h-full p-5 overflow-auto bg-gray-700 shadow-lg content">
                     {{$slot}}
                   </div>
                 </div>
