@@ -72,4 +72,20 @@
         </ul>
     </li>
 
+    <div x-data="{
+        signout(){
+            swal.fire({
+                icon:'warning',
+                title:'You almost sign yourself out!',
+                text:'Are you sure, want to signout?',
+                showDenyButton: true,
+                confirmButtonText: 'Yes'
+            }).then((result)=>{
+                if(result.isConfirmed)
+                    axios.post(@js(route('logout')))
+                        .then(()=>{ location.reload() })
+            })
+        }
+    }"><button class="btn btn-sm btn-link" @click="signout()"><x-heroicon-s-cloud-download class="w-5 h-5" /> logout</button></div>
+
 </ul>

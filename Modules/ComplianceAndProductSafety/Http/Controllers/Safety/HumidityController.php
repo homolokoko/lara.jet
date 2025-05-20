@@ -84,6 +84,13 @@ class HumidityController extends Controller
 
     public function report()
     {
+        return response()->json(
+            \Modules\ComplianceAndProductSafety\Entities\Humidity\RootEntity::with([
+                'style',
+                'location',
+                'timePeriod'
+            ])->get()
+        );
         return view('complianceandproductsafety::templates.safety.humidity.report');
     }
 

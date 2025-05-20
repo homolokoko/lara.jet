@@ -1,15 +1,17 @@
  <div
     x-data="{
         list: [],
-        param: '',
+        param: {},
     }"
     class="">
     {{$slot}}
     <div class="flex flex-wrap w-full gap-3 p-3 border rounded-md">
         <template x-for="(item, index) in list" :key="item.value">
-            <label class="space-x-2 btn">
-                <input type="radio" x-model="param" :value="item.value" class="radio" ><i x-text="item.text"></i>
-            </label>
+            <button @click="param=item"
+                :class="{
+                    'btn-outline':param.value!==item.value,
+                    'btn-success':param.value===item.value,
+                    }" class="btn btn-sm" x-text="item.text"></button>
         </template>
     </div>
 

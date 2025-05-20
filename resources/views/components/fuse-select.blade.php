@@ -30,14 +30,14 @@
         if(!this.search) return this.list;
         else return _.map(fuseFilter,obj => obj.item);
     }
-}" @click.away="open=false" class="relative w-full border divide-y rounded">
+}" @click.away="open=false" class="relative w-full divide-y rounded">
     {{ $slot  }}
     <button
         @click="open=!open;$nextTick(()=>{ $refs.input.focus() })"
-        class="flex items-center justify-between w-full capitalize btn btn-sm">
+        class="flex items-center justify-between w-full capitalize btn btn-sm btn-outline">
         <span x-show="!param.value">Select</span>
         <template x-for="(item, index) in list" :key="item.value">
-            <span class="text-sm font-semibold text-white bg-blue-500 rounded-md px-2 py-0.5" x-show="param.value===item.value" x-text="item.text"></span>
+            <span class="btn btn-xs btn-success" x-show="param.value===item.value" x-text="item.text"></span>
         </template>
         <label :class="{'rotate-180':open}"><x-heroicon-o-chevron-down class="w-5 h-5" /></label>
     </button>
@@ -56,12 +56,11 @@
                     @click="selectItem(item)"
                     x-text="item.text"
                     :class="{
-                            'bg-gray-500':param.value===item.value,
+                            'bg-teal-800':param.value===item.value,
                             'hover:bg-gray-500':param.value!==item.value,
-                        }" class="px-3 py-0.5 cursor-default flex items-center gap-2 hover:bg-gray-500"></li>
+                        }" class="px-3 py-0.5 cursor-default gap-2"></li>
             </template>
         </ul>
-        <div class="p-5 bg-gray-500"></div>
     </div>
 
 

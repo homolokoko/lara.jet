@@ -26,7 +26,7 @@
                 </div>
                 <div class="flex flex-col w-3/4 divide-y main">
                   <div class="w-full p-5 bg-gray-700 shadow-lg nav">
-                    <h3 class="text-xl font-bold">TQMS Process Module</h3>
+                    <a href="{{ route('dashboard') }}" class="text-xl font-bold">TQMS Process Module</a>
                   </div>
                   <div class="w-full h-full p-5 overflow-auto bg-gray-700 shadow-lg content">
                     {{$slot}}

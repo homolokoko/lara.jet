@@ -10,4 +10,9 @@ class Location extends Model
     use HasFactory;
     protected $table = 'location';
     protected $fillable = ['name'];
+
+    public function getNameAttribute($val)
+    {
+        return 'line '.$val;
+    }
 }

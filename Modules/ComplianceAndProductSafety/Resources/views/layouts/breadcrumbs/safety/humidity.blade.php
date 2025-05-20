@@ -3,17 +3,17 @@
         <li>
             <a
                 href="{{ route('complianceandproductsafety::safety.humidity.setup') }}"
-                class="{{ request()->routeIs('complianceandproductsafety::safety.humidity.setup') ? 'text-blue-500':'' }}"> Setup </a>
+                class=" btn btn-xs {{ request()->routeIs('complianceandproductsafety::safety.humidity.setup') ? 'btn-primary':'btn-ghost' }}"> Setup </a>
         </li>
         <li>
           <a
                 href="{{ route('complianceandproductsafety::safety.humidity.report') }}"
-                class="{{ request()->routeIs('complianceandproductsafety::safety.humidity.report') ? 'text-blue-500':'' }}"> Report </a>
+                class=" btn btn-xs {{ request()->routeIs('complianceandproductsafety::safety.humidity.report') ? 'btn-primary':'btn-ghost' }}"> Report </a>
         </li>
         <li>
             <a
                 href="{{ route('complianceandproductsafety::safety.humidity.inspector') }}"
-                class="{{ request()->routeIs('complianceandproductsafety::safety.humidity.inspector') ? 'text-blue-500':'' }}"> Inspector </a>
+                class=" btn btn-xs {{ request()->routeIs('complianceandproductsafety::safety.humidity.inspector') ? 'btn-primary':'btn-ghost' }}"> Inspector </a>
         </li>
     </ul>
   </div>
