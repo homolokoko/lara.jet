@@ -7,5 +7,6 @@
     "ComplianceAndProductSafety": true,
     "ProductDevelopment": true,
     "FinalAuditInspection": true,
-    "ProcessQCModule": true
+    "ProcessQCModule": true,
+    "TestDependency": true
 }

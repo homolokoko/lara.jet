@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <link rel="icon" href="{{ asset('snapchat.png') }}">
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -25,7 +27,8 @@
                   @include('layouts.side')
                 </div>
                 <div class="flex flex-col w-3/4 divide-y main">
-                  <div class="w-full p-5 bg-gray-700 shadow-lg nav">
+                  <div class="flex flex-auto w-full p-5 bg-gray-700 shadow-lg nav">
+                    <img src="{{ asset('snapchat.png') }}" alt="" class="w-8 h-8">
                     <a href="{{ route('dashboard') }}" class="text-xl font-bold">TQMS Process Module</a>
                   </div>
                   <div class="w-full h-full p-5 overflow-auto bg-gray-700 shadow-lg content">
