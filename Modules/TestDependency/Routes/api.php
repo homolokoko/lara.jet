@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\TestDependency\Http\Controllers\QRCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,12 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/testdependency', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('testdependency')->group(function() {
+
+    Route::prefix('qr-code')->group(function(){
+        Route::get('/', [QRCodeController::class,'index'])->name('testdependency::api.qr-code.index');
+    });
+
 });
