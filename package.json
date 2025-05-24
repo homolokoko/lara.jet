@@ -23,6 +23,8 @@
     "dependencies": {
         "daisyui": "^1.25.4",
         "fuse.js": "^7.1.0",
+        "qr-scanner": "^1.4.2",
+        "qrcode": "^1.5.4",
         "slim-select": "^2.11.0",
         "sortablejs": "^1.15.6",
         "sweetalert2": "^11.17.2"

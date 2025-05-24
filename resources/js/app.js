@@ -5,6 +5,8 @@ import Fuse from 'fuse.js';
 import Axios from 'axios';
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import SlimSelect from 'slim-select';
+import QrScanner from 'qr-scanner';
+import QrCode from 'qrcode';
 
 import Alpine from 'alpinejs';
 
@@ -15,6 +17,8 @@ window.Fuse = Fuse
 window.Sortable = Sortable;
 window.axios = Axios;
 window.SlimSelect = SlimSelect;
+window.QrScanner = QrScanner;
+window.QrCode = QrCode;
 
 
 Alpine.start();

@@ -1,5 +1,7 @@
 <?php
 
+use Modules\TestDependency\Http\Controllers\QRCodeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,13 @@
 */
 
 Route::prefix('testdependency')->group(function() {
-    Route::get('/', 'TestDependencyController@index');
+
+    Route::prefix('qr-code')->group(function(){
+        Route::get('/', fn()=>redirect()->route('testdependency::qr-code.scanner'))->name('testdependency::qr-code');
+        Route::get('/scanner', [QRCodeController::class,'scanner'])->name('testdependency::qr-code.scanner');
+        Route::get('/grid-list', [QRCodeController::class,'gridList'])->name('testdependency::qr-code.grid-list');
+        Route::get('/table-list', [QRCodeController::class,'tableList'])->name('testdependency::qr-code.table-list');
+    });
+
+
 });
