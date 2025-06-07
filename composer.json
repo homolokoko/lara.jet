@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "astrotomic/laravel-translatable": "^11.9",
         "blade-ui-kit/blade-heroicons": "^1.5",
         "blade-ui-kit/blade-icons": "^1.8",
         "blade-ui-kit/blade-ui-kit": "^0.3.4",
@@ -18,7 +19,9 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.12",
         "mhmiton/laravel-modules-livewire": "^1.6",
-        "nwidart/laravel-modules": "^8.6"
+        "nwidart/laravel-modules": "^8.6",
+        "staudenmeir/eloquent-has-many-deep": "^1.14",
+        "vicklr/materialized-model": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
