@@ -25,6 +25,10 @@ Route::prefix('shared')->group(function(){
     Route::post('upload', [UploaderController::class, 'upload'])->name('shared.uploader.upload');
 });
 
+Route::prefix('line-guru')->group(function(){
+    Route::get('/output', [\App\Http\Controllers\Api\LineGuru\GarmentTrackingController::class, 'index']);
+});
+
 Route::prefix('admin')->group(function(){
 
     Route::prefix('product')->group(function(){

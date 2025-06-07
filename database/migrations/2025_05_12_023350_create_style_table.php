@@ -16,6 +16,7 @@ class CreateStyleTable extends Migration
         Schema::create('style', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->integer('buyer_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
