@@ -11,4 +11,9 @@ class PurchaseOrder extends Model
 
     protected $table = 'purchase_order';
     protected $fillable = ['no','style_id','ship','active'];
+
+    public function getNameAttribute()
+    {
+        return $this->no;
+    }
 }

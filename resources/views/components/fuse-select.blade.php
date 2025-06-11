@@ -142,16 +142,18 @@
         x-transition:enter-start="opacity-0 -translate-y-1"
         x-transition:enter-end="opacity-100"
         :class="{ 'bottom-0 mb-10' : selectDropdownPosition == 'top', 'top-0 mt-10' : selectDropdownPosition == 'bottom' }"
-        class="absolute z-10 w-full overflow-auto text-sm bg-white border rounded-md shadow-lg max-h-56">
+        class="absolute z-10 w-full overflow-auto text-sm bg-white rounded-md shadow-lg max-h-56">
 
-        <input type="text" x-ref="searchInput" x-model="search" class="w-full px-3 py-1 border-none" placeholder="search ........">
+        <input type="text" x-ref="searchInput" x-model="search" class="w-full sticky top-0 px-3 py-1 border-none" placeholder="search ........">
 
         <template x-for="item in filterList" :key="item.value">
             <li
                 @click="param=item; selectOpen=false; $refs.selectButton.focus();"
                 {{-- :id="item.value + '-' + selectId" --}}
-                :class="{ 'btn-primary' : selectableItemIsActive(item), 'btn-ghost' : !selectableItemIsActive(item) }"
-                @mousemove="selectableItemActive=item"
+                :class="{
+                    'btn-primary' :selectableItemIsActive(item),
+                    'btn-ghost' : !selectableItemIsActive(item),
+                }" @mousemove="selectableItemActive=item"
                 class="flex justify-between w-full border-b rounded-none btn btn-sm">
                 <span class="font-medium" x-text="item.text"></span>
             </li>

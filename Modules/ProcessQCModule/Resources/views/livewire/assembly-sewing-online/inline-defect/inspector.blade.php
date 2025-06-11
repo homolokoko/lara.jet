@@ -3,12 +3,11 @@
     <div x-data="{
         filter:{
             date:'',
-            color:{},
-            defect:{},
-            purchase_order:{},
-            workstation_locate:{},
+            color:@entangle('color'),
             style:@entangle('style'),
-            buyer:@entangle('buyer')
+            buyer:@entangle('buyer'),
+            purchase_order:@entangle('purchase_order'),
+            workstation_locate:@entangle('workstation_locate'),
         },
         qpiDecfects:[],
         data:{
@@ -22,8 +21,25 @@
         addDefectedItem(item){
 
         },
+        recordDefect(){
+            this.$wire.recordDefect(this.filter,this.qpiDecfects)
+        },
         save(){
             console.log('filter',this.filter)
+        },
+        get validateFilter(){
+            let error_message = [];
+            if(!this.filter.date)
+                error_message.push('Please fill date!');
+            if(!this.filter.style.value)
+                error_message.push('Please choose style!');
+            if(!this.filter.buyer.value)
+                error_message.push('Please choose buyer!');
+            if(!this.filter.purchase_order.value)
+                error_message.push('Please choose purchase order!');
+            if(!this.filter.workstation_locate.value)
+                error_message.push('Please choose location!');
+            return error_message;
         },
         get filterDefect(){
             return this.data.defects.filter(
@@ -39,7 +55,15 @@
             <input x-model="data.workstation_locates" x-modelable="list" hidden />
         </x-radio-button>
     </div>
-    <div x-show="filter.workstation_locate.value" class="overflow-hidden border rounded-lg shadow-lg">
+
+    <div x-show="filter.workstation_locate.value" class="border rounded-lg shadow-lg ">
+        <label class="block px-4 py-2 font-semibold bg-gray-300 rounded-t-lg">Style</label>
+        <x-fuse-select>
+            <input x-model="filter.style" x-modelable="param" hidden />
+            <input x-model="data.styles" x-modelable="list" hidden />
+        </x-fuse-select>
+    </div>
+    <div x-show="filter.style.value" class="overflow-hidden border rounded-lg shadow-lg">
         <label class="block px-4 py-2 font-semibold bg-gray-300">Buyer</label>
         <x-radio-button>
             <input x-model="filter.buyer" x-modelable="param" hidden />
@@ -60,14 +84,6 @@
         </template>
     </div> --}}
 
-    <div x-show="filter.buyer.value" class="border rounded-lg shadow-lg ">
-        <label class="block px-4 py-2 font-semibold bg-gray-300 rounded-t-lg">Style</label>
-        <x-fuse-select>
-            <input x-model="filter.style" x-modelable="param" hidden />
-            <input x-model="data.styles" x-modelable="list" hidden />
-        </x-fuse-select>
-    </div>
-
     <div x-show="filter.style.value" class="overflow-hidden border rounded-lg shadow-lg">
         <label class="block px-4 py-2 font-semibold bg-gray-300">Purchase Orders</label>
         <x-radio-button>
@@ -76,7 +92,7 @@
         </x-radio-button>
     </div>
 
-    <div x-show="filter.purchase_order.value" class="overflow-hidden border rounded-lg shadow-lg">
+    <div x-show="filter.style.value" class="overflow-hidden border rounded-lg shadow-lg">
         <label class="block px-4 py-2 font-semibold bg-gray-300">colors</label>
         <x-radio-button>
             <input x-model="filter.color" x-modelable="param" hidden />
@@ -84,14 +100,25 @@
         </x-radio-button>
     </div>
 
-    <div x-show="filter.color.value" class="overflow-hidden border rounded-lg shadow-lg">
+    <div x-show="filter.style.value" class="overflow-hidden border rounded-lg shadow-lg">
         <label class="block px-4 py-2 font-semibold bg-gray-300">Date</label>
         <x-flatpickr>
             <input x-model="filter.date" x-modelable="param" hidden />
         </x-flatpickr>
     </div>
 
-    <div x-show="filter.date " x-data="{
+    <template x-for="error in validateFilter">
+        <div class="alert alert-warning">
+            <div class="flex-1">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+                <label x-text="error"></label>
+            </div>
+        </div>
+    </template>
+
+    <div x-show="validateFilter.length===0" x-data="{
         img:'',
         isActive:false,
         defectTitle:{},
@@ -163,14 +190,18 @@
         </x-modal>
         <button x-show="!img" @click="isActive=true" class="w-full btn btn-success">start inspection</button>
 
-        <div class="grid grid-cols-4 py-4">
-            <template x-for="(item, index) in qpiDecfects" :key="index">
-                <div class="flex flex-col items-center border">
-                    <img :src="item.img" alt="">
-                    <span class="w-full px-3 py-1" x-text="item.defect.text"></span>
-                </div>
-            </template>
+        <div>
+            <div class="grid grid-cols-4 py-4">
+                <template x-for="(item, index) in qpiDecfects" :key="index">
+                    <div class="flex flex-col items-center border">
+                        <img :src="item.img" alt="">
+                        <span class="w-full px-3 py-1" x-text="item.defect.text"></span>
+                    </div>
+                </template>
+            </div>
+            <div class="block w-full"><button @click="recordDefect()" class="btn btn-accent w-full">record defect</button></div>
         </div>
+
 
     </div>
 

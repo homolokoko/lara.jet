@@ -17,6 +17,7 @@ class CreatePqiItemDefectTable extends Migration
             $table->id();
             $table->integer('pqi_item_id')->nullable();
             $table->integer('pqi_defect_id')->nullable();
+            $table->text('photo')->nullable();
         });
     }
 
