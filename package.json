@@ -27,6 +27,7 @@
         "qrcode": "^1.5.4",
         "slim-select": "^2.11.0",
         "sortablejs": "^1.15.6",
-        "sweetalert2": "^11.17.2"
+        "sweetalert2": "^11.17.2",
+        "webcam-easy": "^1.1.1"
     }
 }

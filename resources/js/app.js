@@ -7,6 +7,7 @@ import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import SlimSelect from 'slim-select';
 import QrScanner from 'qr-scanner';
 import QrCode from 'qrcode';
+import Webcam from "webcam-easy";
 
 import Alpine from 'alpinejs';
 
@@ -19,6 +20,7 @@ window.axios = Axios;
 window.SlimSelect = SlimSelect;
 window.QrScanner = QrScanner;
 window.QrCode = QrCode;
+window.Webcam = Webcam;
 
 
 Alpine.start();

@@ -1,6 +1,7 @@
 <?php
 
 use Modules\TestDependency\Http\Controllers\QRCodeController;
+use Modules\TestDependency\Http\Controllers\WebCamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,13 @@ Route::prefix('testdependency')->group(function() {
         Route::get('/grid-list', [QRCodeController::class,'gridList'])->name('testdependency::qr-code.grid-list');
         Route::get('/table-list', [QRCodeController::class,'tableList'])->name('testdependency::qr-code.table-list');
     });
+
+    Route::prefix('web-cam')->group(function(){
+        Route::get('/', fn()=>redirect()->route('testdependency::web-cam.taken'))->name('testdependency::web-cam');
+        Route::get('/taken',[WebCamController::class, 'taken'])->name('testdependency::web-cam.taken');
+    });
+
+
 
 
 });
