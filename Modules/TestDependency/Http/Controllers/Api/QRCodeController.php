@@ -15,7 +15,7 @@ class QRCodeController extends Controller
      */
     public function index()
     {
-        return response()->json(TblTicketEntity::paginate(50));
+        return response()->json(TblTicketEntity::where('orderno','like','%14385%')->paginate(50));
     }
 
     /**

@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class PurchaseOrder extends Model
+{
+    use HasFactory;
+
+    protected $table = 'purchase_order';
+    protected $fillable = ['no','style_id','ship','active'];
+
+    public function getNameAttribute()
+    {
+        return $this->no;
+    }
+}
