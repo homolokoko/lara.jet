@@ -13,9 +13,9 @@ import Webcam from 'webcam-easy';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
-window._ = Lodash
-window.swal = Swal
-window.Fuse = Fuse
+window._ = Lodash;
+window.swal = Swal;
+window.Fuse = Fuse;
 window.Sortable = Sortable;
 window.axios = Axios;
 window.SlimSelect = SlimSelect;

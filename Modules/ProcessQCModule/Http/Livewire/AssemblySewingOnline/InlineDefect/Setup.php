@@ -3,6 +3,7 @@
 namespace Modules\ProcessQCModule\Http\Livewire\AssemblySewingOnline\InlineDefect;
 
 use App\Models\Buyer;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
 use Illuminate\Support\Arr;
@@ -14,19 +15,37 @@ use Modules\ProcessQCModule\Entities\PQI;
 class Setup extends Component
 {
 
-    public array $buyers, $defects;
+    public array $buyer = [], $defect = [];
+    public array $buyers = [], $defects = [], $extra_defects = [];
 
 
     public function boot()
     {
-        $this->listDefect();
+//        $this->listDefect();
         $this->buyers = GetValueTextList::convert(Buyer::get());
     }
 
+    public function updatedBuyer(){ $this->listDefect(); }
+
     public function listDefect()
     {
-        $this->defects = PQI\Defect::where('parent_id',null)
-            ->get()->map(fn($item)=>['value'=>$item->id,'text'=>$item->name])->toArray();
+        $this->defects = GetValueTextList::convert(
+            PQI\Defect::where(['parent_id'=>null,'buyer_id'=>Arr::get($this->buyer,'value')])->get()
+        );
+    }
+
+    public function updatedDefect()
+    {
+        $this->extra_defects = GetValueTextList::convert(
+            PQI\Defect::where(['parent_id'=>Arr::get($this->defect,'value')])->get()
+        );
+    }
+
+    public function listDefectOnSpecificItems()
+    {
+        $this->defects = GetValueTextList::convert(
+            PQI\Defect::where(['parent_id'=>null,'pqi_defect_type_id'=>2])->get()
+        );
     }
 
     public function render()
@@ -36,8 +55,13 @@ class Setup extends Component
 
     public function submit($data)
     {
+//        dd(Arr::get($data,'defect.value'));
+        if(Arr::get($data,'extra_defect.value'))
+            $root = PQI\Defect::where('id',Arr::get($data,'extra_defect.value'))->first();
+        else
+            $root = PQI\Defect::where('id',Arr::get($data,'defect.value'))->first();
         foreach(Arr::get($data,'list') as $item){
-            $defect = PQI\Defect::create(['parent_id'=>Arr::get($data,'defect.value')]);
+            $defect = $root->children()->create(['is_defect'=>true]);
             $translations = $this->addNewDefect(Arr::get($item,'locale'),$defect->id);
             $serverities = $this->addNewServerity(Arr::get($item,'serverity'),$defect->id);
         }
@@ -46,10 +70,11 @@ class Setup extends Component
     public function newGropName($data)
     {
         Arr::set($defect,'buyer_id',Arr::get($data,'buyer.value'));
+        Arr::set($defect,'pqi_defect_type_id',2);
         $defect = PQI\Defect::create($defect);
         $this->addNewDefect(Arr::get($data,'locale'),$defect->id);
         $this->listDefect();
-
+//        $this->listDefectOnSpecificItems();
     }
 
     public function addNewDefect($locale,$defect_id){

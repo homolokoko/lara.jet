@@ -84,7 +84,8 @@ class InlineDefectController extends Controller
 
     public function report()
     {
-//        return \Modules\ProcessQCModule\Entities\PQI\Header::with('items.defects')->get()->toArray();
+//        \Modules\ProcessQCModule\Entities\
+//        return \Modules\ProcessQCModule\Entities\PQI\Defect::where('is_defect',true)->get()->toArray();
         return view('processqcmodule::templates.assembly-sewing-online.inline-defect.report');
     }
 

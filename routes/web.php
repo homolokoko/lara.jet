@@ -24,9 +24,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+//    Route::get('/dashboard', function () {
+//        return view('dashboard');
+//    })->name('dashboard');
 
 
 
@@ -41,6 +41,7 @@ Route::middleware([
 
 });
 
+Route::get('/dashboard', fn ()=>view('dashboard'))->name('dashboard');
 Route::get('/defect',fn()=>view('client.defect'))->name('client.defect');
 Route::get('/photograph-upload',fn()=>view('client.photograph-upload'))->name('client.photograph-upload');
 Route::prefix('blade-ui')->group(function(){

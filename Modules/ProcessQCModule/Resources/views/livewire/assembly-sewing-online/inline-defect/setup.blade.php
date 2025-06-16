@@ -1,12 +1,14 @@
 <div>
 
     <div x-data="{
-
+        exists:[],
         related:'',
-        buyer:{},
-        defect:{},
+        buyer:@entangle('buyer'),
+        defect:@entangle('defect'),
+        extra_defect:{},
         buyers:@entangle('buyers'),
         defects:@entangle('defects'),
+        extra_defects:@entangle('extra_defects'),
         list:[],
         addItem(){
             this.list.push({
@@ -26,7 +28,8 @@
             this.$wire.submit({
                     list:this.list,
                     buyer:this.buyer,
-                    defect:this.defect
+                    defect:this.defect,
+                    extra_defect:this.extra_defect
                 }).then(()=>{
                     swal.fire({
                         icon: 'success',
@@ -36,31 +39,33 @@
                         title:'List of defects was created!'
                     }).then(()=>{ this.list = []; })
                 });
-        }
+        },
     }" class="">
+
 
         <div class="p-5 space-y-4">
 
-        <div class="space-y-2">
-            <label for="">Buyer</label>
-            <x-radio-button>
-                <input x-model="buyer" x-modelable="param" hidden />
-                <input x-model="buyers" x-modelable="list" hidden />
-            </x-radio-button>
-        </div>
+            <div class="overflow-hidden border rounded-lg shadow-lg">
+                <label class="block px-4 py-2 font-semibold bg-gray-300">Buyer</label>
+                <x-radio-button>
+                    <input x-model="buyer" x-modelable="param" hidden />
+                    <input x-model="buyers" x-modelable="list" hidden />
+                </x-radio-button>
+            </div>
 
-        <div x-show="buyer.value" class="space-y-2">
-            <div class="flex justify-between w-full">
-                <label for="">Defect</label>
-                <x-modal>
-                    <x-slot name="trigger">
-                        <button @click="modalOpen=true" class="btn btn-xs">add</button>
-                    </x-slot>
-                    <x-slot name="title">
-                        Add New Defect Group
-                    </x-slot>
-                    <x-slot name="content">
-                        <div x-data="{
+            <div x-show="buyer.value" class="overflow-hidden border rounded-lg shadow-lg">
+                <label class="block px-4 py-2 font-semibold bg-gray-300">
+                    <div class="flex justify-between w-full">
+                        <label for="">Defect</label>
+                        <x-modal>
+                            <x-slot name="trigger">
+                                <button @click="modalOpen=true" class="btn btn-xs">add</button>
+                            </x-slot>
+                            <x-slot name="title">
+                                Add New Defect Group
+                            </x-slot>
+                            <x-slot name="content">
+                                <div x-data="{
                             locale:{
                                 en:'',
                                 kh:'',
@@ -83,31 +88,41 @@
                                     });
                             }
                         }" class="space-y-3">
-                            <div>
-                                <label for="">English</label>
-                                <input x-model="locale.en" type="text" class="block w-full input-bordered input">
-                            </div>
-                            <div>
-                                <label for="">Khmer</label>
-                                <input x-model="locale.kh" type="text" class="block w-full input-bordered input">
-                            </div>
-                            <div>
-                                <label for="">Chinese</label>
-                                <input x-model="locale.cn" type="text" class="block w-full input-bordered input">
-                            </div>
-                            <button @click="newGroupName()" class="w-full btn btn-sm btn-secondary">submit</button>
-                        </div>
-                    </x-slot>
-                </x-modal>
+                                    <div>
+                                        <label for="">English</label>
+                                        <input x-model="locale.en" type="text" class="block w-full input-bordered input">
+                                    </div>
+                                    <div>
+                                        <label for="">Khmer</label>
+                                        <input x-model="locale.kh" type="text" class="block w-full input-bordered input">
+                                    </div>
+                                    <div>
+                                        <label for="">Chinese</label>
+                                        <input x-model="locale.cn" type="text" class="block w-full input-bordered input">
+                                    </div>
+                                    <button @click="newGroupName()" class="w-full btn btn-sm btn-secondary">submit</button>
+                                </div>
+                            </x-slot>
+                        </x-modal>
 
+                    </div>
+                </label>
+                <x-radio-button>
+                    <input x-model="defect" x-modelable="param" hidden />
+                    <input x-model="defects" x-modelable="list" hidden />
+                </x-radio-button>
             </div>
-            <x-fuse-select>
-                <input x-model="defect" x-modelable="param" hidden />
-                <input x-model="defects" x-modelable="list" hidden />
-            </x-fuse-select>
-        </div>
 
-        <div x-show="buyer.value&&defect.value" class="space-y-2">
+            <div x-show="defect.value" class="overflow-hidden border rounded-lg shadow-lg">
+                <label class="block px-4 py-2 font-semibold bg-gray-300"></label>
+                <x-radio-button>
+                    <input x-model="extra_defect" x-modelable="param" hidden />
+                    <input x-model="extra_defects" x-modelable="list" hidden />
+                </x-radio-button>
+            </div>
+
+
+        <div x-show="extra_defect.value" class="space-y-2">
 
             <label for="" class="block">Related Defect</label>
             <div class="relative">
@@ -131,7 +146,7 @@
                             <button @click="removeItem(index)" class="btn btn-sm btn-error">remove</button>
                         </td>
                         <td class="px-3 py-0.5">
-                            <span x-text="item.locale.en"></span>
+                            <input x-model="item.locale.en" class="w-full outline-none border-none input"></input>
                         </td>
                         <td class="px-3 py-0.5">
                             <div class="flex gap-2">
