@@ -1,7 +1,7 @@
 <div x-data="{
     popup:false,
     search:'',
-    param:{},
+    params:[],
     list: [],
     get filterItems(){
         const fuseOptions = {
@@ -28,12 +28,17 @@
     }
 
 }">
-    <label class="button-group input-group">
-        <span class="font-semibold uppercase">{{ $title }}</span>
-        <input @focus="popup=true; $nextTick(()=>{ $refs.popSearchFilter.focus() })" x-model="param.text" placeholder="" class="input block input-ghost w-full input-bordered" readonly />
-    </label>
+    <button @click="popup=true; $nextTick(()=>{ $refs.popSearchFilter.focus() })"
+        class="flex w-full overflow-hidden rounded-lg">
+        <label class="bg-gray-300 font-semibold px-3 py-2">{{ $title }}</label>
+        <div class="border w-full p-1 cursor-default flex flex-wrap gap-1">
+            <template x-for="(item, index) in list" :key="index">
+                <button x-show="_.includes(params,_.toString(item.value))" class="btn btn-xs btn-success" x-text="item.text"></button>
+            </template>
+        </div>
+    </button>
     <div x-show="popup"
-         x-transition:enter="transition ease-out duration-50"
+         x-transition:enter="transition ease-in-out duration-50"
          x-transition:enter-start="opacity-0 -translate-y-1"
          x-transition:enter-end="opacity-100"
         class=" fixed top-0 z-10 left-0 w-screen h-screen">
@@ -52,21 +57,18 @@
                     {{ $other  }}
                     <div class="overflow-auto max-h-56 flex justify-center flex-wrap gap-3 p-5">
                         <template x-for="(item, index) in filterItems" :key="index">
-                            <button
-                                @click="param=item;popup=false"
-                                class="btn btn-md"
-                                :class="{
-                                    'btn-success':item.value===param.value,
-                                    'btn-outline btn-success':item.value!==param.value
-                                }" x-text="item.text"></button>
+                            <button class="btn relative"
+                                    :class="{
+                                        ' btn-success':_.includes(params,_.toString(item.value)),
+                                        'btn-success btn-outline':!_.includes(params,_.toString(item.value))
+                                    }">
+                                <input type="checkbox" x-model="params" :value="item.value"
+                                       class="w-full h-full absolute top-0 left-0 opacity-0">
+                                <label  for="" x-text="item.text"></label>
+                            </button>
                         </template>
-
                     </div>
                 </div>
-{{--                <div class="block px-4 py-2 flex justify-evenly">--}}
-{{--                    <button @click="submit()" class="btn btn-primary">Ok</button>--}}
-{{--                    <button @click="popup=false" class="btn btn-ghost shadow-lg">Close</button>--}}
-{{--                </div>--}}
             </div>
         </div>
 

@@ -20,17 +20,18 @@ use Modules\ProcessQCModule\Entities\PQI\Defect;
 
 class Inspector extends Component
 {
-    public array $buyer = [] , $style = [] ,$purchase_order = [] , $defect = [] , $color = [] , $workstation_locate = [] ;
-    public array $buyers = [], $styles = [],$purchase_orders = [], $defects = [], $colors = [], $workstation_locates = [];
+    public array $orderno = [], $buyer = [] , $style = [] ,$purchase_order = [] , $defect = [] , $color = [] , $workstation_locate = [] ;
+    public array $ordernos =[], $buyers = [], $styles = [],$purchase_orders = [], $defects = [], $colors = [], $workstation_locates = [];
 
     public function boot()
     {
         $this->styles = GetValueTextList::convert(Style::get());
+        $this->ordernos = GetValueTextList::convert(Style::get());
         $this->workstation_locates = GetValueTextList::convert(Location::get());
-        $this->defects = PQI\Defect::with('defects')->where('parent_id',null)->get()->toArray();
+
     }
 
-    public function updatedStyle($param)
+    public function updatedOrderno($param)
     {
         $this->autoFill($param);
     }
@@ -43,22 +44,19 @@ class Inspector extends Component
 
     protected function autoFill($param)
     {
-        $buyer = Style::where('id',$param)->get()->pluck('buyer');
-        $this->buyer = GetValueTextList::mapping($buyer->first());
-        $this->buyers = GetValueTextList::convert(Buyer::whereIn('id',$buyer)->get());
+        $orderno = Style::where('id',$param)->first();
 
-        $colors = StyleColor::where('style_id',Arr::get($param,'value'))->get()->pluck('color');
-        $this->color = GetValueTextList::mapping($colors->first());
-        $this->colors = GetValueTextList::convert($colors);
+        $this->colors = GetValueTextList::convert($orderno->colors);
+        $this->purchase_orders = GetValueTextList::convert($orderno->purchaseOrders);
 
-        $purchase_orders = StylePurchaseOrder::where('style_id',Arr::get($param,'value'))->get()->pluck('purchaseOrder');
-        $purchase_order_mapping = $purchase_orders->map(fn($item)=>['value'=>$item->id,'text'=>$item->no]);
-        $this->purchase_order = $purchase_order_mapping->first();
-        $this->purchase_orders = $purchase_order_mapping->toArray();
+        $this->buyer = GetValueTextList::mapping($orderno->buyer);
+        $this->color = GetValueTextList::mapping($orderno->colors->first());
+        $this->purchase_order = GetValueTextList::mapping($orderno->purchaseOrders->first());
+        $this->defects = PQI\Defect::with('defects.defects')->where(['parent_id'=>null,'buyer_id'=>$orderno->buyer->id])->get()->toArray();
+        return;
     }
     public function recordDefect($filter,$pqiDefects)
     {
-
         $headerData = array(
             'buyer_id'=>Arr::get($filter,'buyer.value'),
             'style_id'=>Arr::get($filter,'style.value'),
@@ -79,6 +77,6 @@ class Inspector extends Component
             Arr::set($defectData,'pqi_defect_id',Arr::get($defect,'defect.value'));
             Arr::set($defectData,'photo',UploadBase64Image::upload(Arr::get($defect,'img'),'pqi'));
             PQI\ItemDefect::create($defectData);
-            endforeach;;
+            endforeach;
     }
 }

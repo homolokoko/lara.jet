@@ -65,12 +65,21 @@ class Report extends Component
 
     public function search($filter)
     {
-        dd($filter);
+        return PQI\Defect::where('is_defect',true)->get()->toArray();
+        return GetValueTextList::convert(PQI\Defect::where('is_defect',true)->get());
     }
 
     public function filter()
     {
 
+    }
+
+    public function submit($data)
+    {
+        foreach($data as $item){
+            PQI\Defect::where('id',Arr::get($item,'value'))
+                ->update(['is_defect'=>!Arr::get($item,'is_not_defect')]);
+        }
     }
 
     protected function dataFilter()
