@@ -14,13 +14,7 @@
             purchase_orders:@entangle('purchase_orders'),
             workstation_locates:@entangle('workstation_locates'),
         },
-        find_str:'',
         defects:[],
-        get findArr(){
-            return this.defects.filter(
-                i => i.name.toLowerCase().includes(this.find_str.toLowerCase())
-            )
-        },
         submit(){
             this.$wire.submit(this.defects)
         },
@@ -34,15 +28,15 @@
 
 {{--            <div class="grid gap-3 md:grid-cols-2">--}}
 
-{{--                <x-popup-single-select>--}}
-{{--                    <x-slot name="title">--}}
-{{--                        {{ __('Style') }}--}}
-{{--                    </x-slot>--}}
-{{--                    <x-slot name="other">--}}
-{{--                        <input x-model="filter.style" x-modelable="param" hidden />--}}
-{{--                        <input x-model="resource.styles" x-modelable="list" hidden />--}}
-{{--                    </x-slot>--}}
-{{--                </x-popup-single-select>--}}
+                <x-popup-single-select>
+                    <x-slot name="title">
+                        {{ __('Style') }}
+                    </x-slot>
+                    <x-slot name="other">
+                        <input x-model="filter.style" x-modelable="param" hidden />
+                        <input x-model="resource.styles" x-modelable="list" hidden />
+                    </x-slot>
+                </x-popup-single-select>
 
 {{--                <x-popup-single-select>--}}
 {{--                    <x-slot name="title">--}}
@@ -88,22 +82,45 @@
 
 {{--            </div>--}}
 
-            <div x-show="defects.length > 0" class="">
-                <input type="text" x-model="find_str" class="input rounded-none w-full input-ghost input-bordered" placeholder="search........." />
-                <template x-for="(item, i) in findArr" :key="item.id">
-                    <div class="px-3 py-1 border flex flex-col gap-3 hover:bg-gray-200">
-{{--                        <input class="checkbox checkbox-lg" type="checkbox" :value="item.value" x-model="item.is_not_defect">--}}
-                        <div class="text-xs breadcrumbs">
-                            <ul>
-                                <template x-for="(path, j) in item.ancestors" :key="path.id">
-                                    <li><span x-text="path.name"></span></li>
-                                </template>
-                            </ul>
-                        </div><span class="text-sm" x-text="`${item.id}-${item.name}`"></span>
-                    </div>
-                </template>
-                <button @click="submit()" class="btn btn-primary btn-md rounded-none">submit</button>
+            <div x-data="{
+                dropdown:false,
+                list:[],
+                param:{},
+                find_str:'',
+                get filterItems(){
+                    return this.list.filter(
+                        i => i.name.toLowerCase().includes(this.find_str.toLowerCase())
+                    )
+                }
+            }">
+                <button class="btn btn-ghost rounded-none border-2 capitalize"
+                        x-text="_.isEmpty(param) ? 'Please choose':param.name"
+                        @click="dropdown=true;$nextTick(()=>{$refs.find_str.focus()})"></button>
+                <input type="hidden" x-model="defect" x-modelable="param" />
+                <input type="hidden" x-model="defects" x-modelable="list" />
+                <div x-show="dropdown" class="relative bg-white">
+                    <input x-ref="find_str" type="text" x-model="find_str" class="input rounded-none w-full input-sm input-ghost input-bordered" placeholder="search........." />
+                    <ul class="max-h-48 min-h-16 relative overflow-auto bg-white border absolute top-0 left-0 divide-y">
+                        <template x-for="(item, i) in filterItems" :key="item.id">
+                            <li class="hover:bg-gray-100">
+                                <label @click="param=item" class="flex flex-col w-full px-3">
+                                    <div class="text-xs breadcrumbs">
+                                        <ul>
+                                            <template x-for="(path, j) in item.ancestors" :key="path.id">
+                                                <li><span x-text="path.name"></span></li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                    <span class="px-3" x-text="item.name"></span>
+                                </label>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
             </div>
+{{--            <div x-show="defects.length > 0">--}}
+{{--                <button @click="submit()" class="btn btn-primary btn-md rounded-none">submit</button>--}}
+{{--            </div>--}}
 
 
 {{--        <button @click="search()" class="btn btn-success w-full">search</button>--}}

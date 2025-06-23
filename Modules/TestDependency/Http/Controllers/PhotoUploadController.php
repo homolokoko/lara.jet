@@ -1,12 +1,14 @@
 <?php
 
-namespace Modules\ProcessQCModule\Http\Controllers\AssemblySewingOnline;
+namespace Modules\TestDependency\Http\Controllers;
 
+use App\Library\ImageOptimize;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 
-class InlineDefectController extends Controller
+class PhotoUploadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class InlineDefectController extends Controller
      */
     public function index()
     {
-        return view('processqcmodule::index');
+        return view('testdependency::index');
     }
 
     /**
@@ -23,7 +25,7 @@ class InlineDefectController extends Controller
      */
     public function create()
     {
-        return view('processqcmodule::create');
+        return view('testdependency::create');
     }
 
     /**
@@ -43,7 +45,7 @@ class InlineDefectController extends Controller
      */
     public function show($id)
     {
-        return view('processqcmodule::show');
+        return view('testdependency::show');
     }
 
     /**
@@ -53,7 +55,7 @@ class InlineDefectController extends Controller
      */
     public function edit($id)
     {
-        return view('processqcmodule::edit');
+        return view('testdependency::edit');
     }
 
     /**
@@ -77,21 +79,14 @@ class InlineDefectController extends Controller
         //
     }
 
-    public function setup()
+    public function upload64(Request $request)
     {
-        return view('processqcmodule::templates.assembly-sewing-online.inline-defect.setup');
+
     }
 
-    public function report()
+    public function uploadFile(Request $request)
     {
-//        \Modules\ProcessQCModule\Entities\
-        return \Modules\ProcessQCModule\Entities\PQI\Defect::where(['is_defect'=>true])->get()->toArray();
-        return view('processqcmodule::templates.assembly-sewing-online.inline-defect.report');
+        return ImageOptimize::save($request->file('file'),'upload','photo');
+//        return ['file'=>$request->file('file')];
     }
-
-    public function inspector()
-    {
-        return view('processqcmodule::templates.assembly-sewing-online.inline-defect.inspector');
-    }
-
 }

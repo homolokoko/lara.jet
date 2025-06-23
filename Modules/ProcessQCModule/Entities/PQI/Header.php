@@ -8,11 +8,13 @@ use App\Models\Style;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Header extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasRelationships;
 
     protected $table = 'pqi_header';
 
@@ -42,6 +44,15 @@ class Header extends Model
             ->belongsTo(
                 Buyer::class,
                 'buyer_id'
+            );
+    }
+
+    public function colors()
+    {
+        return $this
+            ->hasManyDeepFromRelations(
+                $this->items(),
+                (new Item)->color()
             );
     }
 

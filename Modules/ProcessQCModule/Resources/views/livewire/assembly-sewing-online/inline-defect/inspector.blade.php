@@ -7,7 +7,7 @@
             style:{},
             orderno:@entangle('orderno'),
             buyer:@entangle('buyer'),
-            purchase_order:[],
+            purchase_order:@entangle('purchase_order'),
             workstation_locate:{},
         },
         pqiDefects:[],
@@ -47,7 +47,7 @@
                 error_message.push('Please choose style!');
             if(!this.filter.buyer.value)
                 error_message.push('Please choose buyer!');
-            if(!this.filter.purchase_order.length > 0)
+            if(!this.filter.purchase_order.value)
                 error_message.push('Please choose purchase order!');
             if(!this.filter.workstation_locate.value)
                 error_message.push('Please choose location!');
@@ -59,6 +59,8 @@
             );
         },
     }" class="p-5 space-y-5 border rounded-lg">
+
+        <button class="btn" @click="console.log(data.defects)">INSPECT</button>
 
         <div class="grid gap-3 md:grid-cols-2">
             <x-popup-single-select>
@@ -101,15 +103,15 @@
                     <input x-model="data.colors" x-modelable="list" hidden />
                 </x-slot>
             </x-popup-single-select>
-            <x-popup-multiple-select>
+            <x-popup-single-select>
                 <x-slot name="title">
                     {{ __('Purchase Order ') }}
                 </x-slot>
                 <x-slot name="other">
-                    <input x-model="filter.purchase_order" x-modelable="params" hidden />
+                    <input x-model="filter.purchase_order" x-modelable="param" hidden />
                     <input x-model="data.purchase_orders" x-modelable="list" hidden />
                 </x-slot>
-            </x-popup-multiple-select>
+            </x-popup-single-select>
 
             <div class="overflow-hidden border col-span-2 sm:col-span-1 rounded-lg shadow-lg">
                 <label class="block px-4 py-2 font-semibold bg-gray-300">Date</label>
@@ -134,35 +136,19 @@
 
         <div x-show="validateFilter.length===0" x-data="{
             img:'',
+            find_str:'',
             isActive:false,
-            defectTitle:{},
-            subDefect:{},
-            extraDefect:{},
+            defect:{},
             get defectList(){
-                return _.map(filterDefect,(item)=>{
-                    return {value:item.id, text:item.name};
-                })
+                return data.defects.filter(
+                    i => i.text.toLowerCase().includes(this.find_str.toLowerCase())
+                )
             },
             save(){
-                if(this.extraDefect.value)
-                    pqiDefects.push({img:this.img, defect:this.extraDefect});
-                else
-                    pqiDefects.push({img:this.img, defect:this.subDefect});
+                pqiDefects.push({img:this.img, defect:this.defect});
                 this.img='';
                 this.isActive=false;
                 this.extraDefect = this.subDefect = {};
-            },
-            get subDefects(){
-                defect = _.find(filterDefect,item=>item.id===this.defectTitle.value)
-                return _.map(defect.defects,(item)=>{ return {value:item.id, text:item.name, defects:item.defects}; })
-            },
-            get extraDefects(){
-                if(!this.subDefect.value){
-                    return [];
-                }else{
-                    let firstSubDefect = _.find(this.subDefects,i=>i.value===this.subDefect.value);
-                    return _.map(firstSubDefect.defects,(item)=>{return {value:item.id, text:item.name}; })
-                }
             },
             init(){
                 $watch('img',(isExist)=>{ isExist ? modalOpen=true:modalOpen=false })
@@ -189,28 +175,29 @@
                     <div class="flex flex-col">
                         <div class="space-y-3">
                             <img :src="img" alt="">
-                            <div class="border rounded-lg shadow-lg">
-                                <label class="block px-4 py-2 font-semibold text-center bg-gray-300 rounded-t-lg">
-                                    Title
-                                </label>
-                                <x-fuse-select>
-                                    <input x-model="defectTitle" x-modelable="param" hidden />
-                                    <input x-model="defectList" x-modelable="list" hidden />
-                                </x-fuse-select>
-                            </div>
-                            <div x-show="filter.buyer.value" class="border rounded-lg shadow-lg ">
-                                <label class="block px-4 py-2 font-semibold text-center bg-gray-300 rounded-t-lg">Defect</label>
-                                <x-fuse-select>
-                                    <input x-model="subDefect" x-modelable="param" hidden />
-                                    <input x-model="subDefects" x-modelable="list" hidden />
-                                </x-fuse-select>
-                            </div>
-                            <div x-show="extraDefects.length > 0" class="border rounded-lg shadow-lg ">
-                                <label class="block px-4 py-2 font-semibold text-center bg-gray-300 rounded-t-lg">Extra Defect</label>
-                                <x-fuse-select>
-                                    <input x-model="extraDefect" x-modelable="param" hidden />
-                                    <input x-model="extraDefects" x-modelable="list" hidden />
-                                </x-fuse-select>
+                            <div x-data="{dropdown:false}">
+                                <button class="btn btn-outline w-full border rounded-none border-2 capitalize"
+                                        x-text="_.isEmpty(defect) ? 'Please choose':defect.text"
+                                        @click="dropdown=true;$nextTick(()=>{$refs.find_str.focus()})"></button>
+                                <div x-show="dropdown" class="relative bg-white">
+                                    <input x-ref="find_str" type="text" x-model="find_str" class="input rounded-none w-full input-sm input-ghost input-bordered" placeholder="search........." />
+                                    <ul class="max-h-48 min-h-16 relative overflow-auto bg-white border absolute top-0 left-0 divide-y">
+                                        <template x-for="(item, i) in defectList" :key="item.value">
+                                            <li class="hover:bg-gray-100">
+                                                <label @click="defect=item;dropdown=false" class="flex flex-col w-full px-3">
+                                                    <div class="text-xs breadcrumbs">
+                                                        <ul>
+                                                            <template x-for="(path, j) in item.ancestors" :key="path.value">
+                                                                <li><span x-text="path.text"></span></li>
+                                                            </template>
+                                                        </ul>
+                                                    </div>
+                                                    <span class="px-3" x-text="item.text"></span>
+                                                </label>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="flex justify-center">
                                 <button @click="save();$nextTick(()=>{ modalOpen=false; })" class="btn btn-primary">save</button>

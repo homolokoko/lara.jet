@@ -26,13 +26,19 @@ class Report extends Component
 
     public function updatedStyle($param)
     {
-        $header = PQI\Header::where('style_id',$param)->get();
 
+        $header = PQI\Header::with('colors')->where('style_id',$param)->get();
+        dd($header);
         $this->buyers = GetValueTextList::convert($header->pluck('buyer'));
         $this->buyer = GetValueTextList::mapping($header->pluck('buyer')->first());
 
         $this->purchase_orders = GetValueTextList::convert($header->pluck('purchaseOrder'));
         $this->purchase_order = GetValueTextList::mapping($header->pluck('purchaseOrder')->first());
+    }
+
+    public function updatedBuyer($param)
+    {
+        dd($param);
     }
 
     public function dehydrate()

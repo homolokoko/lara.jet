@@ -28,6 +28,8 @@ Route::prefix('testdependency')->group(function() {
         Route::get('/taken',[WebCamController::class, 'taken'])->name('testdependency::web-cam.taken');
     });
 
+    Route::get('/photo-upload',fn()=>view('testdependency::templates.photo-upload'))->name('testdependency::photo-upload');
+
 
 
 

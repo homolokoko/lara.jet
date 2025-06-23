@@ -56,6 +56,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'upload' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload'),
+            'url' => env('ASSET_URL', '').'/storage/upload',
+            'visibility' => 'public',
+        ],
+
         'product' => [
             'driver' => 'local',
             'root' => storage_path('app/public/product'),

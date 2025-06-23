@@ -52,7 +52,13 @@ class Inspector extends Component
         $this->buyer = GetValueTextList::mapping($orderno->buyer);
         $this->color = GetValueTextList::mapping($orderno->colors->first());
         $this->purchase_order = GetValueTextList::mapping($orderno->purchaseOrders->first());
-        $this->defects = PQI\Defect::with('defects.defects')->where(['parent_id'=>null,'buyer_id'=>$orderno->buyer->id])->get()->toArray();
+        $this->defects = PQI\Defect::where(['is_defect'=>true,'buyer_id'=>$orderno->buyer_id])->get()
+                ->map(fn($item)=>[
+                    'value'=>$item->id,
+                    'path'=>$item->path,
+                    'text'=>$item->name,
+                    'ancestors'=>GetValueTextList::convert($item->ancestors)
+                ])->toArray();
         return;
     }
     public function recordDefect($filter,$pqiDefects)

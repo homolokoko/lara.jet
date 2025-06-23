@@ -40836,6 +40836,7 @@ window.QrScanner = qr_scanner__WEBPACK_IMPORTED_MODULE_6__["default"];
 window.QrCode = qrcode__WEBPACK_IMPORTED_MODULE_7__;
 window.Flatpickr = flatpickr__WEBPACK_IMPORTED_MODULE_8__["default"];
 window.Webcam = webcam_easy__WEBPACK_IMPORTED_MODULE_9__["default"];
+window.Webcam = webcam_easy__WEBPACK_IMPORTED_MODULE_9__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].start();
 
 /***/ }),

@@ -41,7 +41,7 @@ class UploadBase64Image
             if ($data === false)
                 dd('Base64 decode failed.');
 
-            $filePath = Str::random() . '.' . $type;
+            $filePath = \Carbon\Carbon::now()->format('y-m-d-h-i-s-u') . '.' . $type;
 
             if (Storage::disk('public')->put($path .'/'. $filePath, $data))
                 return $filePath;
@@ -61,7 +61,7 @@ class UploadBase64Image
             if ($data === false)
                 dd('Base64 decode failed.');
 
-            $filePath = Str::random() . '.png';
+            $filePath = \Carbon\Carbon::now()->format('y-m-d-h-i-s-u') . '.png';
 
             if (Storage::disk('inspection')->put($path . $filePath, $img->encode()))
                 return $filePath;

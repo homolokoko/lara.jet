@@ -9,7 +9,6 @@ import QrScanner from 'qr-scanner';
 import QrCode from 'qrcode';
 import Flatpickr from 'flatpickr';
 import Webcam from 'webcam-easy';
-import Webcam from "webcam-easy";
 
 import Alpine from 'alpinejs';
 

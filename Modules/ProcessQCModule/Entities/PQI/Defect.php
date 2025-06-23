@@ -22,7 +22,7 @@ class Defect extends MaterializedModel implements TranslatableContract
     protected $table = 'pqi_defect';
     protected $translatedAttributes = ['translated'];
     protected $translationForeignKey = 'pqi_defect_id';
-    protected $fillable = ['parent_id','depth','path','ordering','buyer_id','pqi_defect_id','pqi_defect_type_id','is_defect'];
+    protected $fillable = ['parent_id','depth','path','ordering','buyer_id','pqi_defect_id','pqi_defect_type_id','is_defect','is_default'];
 
     // 'parent_id' column name
     protected string $parentColumn = 'parent_id';
@@ -53,10 +53,10 @@ class Defect extends MaterializedModel implements TranslatableContract
 //        return $this->parent()->first();
 //    }
 //
-//    public function getChildrenAttribute()
-//    {
-//        return $this->children()->get();
-//    }
+    public function getChildrenAttribute()
+    {
+        return $this->children()->get();
+    }
 
     public function getAncestorsAttribute()
     {
