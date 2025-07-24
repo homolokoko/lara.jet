@@ -21,8 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('shared')->group(function(){
-    Route::post('upload', [UploaderController::class, 'upload'])->name('shared.uploader.upload');
+Route::prefix('file-upload')->group(function(){
+    Route::post('base', [UploaderController::class, 'uploadBase'])->name('file-upload.upload-base');
+    Route::post('file', [UploaderController::class, 'uploadFile'])->name('file-upload.upload-file');
 });
 
 Route::prefix('line-guru')->group(function(){

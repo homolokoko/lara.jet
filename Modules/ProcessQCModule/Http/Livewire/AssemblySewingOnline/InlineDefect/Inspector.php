@@ -59,6 +59,7 @@ class Inspector extends Component
                     'text'=>$item->name,
                     'ancestors'=>GetValueTextList::convert($item->ancestors)
                 ])->toArray();
+//        dd($this->defects);
         return;
     }
     public function recordDefect($filter,$pqiDefects)

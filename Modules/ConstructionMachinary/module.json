@@ -1,0 +1,13 @@
+{
+    "name": "ConstructionMachinary",
+    "alias": "constructionmachinary",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ConstructionMachinary\\Providers\\ConstructionMachinaryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

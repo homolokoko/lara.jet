@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/',fn()=>redirect('/dashboard'));
+Route::get('/',fn()=>redirect()->route('dashboard'));
 
 Route::middleware([
     'auth:sanctum',
@@ -41,7 +41,7 @@ Route::middleware([
 
 });
 
-Route::get('/dashboard', fn ()=>view('dashboard'))->name('dashboard');
+Route::get('dashboard',function(){return view('dashboard');})->name('dashboard');
 Route::get('/defect',fn()=>view('client.defect'))->name('client.defect');
 Route::get('/photograph-upload',fn()=>view('client.photograph-upload'))->name('client.photograph-upload');
 Route::prefix('blade-ui')->group(function(){
