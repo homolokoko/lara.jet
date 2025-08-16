@@ -10,6 +10,6 @@ class Size extends Model
 {
     use HasFactory;
     // use SoftDeletes;
-    protected $table = 'sizes';
+    protected $table = 'size';
     protected $fillable = ['name'];
 }

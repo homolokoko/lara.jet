@@ -46,4 +46,9 @@ Route::prefix('admin')->group(function(){
         Route::get('translations', [DefectController::class, 'listAllTranslation'])->name('admin.defects.translations');
     });
 
+
 });
+
+Route::patch('/full-qc/{page}/defect-analysis', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysis'])->name('full-qc.defect-analysis.report');
+Route::patch('/full-qc/{page}/defect-analysis-transcaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.defect-analysis-transcaction.report');
+

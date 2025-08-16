@@ -9,10 +9,19 @@ import QrScanner from 'qr-scanner';
 import QrCode from 'qrcode';
 import Flatpickr from 'flatpickr';
 import Webcam from 'webcam-easy';
+import { TabulatorFull as Tabulator } from 'tabulator-tables';
 
 import Alpine from 'alpinejs';
-
+import mask from '@alpinejs/mask';
+import intersect from '@alpinejs/intersect';
+import resize from '@alpinejs/resize';
+import focus from '@alpinejs/focus';
+import collapse from '@alpinejs/collapse';
+import anchor from '@alpinejs/anchor';
+import morph from '@alpinejs/morph';
+import sort from '@alpinejs/sort';
 window.Alpine = Alpine;
+
 window._ = Lodash;
 window.swal = Swal;
 window.Fuse = Fuse;
@@ -23,7 +32,14 @@ window.QrScanner = QrScanner;
 window.QrCode = QrCode;
 window.Flatpickr = Flatpickr;
 window.Webcam = Webcam;
-window.Webcam = Webcam;
-
+window.Tabulator = Tabulator;
 
 Alpine.start();
+Alpine.plugin(mask)
+Alpine.plugin(intersect)
+Alpine.plugin(resize)
+Alpine.plugin(focus)
+Alpine.plugin(collapse)
+Alpine.plugin(anchor)
+Alpine.plugin(morph)
+Alpine.plugin(sort)

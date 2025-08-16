@@ -1,5 +1,4 @@
 <div x-data="{ modalOpen: false }"
-    @keydown.escape.window="modalOpen = false"
     class="relative z-50 w-auto h-auto">
     <div>{{@$trigger}}</div>
     <div x-show="modalOpen" class="fixed top-0 left-0 z-10 flex items-center justify-center w-screen h-screen" x-cloak>
@@ -10,7 +9,7 @@
                 x-transition:leave="ease-in duration-300"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
-                @click="modalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-25"></div>
+                class="absolute inset-0 w-full h-full bg-black bg-opacity-25"></div>
             <div x-show="modalOpen"
                 x-trap.inert.noscroll="modalOpen"
                 x-transition:enter="ease-out duration-300"
