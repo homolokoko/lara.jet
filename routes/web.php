@@ -47,3 +47,9 @@ Route::get('/photograph-upload',fn()=>view('client.photograph-upload'))->name('c
 Route::prefix('blade-ui')->group(function(){
     Route::get('/hero-icon', fn()=>view('blade-ui.hero-icon'))->name('blade-ui.hero-icon');
 });
+
+
+Route::get('/full-qc/packing/{page}', [\App\Http\Controllers\Inspector\FullQcController::class,'packing'])->name('full-qc.packing.form');
+Route::get('/full-qc/afterwash/{page}', [\App\Http\Controllers\Inspector\FullQcController::class,'afterwash'])->name('full-qc.afterwash.form');
+Route::get('/full-qc/finishing/{page}', [\App\Http\Controllers\Inspector\FullQcController::class,'finishing'])->name('full-qc.finishing.form');
+

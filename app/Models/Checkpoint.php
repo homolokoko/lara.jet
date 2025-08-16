@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DefectsTranslations extends Model
+class Checkpoint extends Model
 {
     use HasFactory;
 
-    protected $table = 'defects_translations';
+    protected $table = 'checkpoint';
+    protected $fillabe = ['name','desc'];
 }

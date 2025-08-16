@@ -11,7 +11,7 @@ class Size extends Model
 {
     use HasFactory;
 
-    protected $table = 'style_profile_sizes';
+    protected $table = 'style_profile_size';
 
     public function profile()
     {
@@ -27,7 +27,7 @@ class Size extends Model
         return $this
             ->belongsTo(
                 Root::class,
-                'sizes_id'
+                'size_id'
             );
     }
 }

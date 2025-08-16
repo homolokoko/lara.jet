@@ -61,4 +61,13 @@ class Style extends Model
                 (new StylePurchaseOrder)->purchaseOrder()
             );
     }
+
+    public function styleProfiles()
+    {
+        return $this
+            ->hasMany(
+                StyleProfile::class,
+                'style_id'
+            );
+    }
 }
