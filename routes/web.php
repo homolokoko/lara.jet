@@ -37,6 +37,11 @@ Route::middleware([
     });
 
 
+    Route::prefix('/setup')->group(function(){
+        Route::get('/buyer',fn()=>view('setup.buyer'))->name('setup.buyer');
+    });
+
+
 
 
 });
