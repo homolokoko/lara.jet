@@ -41,7 +41,8 @@ Route::middleware([
         Route::get('/buyer',fn()=>view('setup.buyer'))->name('setup.buyer');
     });
 
-
+    Route::get('/full-qc/{mode}/{report_view}/form',[\App\Http\Controllers\Inspector\FullQcController::class,'form'])->name('full-qc.form');
+    Route::get('/full-qc/{mode}/{report_view}/report',[\App\Http\Controllers\Inspector\FullQcController::class,'report'])->name('full-qc.report');
 
 
 });

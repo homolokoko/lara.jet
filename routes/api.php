@@ -49,6 +49,6 @@ Route::prefix('admin')->group(function(){
 
 });
 
-Route::patch('/full-qc/{page}/defect-analysis', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysis'])->name('full-qc.defect-analysis.report');
-Route::patch('/full-qc/{page}/defect-analysis-transcaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.defect-analysis-transcaction.report');
+Route::patch('/full-qc/{mode}/{report_view}/defect-analysis-transaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.defect-analysis-transcaction.report');
+Route::get('/full-qc/{mode}/{report_view}/defect-analysis-transaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.get-defect-analysis-transcaction.report');
 

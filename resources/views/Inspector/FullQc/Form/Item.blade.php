@@ -1,14 +1,13 @@
 <div x-data="{
         scannerEngine:null,
         async activeScanner(v){
+            console.log('active scanner');
             modalOpen=true;
-            let video = { 'elem': this.$refs.videoElem, 'camera': 'environment' };
             this.scannerEngine = await new QrScanner(
                  this.$refs.videoElem,
                 result => this.detectGarmentCode(result)
             );
             this.scannerEngine.start();
-            this.$refs.scan_region.classList.remove('hidden');
         },
         async detectGarmentCode(v){
             sketch.garment_code=v;
@@ -20,13 +19,11 @@
                         .then((result)=>{
                             if(result.isDenied){
                                 this.scannerEngine.start();
-                                this.$refs.scan_region.classList.remove('hidden');
                             }else{
                                 garment_tracking_id = response.garment_tracking_id;
                                 this.$wire.submitAcceptItem(information)
                                     .then(()=>{
                                         this.scannerEngine.start();
-                                        this.$refs.scan_region.classList.remove('hidden');
                                     });
                             }
                         })
@@ -36,7 +33,6 @@
         async inActiveScanner(){
             modalOpen=false;
             this.scannerEngine.stop();
-            this.$refs.scan_region.classList.add('hidden');
         },
         recordSend(){
             console.log({'information':information,'sketch':sketch});

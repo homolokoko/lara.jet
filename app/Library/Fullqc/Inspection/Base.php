@@ -3,43 +3,66 @@ namespace App\Library\Fullqc\Inspection;
 
 use App\Models\Binticket;
 use App\Models\GarmentTracking;
-use App\Models\FullQc\{Afterwash,Packing,Finishing};
+use App\Models\FullQc;
+use Illuminate\Support\Arr;
+use function PHPUnit\Framework\isEmpty;
 
 class Base{
 
+    public $view_tile,$veiw_type,$mode_title,$mode_type;
+
+    CONST VIEW_FACTORY = 1;
+    CONST VIEW_PD = 2;
+
+    public CONST TITLE_FACTORY = 'Factory';
+    public CONST TITLE_PD = 'PD';
+
+    public CONST MODE_FULLQC_PACKING = 1;
+    public CONST MODE_FULLQC_FINISHING = 2;
+    public CONST MODE_FULLQC_AFTERWASH = 3;
+
+    public CONST TITLE_FULLQC_PACKING = 'FullQc Packing';
+    public CONST TITLE_FULLQC_FINISHING = 'FullQc Finshing';
+    public CONST TITLE_FULLQC_AFTERWASH = 'FullQc After Wash';
+
+    public array $viewType = [
+        'pd' => self::VIEW_PD,
+        'factory' => self::VIEW_FACTORY,
+    ];
+
+    public array $viewTitle = [
+        'pd' => self::TITLE_PD,
+        'factory' => self::TITLE_FACTORY,
+    ];
+
+    public array $modeType = [
+        'packing' => self::MODE_FULLQC_PACKING,
+        'finishing' => self::MODE_FULLQC_FINISHING,
+        'after-wash' => self::MODE_FULLQC_AFTERWASH,
+    ];
+
+    public array $modeTitle = [
+        'packing' => self::TITLE_FULLQC_PACKING,
+        'finishing' => self::TITLE_FULLQC_FINISHING,
+        'after-wash' => self::TITLE_FULLQC_AFTERWASH,
+    ];
+
     protected $profile,$item,$itemRepair;
 
-    public function __construct($module) {
-        switch($module)
-        {
-            case 'packing':
-                $this->profile = Packing\Profile::class;
-                $this->item = Packing\Item::class;
-                $this->itemRepair = Packing\ItemRepair::class;
-                break;
-            case 'afterwash':
-                $this->profile = Afterwash\Profile::class;
-                $this->item = Afterwash\Item::class;
-                $this->itemRepair = Afterwash\ItemRepair::class;
-                break;
-            case 'finishing':
-                $this->profile = Finishing\Profile::class;
-                $this->item = Finishing\Item::class;
-                $this->itemRepair = Finishing\ItemRepair::class;
-                break;
-            default:
-                break;
-
-        }
+    public function __construct($mode,$report_view) {
+        $this->mode_type = Arr::get($this->modeType,$mode);
+        $this->mode_title = Arr::get($this->modeTitle,$mode);
+        $this->view_type = Arr::get($this->viewType,$report_view);
+        $this->view_title = Arr::get($this->viewTitle,$report_view);
     }
 
-    public function detectGarmentCode($code)
+    public static function detectGarmentCode($code)
     {
        $bin_number = ['number'=>$code];
        $bin_ticket = Binticket::updateOrCreate($bin_number,$bin_number);
        $garment_code = ['garmentQrCode'=>$code,'bin_tickets_id'=>$bin_ticket->id];
        $garment_ticket = GarmentTracking::updateOrCreate($garment_code,$garment_code);
-       $item = $this->item::where('garment_tracking_id',$bin_ticket->id);
+       $item = FullQc\Item::where('garment_tracking_id',$bin_ticket->id);
        if($item->exists()){
             $alert_message = [
                 'icon'=>'error',
@@ -62,7 +85,7 @@ class Base{
 
     public function setProfile($data,$status)
     {
-        $profile = $this->profile::updateOrCreate($data,$data);
+        $profile = FullQc\Profile::updateOrCreate($data,$data);
          if($status)
                 $profile->increment('pass_pcs',1);
             else
@@ -70,9 +93,9 @@ class Base{
         return $profile;
     }
 
-    public function setItem($data,$status)
+    public static function setItem($data,$status)
     {
-        $item = $this->item::updateOrCreate(['garment_tracking_id'=>$data['garment_tracking_id']],$data);
+        $item = FullQc\Item::updateOrCreate(['garment_tracking_id'=>$data['garment_tracking_id']],$data);
         if($status)
                 $item->increment('accept_qty',1);
             else
@@ -80,14 +103,14 @@ class Base{
         return $item;
     }
 
-    public function setItemRepair($data)
+    public static function setItemRepair($data)
     {
-        return $this->itemRepair::create($data);
+        return FullQc\ItemRepair::create($data);
     }
 
-    public function list($style,$locate,$date,$inspector)
+    public static function list($style,$locate,$date,$inspector)
     {
-        $query = $this->profile::with([
+        $query = FullQc\Profile::with([
                 'style',
                 'location',
                 'purchaseOrder',
@@ -109,17 +132,16 @@ class Base{
         return $query->orderBy('updated_at','desc')->get();
     }
 
-    public function transaction($style,$locate,$date,$inspector)
+    public static function transaction($style,$locate,$date,$inspector)
     {
-        $query = $this->item::with([
-            'size',
-            'color',
-            'garment',
-            'style',
-            'location',
-            'inspector'
-        ]);
-        return $query->orderBy('updated_at','desc');
+        $query =  FullQc\Profile::query();
+        if($style)
+            $query->style($style);
+        if($locate)
+            $query->locate($locate);
+        if($inspector)
+            $query->inspector($inspector);
+        return $query->getByDate($date)->orderBy('updated_at','desc');
     }
 
 

@@ -1818,6 +1818,12 @@ select {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: var(--padding-card, 2rem);
+}
 .card figure,.card figure>* {
   width: 100%;
 }
@@ -2903,12 +2909,6 @@ select {
   --tw-scale-x: 1;
   --tw-scale-y: 1;
 }
-.label-text {
-  font-size: .875rem;
-  line-height: 1.25rem;
-  --tw-text-opacity: 1;
-  color: hsla(var(--bc) / var(--tw-text-opacity, 1));
-}
 .label-text-alt {
   font-size: .75rem;
   line-height: 1rem;
@@ -3198,6 +3198,9 @@ select {
   to {
     transform: translateY(0);
   }
+}
+.select-bordered {
+  --tw-border-opacity: 0.2;
 }
 .select-disabled::-moz-placeholder,.select[disabled]::-moz-placeholder {
   --tw-placeholder-opacity: 0.2;
@@ -3663,6 +3666,31 @@ select {
   height: 4rem;
   padding: 0;
   width: 4rem;
+}
+.input-xs {
+  height: 1.5rem;
+  font-size: .75rem;
+  line-height: 1rem;
+  line-height: 1.625;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+.select-sm {
+  height: 2rem;
+  font-size: .875rem;
+  line-height: 2rem;
+  padding-left: .75rem;
+  padding-right: 2rem;
+  min-height: 2rem;
+}
+.select-xs {
+  height: 1.5rem;
+  font-size: .75rem;
+  line-height: 1rem;
+  line-height: 1.625;
+  padding-left: .5rem;
+  padding-right: 2rem;
+  min-height: 1.5rem;
 }
 .alert-success {
   --tw-bg-opacity: 0.1;
@@ -4919,6 +4947,9 @@ select {
 .items-center {
   align-items: center;
 }
+.justify-start {
+  justify-content: flex-start;
+}
 .justify-end {
   justify-content: flex-end;
 }
@@ -5047,8 +5078,14 @@ select {
 .overflow-hidden {
   overflow: hidden;
 }
+.overflow-x-auto {
+  overflow-x: auto;
+}
 .overflow-y-auto {
   overflow-y: auto;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 .overflow-y-hidden {
   overflow-y: hidden;
@@ -5379,6 +5416,14 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(253 224 71 / var(--tw-bg-opacity, 1));
 }
+.bg-error {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--er) / var(--tw-bg-opacity, 1));
+}
+.bg-success {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--su) / var(--tw-bg-opacity, 1));
+}
 .bg-opacity-10 {
   --tw-bg-opacity: 0.1;
 }
@@ -5636,6 +5681,10 @@ select {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 .font-bold {
   font-weight: 700;

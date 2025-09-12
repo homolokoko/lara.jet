@@ -31,10 +31,12 @@
         <div class="w-screen h-screen">
             <!-- Page Content -->
             <div class="flex w-full h-full divide-x">
-                <div class="w-1/4 h-full py-5 overflow-auto shadow-lg side">
-                  @include('layouts.side')
+                <div x-data="{show_nav:false}">
+                    <div x-show="show_nav" class="w-1/4 h-full py-5 overflow-auto shadow-lg side">
+                        @include('layouts.side')
+                    </div>
                 </div>
-                <div class="flex flex-col w-3/4 divide-y main">
+                <div class="flex flex-col w-full divide-y main">
                   <div class="flex flex-auto w-full p-5 shadow-lg nav">
                     <img src="{{ asset('snapchat.png') }}" alt="" class="w-8 h-8">
                     <a href="{{ route('dashboard') }}" class="text-xl font-bold">TQMS Process Module</a>
