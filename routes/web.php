@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',fn()=>redirect('/dashboard'));
+Route::get('/test/query',[\App\Http\Controllers\TestController::class,'query'])->name('test.query');
 
 Route::middleware([
     'auth:sanctum',
@@ -37,8 +38,10 @@ Route::middleware([
     });
 
 
-    Route::prefix('/setup')->group(function(){
-        Route::get('/buyer',fn()=>view('setup.buyer'))->name('setup.buyer');
+    Route::prefix('/management')->group(function(){
+        Route::get('/buyer',fn()=>view('management.buyer'))->name('management.buyer');
+        Route::get('/style',fn()=>view('management.style'))->name('management.style');
+        Route::get('/style',fn()=>view('management.purchase-order'))->name('management.purchase-order');
     });
 
     Route::get('/full-qc/{mode}/{report_view}/form',[\App\Http\Controllers\Inspector\FullQcController::class,'form'])->name('full-qc.form');

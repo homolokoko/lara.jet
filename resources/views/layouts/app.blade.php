@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html data-theme="" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html  x-data="{
+    theme:'',
+    init(){
+        this.theme = localStorage.getItem('modify-theme-content');
+    }
+}" @modify-theme-content="theme=event.detail" :data-theme="theme" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,9 +42,58 @@
                     </div>
                 </div>
                 <div class="flex flex-col w-full divide-y main">
-                  <div class="flex flex-auto w-full p-5 shadow-lg nav">
-                    <img src="{{ asset('snapchat.png') }}" alt="" class="w-8 h-8">
-                    <a href="{{ route('dashboard') }}" class="text-xl font-bold">TQMS Process Module</a>
+                  <div class="flex justify-between w-full p-5 shadow-lg nav">
+                      <div class="flex">
+                        <img src="{{ asset('snapchat.png') }}" alt="" class="w-8 h-8">
+                        <a href="{{ route('dashboard') }}" class="text-xl font-bold">TQMS Process Module</a>
+                      </div>
+                      <div x-data="{
+                            picked:'',
+                            dropdown:false,
+                            themes:[
+                                {value:'',text:'light'},
+                                {value:'dark',text:'dark'},
+                                {value:'cupcake',text:'cupcake'},
+                                {value:'bumblebee',text:'bumblebee'},
+                                {value:'emerald',text:'emerald'},
+                                {value:'corporate',text:'corporate'},
+                                {value:'synthwave',text:'synthwave'},
+                                {value:'retro',text:'retro'},
+                                {value:'cyberpunk',text:'cyberpunk'},
+                                {value:'valentine',text:'valentine'},
+                                {value:'halloween',text:'halloween'},
+                                {value:'garden',text:'garden'},
+                                {value:'forest',text:'forest'},
+                                {value:'aqua',text:'aqua'},
+                                {value:'lofi',text:'lofi'},
+                                {value:'pastel',text:'pastel'},
+                                {value:'fantasy',text:'fantasy'},
+                                {value:'wireframe',text:'wireframe'},
+                                {value:'black',text:'black'},
+                                {value:'luxury',text:'luxury'},
+                                {value:'dracula',text:'dracula'},
+                                {value:'cmyk',text:'cmyk'}
+                            ],
+                            selectedTheme(val){
+                                this.picked = val;
+                                $dispatch('modify-theme-content',val);
+                                localStorage.setItem('modify-theme-content', val);
+                            },
+                            init(){
+                                this.picked = localStorage.getItem('modify-theme-content');
+                            }
+                        }" class="dropdown">
+                          <button class="btn btn-ghost btn-sm" @click="dropdown=!dropdown" class="btn">Choose Theme</button>
+                          <ul tabindex="0" x-show="dropdown" class="p-2 overflow-auto text-black max-h-96 dropdown-content rounded-box bg-secondary">
+                              <template x-for="theme in themes">
+                                <li><button
+                                    x-text="theme.text"
+                                    class="flex justify-between w-full btn btn-ghost btn-sm"
+                                    :class="{'btn-active':picked===theme.value}"
+                                    @click="selectedTheme(theme.value)" ></button></li>
+                              </template>
+                          </ul>
+                      </div>
                   </div>
                   <div class="w-full h-full p-5 overflow-auto shadow-lg content">
                     {{$slot}}
