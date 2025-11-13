@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('shared')->group(function(){
     Route::post('upload', [UploaderController::class, 'upload'])->name('shared.uploader.upload');
+    Route::post('multiple-files-upload', [UploaderController::class, 'multipleFilesUpload'])->name('shared.uploader.multiple-files-upload');
 });
 
 Route::prefix('line-guru')->group(function(){
@@ -30,6 +31,8 @@ Route::prefix('line-guru')->group(function(){
 });
 
 Route::prefix('admin')->group(function(){
+
+
 
     Route::prefix('product')->group(function(){
 

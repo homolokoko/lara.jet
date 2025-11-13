@@ -8,5 +8,7 @@
     "ProductDevelopment": true,
     "FinalAuditInspection": true,
     "ProcessQCModule": true,
-    "TestDependency": true
+    "TestDependency": true,
+    "CountryCatalog": true,
+    "Product": true
 }
