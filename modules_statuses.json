@@ -10,5 +10,6 @@
     "ProcessQCModule": true,
     "TestDependency": true,
     "CountryCatalog": true,
-    "Product": true
+    "Product": true,
+    "SchoolManagement": true
 }

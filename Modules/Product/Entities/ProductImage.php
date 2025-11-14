@@ -19,7 +19,7 @@ class ProductImage extends Model
         if(!$this->file_path)
             return asset('snapchat.png');
         else
-            return Storage::url($this->file_path);
+            return asset(Storage::url($this->file_path));
     }
 
     protected static function newFactory()

@@ -12,5 +12,5 @@
     }
 }" class="w-full">
     {{ @$slot }}
-    <input x-ref="flatpickr" type="text" readonly class="w-full border-none rounded-none input input-ghost" />
+    <input x-ref="flatpickr" type="text" readonly class="input input-bordered" />
 </div>

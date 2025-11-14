@@ -15,7 +15,7 @@ class Product extends Model
 
     protected $table = 'product';
     protected $fillable = ['name','price','discount','in_stock','out_stock','is_available','release_date'];
-    public $appends = ['image_output'];
+    public $appends = ['image_output','final_price'];
 
     public function image()
     {
@@ -39,6 +39,13 @@ class Product extends Model
     {
         $image = $this->images()->where(['product_id'=>$this->id,'sort'=>1]);
         return $image->exists() ? $image->first()->url : asset('snapchat.png');
+    }
+
+    public function getFinalPriceAttribute()
+    {
+        $origin = $this->price;
+        $percent = $this->discount;
+        return $origin*(1-($percent/100));
     }
 
     protected static function newFactory()

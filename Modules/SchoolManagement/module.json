@@ -1,0 +1,13 @@
+{
+    "name": "SchoolManagement",
+    "alias": "schoolmanagement",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\SchoolManagement\\Providers\\SchoolManagementServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

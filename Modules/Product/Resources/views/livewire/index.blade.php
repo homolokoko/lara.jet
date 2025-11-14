@@ -130,7 +130,7 @@
                         </div>
                         <div class="">
                             <label class="block" for="">Release Date</label>
-                            <input type="text" x-model="edit_data.release_date" class="input input-bordered">
+                            <x-flatpickr><input type="hidden" x-model="param" x-modelable="edit_data.release_date"></x-flatpickr>
                         </div>
                         <div class="">
                             <label class="block" for="">Available</label>

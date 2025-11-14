@@ -25,6 +25,7 @@ class Index extends Component
 
     public function update($id,$data)
     {
+
         $product_data = [
             'name' => Arr::get($data,'name'),
             'price' => Arr::get($data,'price'),
@@ -40,6 +41,7 @@ class Index extends Component
             ->map(fn($item,$indx)=>['sort'=>++$indx,'product_id'=>$product->id,'file_path'=>Arr::get($item,'file_path')]);
 
         $product->update($product_data);
+        $product->images()->delete();
         $product->images()->createMany($product_images);
     }
 

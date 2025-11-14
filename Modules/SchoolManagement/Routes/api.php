@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/product', function (Request $request) {
+Route::middleware('auth:api')->get('/schoolmanagement', function (Request $request) {
     return $request->user();
-});
-
-Route::prefix('product')->group(function() {
-    Route::get('/', [Modules\Product\Http\Controllers\Api\ProductController::class,'index']);
 });
