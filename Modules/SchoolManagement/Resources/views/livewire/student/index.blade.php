@@ -1,11 +1,13 @@
-<div>
-    <h3>The <code>Index</code> livewire component is loaded from the <code>SchoolManagement</code> module.</h3>
+<div class="space-y-7">
 
+    <h3 class="text-xl font-semibold">
+        Mangement Student Register / Modify their information
+    </h3>
 
     <div class="tabs">
-        <a wire:click="navigatePage(1)" class="tab tab-lifted">Create</a>
-        <a wire:click="navigatePage(2)" class="tab tab-lifted tab-active">Table</a>
-        <a wire:click="navigatePage(3)" class="tab tab-lifted">Edit</a>
+        <a wire:click="navigatePage(1)" class="tab tab-lifted {{$tab===1 ? 'tab-active':''}}">Create</a>
+        <a wire:click="navigatePage(2)" class="tab tab-lifted {{$tab===2 ? 'tab-active':''}}">Table</a>
+        <a wire:click="navigatePage(3)" class="tab tab-lifted {{$tab===3 ? 'tab-active':''}}">Edit</a>
     </div>
 
     <div>

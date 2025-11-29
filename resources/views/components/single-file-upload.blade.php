@@ -1,7 +1,7 @@
 @props(['disk','model'])
 <div class="w-full py-4 px-12 text-center hover:bg-gray-200 bg-opacity-50 border-2 border-black border-dashed "
     x-data="{
-        param:[],
+        param:{},
         filesUpload(event){
             let files = event.target.files;
             const formData = new FormData();
@@ -17,7 +17,7 @@
                             'Content-Type': 'multipart/form-data'
                         }
                     }
-                ).then((response)=>{this.images = response.data.images});
+                ).then((response)=>{this.param = response.data});
             }
             catch(err){ console.log('message',err); }
 

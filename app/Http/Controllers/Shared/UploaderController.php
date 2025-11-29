@@ -11,6 +11,32 @@ class UploaderController extends Controller
 {
     //
 
+    public function singleFileUpload(Request $request)
+    {
+        $request->validate([
+            'images.*' => 'required|image|max:10240', // 1MB Max
+        ]);
+        $image = $request->file('image');
+        $path = $image->store('student', 'public');
+
+        $uploadedImages = [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('product', 'public');
+                $uploadedImage[] = [
+                    'file_path' => $path,
+                    'originalName' => $image->getClientOriginalName(),
+                    'url' => Storage::disk('public')->url($path),
+                    'rotate' => false,
+                ];
+            }
+        }
+
+
+        return response()->json($uploadedImage);
+    }
+
     public function multipleFilesUpload(Request $request)
     {
         $request->validate([

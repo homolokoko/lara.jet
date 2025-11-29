@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $tab;
+    public $tab=1;
     public $studentId;
 
     public function render()
