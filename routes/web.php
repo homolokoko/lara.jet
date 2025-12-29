@@ -42,10 +42,21 @@ Route::middleware([
         Route::get('/buyer',fn()=>view('management.buyer'))->name('management.buyer');
         Route::get('/style',fn()=>view('management.style'))->name('management.style');
         Route::get('/style',fn()=>view('management.purchase-order'))->name('management.purchase-order');
+
+        Route::get('/staff',fn()=>view('management.staff'))->name('management.staff');
     });
 
     Route::get('/full-qc/{mode}/{report_view}/form',[\App\Http\Controllers\Inspector\FullQcController::class,'form'])->name('full-qc.form');
     Route::get('/full-qc/{mode}/{report_view}/report',[\App\Http\Controllers\Inspector\FullQcController::class,'report'])->name('full-qc.report');
+
+    Route::prefix('/materials')->group(function(){
+
+        Route::prefix('/audit')->group(function(){
+            Route::get('/',fn()=>view('materials.audit.trim'))->name('url.materials.audit.trim');
+            Route::get('/{type}',[\App\Http\Controllers\Material\AuditController::class,'audit'])->name('url.materials.audit');
+        });
+
+    });
 
 
 });
@@ -61,4 +72,5 @@ Route::prefix('blade-ui')->group(function(){
 Route::get('/full-qc/packing/{page}', [\App\Http\Controllers\Inspector\FullQcController::class,'packing'])->name('full-qc.packing.form');
 Route::get('/full-qc/afterwash/{page}', [\App\Http\Controllers\Inspector\FullQcController::class,'afterwash'])->name('full-qc.afterwash.form');
 Route::get('/full-qc/finishing/{page}', [\App\Http\Controllers\Inspector\FullQcController::class,'finishing'])->name('full-qc.finishing.form');
+
 

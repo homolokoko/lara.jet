@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Shared\UploaderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\EziStyleOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,6 @@ Route::prefix('admin')->group(function(){
 
 Route::patch('/full-qc/{mode}/{report_view}/defect-analysis-transaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.defect-analysis-transcaction.report');
 Route::get('/full-qc/{mode}/{report_view}/defect-analysis-transaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.get-defect-analysis-transcaction.report');
+
+Route::post('apparelezi-style-order-no', [EziStyleOrderController::class, 'search'])->name('search-ezi-style-order-no');
 

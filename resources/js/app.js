@@ -10,6 +10,7 @@ import QrCode from 'qrcode';
 import Flatpickr from 'flatpickr';
 import Webcam from 'webcam-easy';
 import { TabulatorFull as Tabulator } from 'tabulator-tables';
+import country from './lib/country';
 
 import Alpine from 'alpinejs';
 import mask from '@alpinejs/mask';
@@ -33,6 +34,10 @@ window.QrCode = QrCode;
 window.Flatpickr = Flatpickr;
 window.Webcam = Webcam;
 window.Tabulator = Tabulator;
+window.QMS = {
+    "fuse" : Fuse,
+    "country": country,
+}
 
 Alpine.start();
 Alpine.plugin(mask)

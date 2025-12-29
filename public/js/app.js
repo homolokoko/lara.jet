@@ -76034,7 +76034,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var fuse_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! fuse.js */ "./node_modules/fuse.js/dist/fuse.mjs");
+/* harmony import */ var fuse_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! fuse.js */ "./node_modules/fuse.js/dist/fuse.mjs");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var sortablejs_modular_sortable_complete_esm_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sortablejs/modular/sortable.complete.esm.js */ "./node_modules/sortablejs/modular/sortable.complete.esm.js");
@@ -76044,16 +76044,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var qrcode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! qrcode */ "./node_modules/qrcode/lib/browser.js");
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 /* harmony import */ var webcam_easy__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! webcam-easy */ "./node_modules/webcam-easy/src/webcam-easy.js");
-/* harmony import */ var tabulator_tables__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! tabulator-tables */ "./node_modules/tabulator-tables/dist/js/tabulator_esm.mjs");
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
-/* harmony import */ var _alpinejs_mask__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @alpinejs/mask */ "./node_modules/@alpinejs/mask/dist/module.esm.js");
-/* harmony import */ var _alpinejs_intersect__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @alpinejs/intersect */ "./node_modules/@alpinejs/intersect/dist/module.esm.js");
-/* harmony import */ var _alpinejs_resize__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @alpinejs/resize */ "./node_modules/@alpinejs/resize/dist/module.esm.js");
-/* harmony import */ var _alpinejs_focus__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @alpinejs/focus */ "./node_modules/@alpinejs/focus/dist/module.esm.js");
-/* harmony import */ var _alpinejs_collapse__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @alpinejs/collapse */ "./node_modules/@alpinejs/collapse/dist/module.esm.js");
-/* harmony import */ var _alpinejs_anchor__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @alpinejs/anchor */ "./node_modules/@alpinejs/anchor/dist/module.esm.js");
-/* harmony import */ var _alpinejs_morph__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @alpinejs/morph */ "./node_modules/@alpinejs/morph/dist/module.esm.js");
-/* harmony import */ var _alpinejs_sort__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @alpinejs/sort */ "./node_modules/@alpinejs/sort/dist/module.esm.js");
+/* harmony import */ var tabulator_tables__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! tabulator-tables */ "./node_modules/tabulator-tables/dist/js/tabulator_esm.mjs");
+/* harmony import */ var _lib_country__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lib/country */ "./resources/js/lib/country.js");
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _alpinejs_mask__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @alpinejs/mask */ "./node_modules/@alpinejs/mask/dist/module.esm.js");
+/* harmony import */ var _alpinejs_intersect__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @alpinejs/intersect */ "./node_modules/@alpinejs/intersect/dist/module.esm.js");
+/* harmony import */ var _alpinejs_resize__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @alpinejs/resize */ "./node_modules/@alpinejs/resize/dist/module.esm.js");
+/* harmony import */ var _alpinejs_focus__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @alpinejs/focus */ "./node_modules/@alpinejs/focus/dist/module.esm.js");
+/* harmony import */ var _alpinejs_collapse__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @alpinejs/collapse */ "./node_modules/@alpinejs/collapse/dist/module.esm.js");
+/* harmony import */ var _alpinejs_anchor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @alpinejs/anchor */ "./node_modules/@alpinejs/anchor/dist/module.esm.js");
+/* harmony import */ var _alpinejs_morph__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @alpinejs/morph */ "./node_modules/@alpinejs/morph/dist/module.esm.js");
+/* harmony import */ var _alpinejs_sort__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @alpinejs/sort */ "./node_modules/@alpinejs/sort/dist/module.esm.js");
 
 
 
@@ -76075,10 +76076,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"];
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"];
 window._ = (lodash__WEBPACK_IMPORTED_MODULE_1___default());
 window.swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
-window.Fuse = fuse_js__WEBPACK_IMPORTED_MODULE_19__["default"];
+window.Fuse = fuse_js__WEBPACK_IMPORTED_MODULE_20__["default"];
 window.Sortable = sortablejs_modular_sortable_complete_esm_js__WEBPACK_IMPORTED_MODULE_4__["default"];
 window.axios = (axios__WEBPACK_IMPORTED_MODULE_3___default());
 window.SlimSelect = (slim_select__WEBPACK_IMPORTED_MODULE_5___default());
@@ -76086,16 +76088,20 @@ window.QrScanner = qr_scanner__WEBPACK_IMPORTED_MODULE_6__["default"];
 window.QrCode = qrcode__WEBPACK_IMPORTED_MODULE_7__;
 window.Flatpickr = flatpickr__WEBPACK_IMPORTED_MODULE_8__["default"];
 window.Webcam = webcam_easy__WEBPACK_IMPORTED_MODULE_9__["default"];
-window.Tabulator = tabulator_tables__WEBPACK_IMPORTED_MODULE_20__.TabulatorFull;
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].start();
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_mask__WEBPACK_IMPORTED_MODULE_11__["default"]);
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_intersect__WEBPACK_IMPORTED_MODULE_12__["default"]);
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_resize__WEBPACK_IMPORTED_MODULE_13__["default"]);
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_focus__WEBPACK_IMPORTED_MODULE_14__["default"]);
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_collapse__WEBPACK_IMPORTED_MODULE_15__["default"]);
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_anchor__WEBPACK_IMPORTED_MODULE_16__["default"]);
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_morph__WEBPACK_IMPORTED_MODULE_17__["default"]);
-alpinejs__WEBPACK_IMPORTED_MODULE_10__["default"].plugin(_alpinejs_sort__WEBPACK_IMPORTED_MODULE_18__["default"]);
+window.Tabulator = tabulator_tables__WEBPACK_IMPORTED_MODULE_21__.TabulatorFull;
+window.QMS = {
+  "fuse": fuse_js__WEBPACK_IMPORTED_MODULE_20__["default"],
+  "country": _lib_country__WEBPACK_IMPORTED_MODULE_10__["default"]
+};
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].start();
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_mask__WEBPACK_IMPORTED_MODULE_12__["default"]);
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_intersect__WEBPACK_IMPORTED_MODULE_13__["default"]);
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_resize__WEBPACK_IMPORTED_MODULE_14__["default"]);
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_focus__WEBPACK_IMPORTED_MODULE_15__["default"]);
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_collapse__WEBPACK_IMPORTED_MODULE_16__["default"]);
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_anchor__WEBPACK_IMPORTED_MODULE_17__["default"]);
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_morph__WEBPACK_IMPORTED_MODULE_18__["default"]);
+alpinejs__WEBPACK_IMPORTED_MODULE_11__["default"].plugin(_alpinejs_sort__WEBPACK_IMPORTED_MODULE_19__["default"]);
 
 /***/ }),
 
@@ -76132,6 +76138,778 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/lib/country.js":
+/*!*************************************!*\
+  !*** ./resources/js/lib/country.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var countries = [{
+  text: "Afghanistan",
+  value: "AF"
+}, {
+  text: "Aland Islands",
+  value: "AX"
+}, {
+  text: "Albania",
+  value: "AL"
+}, {
+  text: "Algeria",
+  value: "DZ"
+}, {
+  text: "American Samoa",
+  value: "AS"
+}, {
+  text: "Andorra",
+  value: "AD"
+}, {
+  text: "Angola",
+  value: "AO"
+}, {
+  text: "Anguilla",
+  value: "AI"
+}, {
+  text: "Antarctica",
+  value: "AQ"
+}, {
+  text: "Antigua and Barbuda",
+  value: "AG"
+}, {
+  text: "Argentina",
+  value: "AR"
+}, {
+  text: "Armenia",
+  value: "AM"
+}, {
+  text: "Aruba",
+  value: "AW"
+}, {
+  text: "Australia",
+  value: "AU"
+}, {
+  text: "Austria",
+  value: "AT"
+}, {
+  text: "Azerbaijan",
+  value: "AZ"
+}, {
+  text: "Bahamas",
+  value: "BS"
+}, {
+  text: "Bahrain",
+  value: "BH"
+}, {
+  text: "Bangladesh",
+  value: "BD"
+}, {
+  text: "Barbados",
+  value: "BB"
+}, {
+  text: "Belarus",
+  value: "BY"
+}, {
+  text: "Belgium",
+  value: "BE"
+}, {
+  text: "Belize",
+  value: "BZ"
+}, {
+  text: "Benin",
+  value: "BJ"
+}, {
+  text: "Bermuda",
+  value: "BM"
+}, {
+  text: "Bhutan",
+  value: "BT"
+}, {
+  text: "Bolivia",
+  value: "BO"
+}, {
+  text: "Bonaire, Sint Eustatius and Saba",
+  value: "BQ"
+}, {
+  text: "Bosnia and Herzegovina",
+  value: "BA"
+}, {
+  text: "Botswana",
+  value: "BW"
+}, {
+  text: "Bouvet Island",
+  value: "BV"
+}, {
+  text: "Brazil",
+  value: "BR"
+}, {
+  text: "British Indian Ocean Territory",
+  value: "IO"
+}, {
+  text: "Brunei Darussalam",
+  value: "BN"
+}, {
+  text: "Bulgaria",
+  value: "BG"
+}, {
+  text: "Burkina Faso",
+  value: "BF"
+}, {
+  text: "Burundi",
+  value: "BI"
+}, {
+  text: "Cambodia",
+  value: "KH"
+}, {
+  text: "Cameroon",
+  value: "CM"
+}, {
+  text: "Canada",
+  value: "CA"
+}, {
+  text: "Cape Verde",
+  value: "CV"
+}, {
+  text: "Cayman Islands",
+  value: "KY"
+}, {
+  text: "Central African Republic",
+  value: "CF"
+}, {
+  text: "Chad",
+  value: "TD"
+}, {
+  text: "Chile",
+  value: "CL"
+}, {
+  text: "China",
+  value: "CN"
+}, {
+  text: "Christmas Island",
+  value: "CX"
+}, {
+  text: "Cocos (Keeling) Islands",
+  value: "CC"
+}, {
+  text: "Colombia",
+  value: "CO"
+}, {
+  text: "Comoros",
+  value: "KM"
+}, {
+  text: "Congo",
+  value: "CG"
+}, {
+  text: "Congo, Democratic Republic of the Congo",
+  value: "CD"
+}, {
+  text: "Cook Islands",
+  value: "CK"
+}, {
+  text: "Costa Rica",
+  value: "CR"
+}, {
+  text: "Cote D'Ivoire",
+  value: "CI"
+}, {
+  text: "Croatia",
+  value: "HR"
+}, {
+  text: "Cuba",
+  value: "CU"
+}, {
+  text: "Curacao",
+  value: "CW"
+}, {
+  text: "Cyprus",
+  value: "CY"
+}, {
+  text: "Czech Republic",
+  value: "CZ"
+}, {
+  text: "Denmark",
+  value: "DK"
+}, {
+  text: "Djibouti",
+  value: "DJ"
+}, {
+  text: "Dominica",
+  value: "DM"
+}, {
+  text: "Dominican Republic",
+  value: "DO"
+}, {
+  text: "Ecuador",
+  value: "EC"
+}, {
+  text: "Egypt",
+  value: "EG"
+}, {
+  text: "El Salvador",
+  value: "SV"
+}, {
+  text: "Equatorial Guinea",
+  value: "GQ"
+}, {
+  text: "Eritrea",
+  value: "ER"
+}, {
+  text: "Estonia",
+  value: "EE"
+}, {
+  text: "Ethiopia",
+  value: "ET"
+}, {
+  text: "Falkland Islands (Malvinas)",
+  value: "FK"
+}, {
+  text: "Faroe Islands",
+  value: "FO"
+}, {
+  text: "Fiji",
+  value: "FJ"
+}, {
+  text: "Finland",
+  value: "FI"
+}, {
+  text: "France",
+  value: "FR"
+}, {
+  text: "French Guiana",
+  value: "GF"
+}, {
+  text: "French Polynesia",
+  value: "PF"
+}, {
+  text: "French Southern Territories",
+  value: "TF"
+}, {
+  text: "Gabon",
+  value: "GA"
+}, {
+  text: "Gambia",
+  value: "GM"
+}, {
+  text: "Georgia",
+  value: "GE"
+}, {
+  text: "Germany",
+  value: "DE"
+}, {
+  text: "Ghana",
+  value: "GH"
+}, {
+  text: "Gibraltar",
+  value: "GI"
+}, {
+  text: "Greece",
+  value: "GR"
+}, {
+  text: "Greenland",
+  value: "GL"
+}, {
+  text: "Grenada",
+  value: "GD"
+}, {
+  text: "Guadeloupe",
+  value: "GP"
+}, {
+  text: "Guam",
+  value: "GU"
+}, {
+  text: "Guatemala",
+  value: "GT"
+}, {
+  text: "Guernsey",
+  value: "GG"
+}, {
+  text: "Guinea",
+  value: "GN"
+}, {
+  text: "Guinea-Bissau",
+  value: "GW"
+}, {
+  text: "Guyana",
+  value: "GY"
+}, {
+  text: "Haiti",
+  value: "HT"
+}, {
+  text: "Heard Island and McDonald Islands",
+  value: "HM"
+}, {
+  text: "Holy See (Vatican City State)",
+  value: "VA"
+}, {
+  text: "Honduras",
+  value: "HN"
+}, {
+  text: "Hong Kong",
+  value: "HK"
+}, {
+  text: "Hungary",
+  value: "HU"
+}, {
+  text: "Iceland",
+  value: "IS"
+}, {
+  text: "India",
+  value: "IN"
+}, {
+  text: "Indonesia",
+  value: "ID"
+}, {
+  text: "Iran, Islamic Republic of",
+  value: "IR"
+}, {
+  text: "Iraq",
+  value: "IQ"
+}, {
+  text: "Ireland",
+  value: "IE"
+}, {
+  text: "Isle of Man",
+  value: "IM"
+}, {
+  text: "Israel",
+  value: "IL"
+}, {
+  text: "Italy",
+  value: "IT"
+}, {
+  text: "Jamaica",
+  value: "JM"
+}, {
+  text: "Japan",
+  value: "JP"
+}, {
+  text: "Jersey",
+  value: "JE"
+}, {
+  text: "Jordan",
+  value: "JO"
+}, {
+  text: "Kazakhstan",
+  value: "KZ"
+}, {
+  text: "Kenya",
+  value: "KE"
+}, {
+  text: "Kiribati",
+  value: "KI"
+}, {
+  text: "Korea, Democratic People's Republic of",
+  value: "KP"
+}, {
+  text: "Korea, Republic of",
+  value: "KR"
+}, {
+  text: "Kosovo",
+  value: "XK"
+}, {
+  text: "Kuwait",
+  value: "KW"
+}, {
+  text: "Kyrgyzstan",
+  value: "KG"
+}, {
+  text: "Lao People's Democratic Republic",
+  value: "LA"
+}, {
+  text: "Latvia",
+  value: "LV"
+}, {
+  text: "Lebanon",
+  value: "LB"
+}, {
+  text: "Lesotho",
+  value: "LS"
+}, {
+  text: "Liberia",
+  value: "LR"
+}, {
+  text: "Libyan Arab Jamahiriya",
+  value: "LY"
+}, {
+  text: "Liechtenstein",
+  value: "LI"
+}, {
+  text: "Lithuania",
+  value: "LT"
+}, {
+  text: "Luxembourg",
+  value: "LU"
+}, {
+  text: "Macao",
+  value: "MO"
+}, {
+  text: "Macedonia, the Former Yugoslav Republic of",
+  value: "MK"
+}, {
+  text: "Madagascar",
+  value: "MG"
+}, {
+  text: "Malawi",
+  value: "MW"
+}, {
+  text: "Malaysia",
+  value: "MY"
+}, {
+  text: "Maldives",
+  value: "MV"
+}, {
+  text: "Mali",
+  value: "ML"
+}, {
+  text: "Malta",
+  value: "MT"
+}, {
+  text: "Marshall Islands",
+  value: "MH"
+}, {
+  text: "Martinique",
+  value: "MQ"
+}, {
+  text: "Mauritania",
+  value: "MR"
+}, {
+  text: "Mauritius",
+  value: "MU"
+}, {
+  text: "Mayotte",
+  value: "YT"
+}, {
+  text: "Mexico",
+  value: "MX"
+}, {
+  text: "Micronesia, Federated States of",
+  value: "FM"
+}, {
+  text: "Moldova, Republic of",
+  value: "MD"
+}, {
+  text: "Monaco",
+  value: "MC"
+}, {
+  text: "Mongolia",
+  value: "MN"
+}, {
+  text: "Montenegro",
+  value: "ME"
+}, {
+  text: "Montserrat",
+  value: "MS"
+}, {
+  text: "Morocco",
+  value: "MA"
+}, {
+  text: "Mozambique",
+  value: "MZ"
+}, {
+  text: "Myanmar",
+  value: "MM"
+}, {
+  text: "Namibia",
+  value: "NA"
+}, {
+  text: "Nauru",
+  value: "NR"
+}, {
+  text: "Nepal",
+  value: "NP"
+}, {
+  text: "Netherlands",
+  value: "NL"
+}, {
+  text: "Netherlands Antilles",
+  value: "AN"
+}, {
+  text: "New Caledonia",
+  value: "NC"
+}, {
+  text: "New Zealand",
+  value: "NZ"
+}, {
+  text: "Nicaragua",
+  value: "NI"
+}, {
+  text: "Niger",
+  value: "NE"
+}, {
+  text: "Nigeria",
+  value: "NG"
+}, {
+  text: "Niue",
+  value: "NU"
+}, {
+  text: "Norfolk Island",
+  value: "NF"
+}, {
+  text: "Northern Mariana Islands",
+  value: "MP"
+}, {
+  text: "Norway",
+  value: "NO"
+}, {
+  text: "Oman",
+  value: "OM"
+}, {
+  text: "Pakistan",
+  value: "PK"
+}, {
+  text: "Palau",
+  value: "PW"
+}, {
+  text: "Palestinian Territory, Occupied",
+  value: "PS"
+}, {
+  text: "Panama",
+  value: "PA"
+}, {
+  text: "Papua New Guinea",
+  value: "PG"
+}, {
+  text: "Paraguay",
+  value: "PY"
+}, {
+  text: "Peru",
+  value: "PE"
+}, {
+  text: "Philippines",
+  value: "PH"
+}, {
+  text: "Pitcairn",
+  value: "PN"
+}, {
+  text: "Poland",
+  value: "PL"
+}, {
+  text: "Portugal",
+  value: "PT"
+}, {
+  text: "Puerto Rico",
+  value: "PR"
+}, {
+  text: "Qatar",
+  value: "QA"
+}, {
+  text: "Reunion",
+  value: "RE"
+}, {
+  text: "Romania",
+  value: "RO"
+}, {
+  text: "Russian Federation",
+  value: "RU"
+}, {
+  text: "Rwanda",
+  value: "RW"
+}, {
+  text: "Saint Barthelemy",
+  value: "BL"
+}, {
+  text: "Saint Helena",
+  value: "SH"
+}, {
+  text: "Saint Kitts and Nevis",
+  value: "KN"
+}, {
+  text: "Saint Lucia",
+  value: "LC"
+}, {
+  text: "Saint Martin",
+  value: "MF"
+}, {
+  text: "Saint Pierre and Miquelon",
+  value: "PM"
+}, {
+  text: "Saint Vincent and the Grenadines",
+  value: "VC"
+}, {
+  text: "Samoa",
+  value: "WS"
+}, {
+  text: "San Marino",
+  value: "SM"
+}, {
+  text: "Sao Tome and Principe",
+  value: "ST"
+}, {
+  text: "Saudi Arabia",
+  value: "SA"
+}, {
+  text: "Senegal",
+  value: "SN"
+}, {
+  text: "Serbia",
+  value: "RS"
+}, {
+  text: "Serbia and Montenegro",
+  value: "CS"
+}, {
+  text: "Seychelles",
+  value: "SC"
+}, {
+  text: "Sierra Leone",
+  value: "SL"
+}, {
+  text: "Singapore",
+  value: "SG"
+}, {
+  text: "St Martin",
+  value: "SX"
+}, {
+  text: "Slovakia",
+  value: "SK"
+}, {
+  text: "Slovenia",
+  value: "SI"
+}, {
+  text: "Solomon Islands",
+  value: "SB"
+}, {
+  text: "Somalia",
+  value: "SO"
+}, {
+  text: "South Africa",
+  value: "ZA"
+}, {
+  text: "South Georgia and the South Sandwich Islands",
+  value: "GS"
+}, {
+  text: "South Sudan",
+  value: "SS"
+}, {
+  text: "Spain",
+  value: "ES"
+}, {
+  text: "Sri Lanka",
+  value: "LK"
+}, {
+  text: "Sudan",
+  value: "SD"
+}, {
+  text: "Suriname",
+  value: "SR"
+}, {
+  text: "Svalbard and Jan Mayen",
+  value: "SJ"
+}, {
+  text: "Swaziland",
+  value: "SZ"
+}, {
+  text: "Sweden",
+  value: "SE"
+}, {
+  text: "Switzerland",
+  value: "CH"
+}, {
+  text: "Syrian Arab Republic",
+  value: "SY"
+}, {
+  text: "Taiwan, Province of China",
+  value: "TW"
+}, {
+  text: "Tajikistan",
+  value: "TJ"
+}, {
+  text: "Tanzania, United Republic of",
+  value: "TZ"
+}, {
+  text: "Thailand",
+  value: "TH"
+}, {
+  text: "Timor-Leste",
+  value: "TL"
+}, {
+  text: "Togo",
+  value: "TG"
+}, {
+  text: "Tokelau",
+  value: "TK"
+}, {
+  text: "Tonga",
+  value: "TO"
+}, {
+  text: "Trinidad and Tobago",
+  value: "TT"
+}, {
+  text: "Tunisia",
+  value: "TN"
+}, {
+  text: "Turkey",
+  value: "TR"
+}, {
+  text: "Turkmenistan",
+  value: "TM"
+}, {
+  text: "Turks and Caicos Islands",
+  value: "TC"
+}, {
+  text: "Tuvalu",
+  value: "TV"
+}, {
+  text: "Uganda",
+  value: "UG"
+}, {
+  text: "Ukraine",
+  value: "UA"
+}, {
+  text: "United Arab Emirates",
+  value: "AE"
+}, {
+  text: "United Kingdom",
+  value: "GB"
+}, {
+  text: "United States",
+  value: "US"
+}, {
+  text: "United States Minor Outlying Islands",
+  value: "UM"
+}, {
+  text: "Uruguay",
+  value: "UY"
+}, {
+  text: "Uzbekistan",
+  value: "UZ"
+}, {
+  text: "Vanuatu",
+  value: "VU"
+}, {
+  text: "Venezuela",
+  value: "VE"
+}, {
+  text: "Viet Nam",
+  value: "VN"
+}, {
+  text: "Virgin Islands, British",
+  value: "VG"
+}, {
+  text: "Virgin Islands, U.s.",
+  value: "VI"
+}, {
+  text: "Wallis and Futuna",
+  value: "WF"
+}, {
+  text: "Western Sahara",
+  value: "EH"
+}, {
+  text: "Yemen",
+  value: "YE"
+}, {
+  text: "Zambia",
+  value: "ZM"
+}, {
+  text: "Zimbabwe",
+  value: "ZW"
+}];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (countries);
 
 /***/ })
 
