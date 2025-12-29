@@ -2,6 +2,7 @@
     param:'',
     init(){
         Flatpickr(this.$refs.flatpickr, {
+            mode:'range',
             onClose: (selectedDates, dateStr, instance)=>{
                 this.param = dateStr;
                 // console.log('dateStr', dateStr);
@@ -12,6 +13,5 @@
     }
 }" class="w-full">
     {{ @$slot }}
-    <input type="hidden" x-model="{{@$model}}" x-modelable="param">
     <input x-ref="flatpickr" type="text" readonly class="input input-bordered w-full" />
 </div>

@@ -41,7 +41,7 @@ Route::middleware([
     Route::prefix('/management')->group(function(){
         Route::get('/buyer',fn()=>view('management.buyer'))->name('management.buyer');
         Route::get('/style',fn()=>view('management.style'))->name('management.style');
-        Route::get('/style',fn()=>view('management.purchase-order'))->name('management.purchase-order');
+        Route::get('/purchase-order',fn()=>view('management.purchase-order'))->name('management.purchase-order');
 
         Route::get('/staff',fn()=>view('management.staff'))->name('management.staff');
     });

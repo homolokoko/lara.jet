@@ -11,7 +11,7 @@ class UploaderController extends Controller
 {
     //
 
-    public function singleFileUpload(Request $request)
+    public function __singleFileUpload(Request $request)
     {
         $request->validate([
             'images.*' => 'required|image|max:10240', // 1MB Max
@@ -37,6 +37,31 @@ class UploaderController extends Controller
         return response()->json($uploadedImage);
     }
 
+    public function singleFileUpload(Request $request)
+    {
+        $request->validate([
+            'images.*' => 'required|image|max:10240', // 1MB Max
+        ]);
+
+        $uploadedImages = [];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $filename = \Carbon\Carbon::now()->format('Y-m-d-h-i-s').'.'.$ext;
+            $path = Storage::disk('tmp')->putFileAs('',$image,$filename);
+            $uploadedImages = [
+                'file_path' => $path,
+                'originalName' => $image->getClientOriginalName(),
+                'url' =>Storage::disk('tmp')->url($path),
+                'rotate' => false,
+            ];
+        }
+
+
+        return response()->json($uploadedImages);
+    }
+
     public function multipleFilesUpload(Request $request)
     {
         $request->validate([
@@ -47,7 +72,7 @@ class UploaderController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('product', 'public');
+                $path = $image->store('tmp', 'public');
                 $uploadedImages[] = [
                     'file_path' => $path,
                     'originalName' => $image->getClientOriginalName(),

@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('shared')->group(function(){
     Route::post('upload', [UploaderController::class, 'upload'])->name('shared.uploader.upload');
+    Route::post('single-files-upload', [UploaderController::class, 'singleFileUpload'])->name('shared.uploader.single-files-upload');
     Route::post('multiple-files-upload', [UploaderController::class, 'multipleFilesUpload'])->name('shared.uploader.multiple-files-upload');
 });
 
