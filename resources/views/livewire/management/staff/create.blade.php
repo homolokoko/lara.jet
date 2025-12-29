@@ -35,12 +35,13 @@
     zips:[],
     positions:[],
     async save(){
-        return console.log('save', this.usr);
         await this.$wire.save(this.usr)
     },
     init(){
         this.$wire.getAllZips()
-            .then((response)=>{ this.zips=response })
+            .then((response)=>{ this.zips=response });
+        this.$wire.getAllPositions()
+            .then((response)=>{ this.positions=response });
     },
 }">
 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Management\Staff;
 
 use App\Library\GetValueTextList;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class Create extends Component
@@ -19,9 +20,18 @@ class Create extends Component
         );
     }
 
+    public function getAllPositions()
+    {
+        return GetValueTextList::convert(
+            \App\Models\Staff\Position::get()
+        );
+    }
+
     public function save($data)
     {
-        dd($data);
+
+        $file_temp = $data['img']['file_path'];
+        // Storage::disk('public')->copy('tmp/'.$file_temp,'staff/photograph/'.$file_temp);
 
     }
 }

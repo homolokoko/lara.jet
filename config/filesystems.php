@@ -56,6 +56,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'staff' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/staff'),
+            'url' => env('ASSET_URL', '').'/storage/staff',
+            'visibility' => 'public',
+        ],
+
         'upload' => [
             'driver' => 'local',
             'root' => storage_path('app/public/upload'),
