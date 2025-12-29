@@ -199,7 +199,7 @@
         </div>
     </div>
 
-    <div class="space-y-3">
+    <div class="space-y-3 mt--5">
         <label class="block label-text-alt" for="">Other</label>
         <textarea x-model="usr.other" rows="4" class="w-full textarea textarea-bordered"></textarea>
     </div>

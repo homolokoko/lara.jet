@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('countrycatalog')->group(function() {
-    Route::get('/', 'CountryCatalogController@index');
+Route::prefix('countrycatalog')->group(function () {
+    Route::get('/', 'CountryCatalogController@store');
 });
