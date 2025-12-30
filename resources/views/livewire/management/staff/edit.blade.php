@@ -1,17 +1,18 @@
 <div x-data="{
     usr:{
+        id:null,
         name_en:'',
         name_kh:'',
         edu_lvl:'',
         email:'',
         is_female:null,
         dob:'',
-        tel_main:'',
-        tel_opt:'',
         is_married:null,
         position:'',
         lvl:'',
         img:{},
+        tel_main:'',
+        tel_opt:'',
         birth_add:{
             street:'',
             city:'',
@@ -25,6 +26,7 @@
             zip:null,
         },
         parent_info:{
+            id:'',
             dad_name:'',
             mom_name:'',
             dad_career:'',
@@ -47,17 +49,32 @@
                 }).then(()=>{ $dispatch('reload-data-table') });
             })
     },
+    async show(id){
+        await this.$wire.show(id)
+            .then(async (response)=>{ console.log('dsaf',response);this.usr = await response; })
+    },
+    async upgrade(){
+        await this.$wire.upgrade(this.usr)
+            .then(()=>{
+                    swal.fire({
+                        icon:'success',
+                        title:'Staff Upgraded Successfully',
+                        text: 'Closing ....',
+                        showConfirmButton: false,
+                        timer:1000,
+                        timerProgressBar:true
+                    }).then(()=>{ $dispatch('reload-data-table') });
+                })
+    },
     async init(){
         await this.$wire.getRelatedList()
             .then(async (response)=>{
                 this.zips= await response.zips;
                 this.positions= await response.positions;
             });
-    },
-}">
+    }
+}" @edit-usr-info.window="show(event.detail)">
 
-
-    {{-- Be like water. --}}
     <div class="grid grid-cols-3 gap-7">
         <div class="flex flex-col gap-5">
             <div class="space-y-3">
@@ -86,7 +103,7 @@
         <div class="flex flex-col gap-5">
             <div class="space-y-3">
                 <label class="block label-text-alt" for="">ID</label>
-                <input x-model="usr.email" type="text" class="w-full input input-bordered">
+                <input x-model="usr.email" readonly type="text" class="w-full input input-bordered">
             </div>
             <div class="flex gap-5">
                 <div class="space-y-3">
@@ -216,7 +233,7 @@
     </div>
 
     <div class="flex justify-center w-full p-5">
-        <button @click="save()" class="btn btn-primary">Save</button>
+        <button @click="upgrade()" class="btn btn-primary">Save</button>
     </div>
 
 </div>

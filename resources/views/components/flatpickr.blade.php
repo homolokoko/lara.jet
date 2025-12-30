@@ -13,5 +13,5 @@
 }" class="w-full">
     {{ @$slot }}
     <input type="hidden" x-model="{{@$model}}" x-modelable="param">
-    <input x-ref="flatpickr" type="text" readonly class="input input-bordered w-full" />
+    <input x-ref="flatpickr" :value="param" type="text" readonly class="w-full input input-bordered" />
 </div>
