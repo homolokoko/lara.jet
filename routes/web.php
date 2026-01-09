@@ -44,6 +44,7 @@ Route::middleware([
         Route::get('/purchase-order',fn()=>view('management.purchase-order'))->name('management.purchase-order');
 
         Route::get('/staff',fn()=>view('management.staff'))->name('management.staff');
+        Route::get('/course',fn()=>view('management.course'))->name('management.course');
     });
 
     Route::get('/full-qc/{mode}/{report_view}/form',[\App\Http\Controllers\Inspector\FullQcController::class,'form'])->name('full-qc.form');
