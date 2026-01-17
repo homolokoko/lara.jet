@@ -63,7 +63,7 @@
                 <td>Education Attainment</td>
                 <td>Position&Level</td>
                 <td>
-                    <x-modal title="Create Course">
+                    <x-large-modal title="Create Course">
                         <x-slot name="trigger">
                             <button class="btn btn-sm btn-primary" @click="modalOpen=true">Create</button>
                         </x-slot>
@@ -72,7 +72,7 @@
                                 <div class="flex flex-col gap-5">
                                     <div class="space-y-3">
                                         <label class="block label-text-alt" for="">Course Year</label>
-                                        <div class="flex">
+                                        <div class="flex justify-between">
                                             <select x-model="create_data.start_course" class="select select-bordered">
                                                 <option selected>Please Start Year</option>
                                                 <template x-for="i in course_years" :key="i">
@@ -88,26 +88,87 @@
                                         </div>
                                     </div>
                                     <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Name (English)</label>
-                                        <input x-model="usr.name_en" type="text" class="w-full input input-bordered">
+                                        <label class="block label-text-alt" for="">Level/Grade (KH)</label>
+                                        <select x-model="create_data.start_course" class="w-full select select-bordered">
+                                            <option selected>Level/Grade</option>
+                                            <template x-for="i in 10" :key="i">
+                                                <option value="i" x-text="i"></option>
+                                            </template>
+                                        </select>
                                     </div>
                                     <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Education Attainment</label>
-                                        <select x-model="usr.edu_lvl" class="select select-bordered">
-                                            <option selected>Please Select Level</option>
-                                            <option value="i">Secondary Education (Grades 7-9)</option>
-                                            <option value="ii">Upper Secondary (Grades 10-12)</option>
-                                            <option value="iii">Diploma</option>
-                                            <option value="iv">Associate Degree</option>
-                                            <option value="v">Bachelor's Degree</option>
-                                            <option value="vi">Master's Degree</option>
-                                            <option value="vii">Doctorate/Ph.D.</option>
+                                        <label class="block label-text-alt" for="">Level/Grade (EN)</label>
+                                        <select x-model="create_data.start_course" class="w-full select select-bordered">
+                                            <option selected>Level/Grade</option>
+                                            <template x-for="i in 10" :key="i">
+                                                <option value="i" x-text="i"></option>
+                                            </template>
                                         </select>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="block label-text-alt" for="">Monthly Payment</label>
+                                        <input type="text" class="w-full input input-bordered">
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <div class="space-y-3">
+                                            <label class="block label-text-alt" for="">Time Period</label>
+                                            <div class="input-group">
+                                                <input type="time" class="input input-bordered">
+                                                <input type="time" class="input input-bordered">
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <label class="block label-text-alt" for="">Room</label>
+                                            <select x-model="create_data.start_course" class="w-full select select-bordered">
+                                            <option selected>Room</option>
+                                            <template x-for="i in 10" :key="i">
+                                                <option value="i" x-text="i"></option>
+                                            </template>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-5">
+                                    <div class="space-y-3">
+                                        <label class="block label-text-alt" for="">Staff Identity</label>
+                                        <input type="text" class="w-full input input-bordered">
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="block label-text-alt" for="">Staff Name</label>
+                                        <input type="text" class="w-full input input-bordered">
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <div class="space-y-3">
+                                            <label class="block label-text-alt" for="">Enroll Date</label>
+                                            <x-flatpickr />
+                                            {{-- <x-flatpickr model="usr.dob" /> --}}
+                                        </div>
+                                        <div class="space-y-3">
+                                            <label class="block label-text-alt" for="">Debt</label>
+                                            <input type="text" class="w-full input input-bordered">
+                                        </div>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="block label-text-alt" for="">As Salary</label>
+                                        <input type="text" class="w-full input input-bordered" disabled>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="block label-text-alt" for="">As Percentage</label>
+                                        <input type="text" class="w-full input input-bordered" disabled>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-5">
+                                    <div class="space-y-3">
+                                        <label class="block label-text-alt" for="">Status</label>
+                                        <div class="flex gap-5">
+                                            <button class="btn btn-sm btn-outline btn-success">Active</button>
+                                            <button class="btn btn-sm btn-outline btn-error">Inactive</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </x-slot>
-                    </x-modal>
+                    </x-large-modal>
                 </td>
             </tr>
         </thead>

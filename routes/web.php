@@ -29,7 +29,7 @@ Route::middleware([
 //        return view('dashboard');
 //    })->name('dashboard');
 
-
+    Route::get('/dashboard', fn ()=>view('dashboard'))->name('dashboard');
 
     Route::prefix('admin')->group(function(){
         Route::get('product', fn()=>view('admin.product'))->name('admin.product');
@@ -62,7 +62,6 @@ Route::middleware([
 
 });
 
-Route::get('/dashboard', fn ()=>view('dashboard'))->name('dashboard');
 Route::get('/defect',fn()=>view('client.defect'))->name('client.defect');
 Route::get('/photograph-upload',fn()=>view('client.photograph-upload'))->name('client.photograph-upload');
 Route::prefix('blade-ui')->group(function(){
