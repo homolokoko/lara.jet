@@ -44,7 +44,7 @@
     }
 }" x-init="retrive()" @reload-data-table.window="retrive()">
 
-    <table class="table w-full">
+    <table class="table w-full table-compact">
         <thead>
             <tr>
                 <td>ID</td>
@@ -54,7 +54,7 @@
                 <td>Date of Birth</td>
                 <td>Education Attainment</td>
                 <td>Position&Level</td>
-                <td></td>
+                <td>Action</td>
             </tr>
         </thead>
         <tbody>
@@ -74,9 +74,15 @@
                 </td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn btn-accent btn-xs">detail</button>
-                        <button @click="$dispatch('edit-usr-info',elem.id)" class="btn btn-info btn-xs">edit</button>
-                        <button @click="remove(elem.id)" class="btn btn-error btn-xs">delete</button>
+                        <button class="btn btn-accent btn-xs">
+                            <x-heroicon-o-document-text class="w-5 h-5" />
+                        </button>
+                        <button @click="$dispatch('edit-usr-info',elem.id)" class="btn btn-info btn-xs">
+                            <x-heroicon-o-pencil-alt class="w-5 h-5" />
+                        </button>
+                        <button @click="remove(elem.id)" class="btn btn-error btn-xs">
+                            <x-heroicon-o-trash class="w-5 h-5" />
+                        </button>
                     </div>
                 </td>
             </tr>
