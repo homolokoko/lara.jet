@@ -103,7 +103,7 @@
         <div class="flex flex-col gap-5">
             <div class="space-y-3">
                 <label class="block label-text-alt" for="">ID</label>
-                <input x-model="usr.email" readonly type="text" class="w-full input input-bordered">
+                <input x-model="usr.email" type="text" class="w-full input input-bordered">
             </div>
             <div class="flex gap-5">
                 <div class="space-y-3">

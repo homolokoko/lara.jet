@@ -3,14 +3,9 @@
     per_page:10,
     filter:{},
     datatable:{},
-    course_years:[],
     goPage(page){
         this.page=page;
         this.retrive();
-    },
-    create_data:{
-
-
     },
     async remove(id){
         swal.fire({
@@ -44,129 +39,30 @@
         })
     },
     async retrive(){
-        let current_year = new Date().getFullYear();
-        this.course_years = _.range(current_year-4,current_year+6);
-        console.log('course_years',this.course_years);
         await this.$wire.datatable(this.page,this.per_page,this.filter)
-            .then(async (response)=>{ this.datatable = await response; })
+            .then(async (response)=>{ this.datatable = await response; console.log('datatable',this.datatable) })
     }
-}" x-init="retrive()" @reload-data-table.window="retrive()">
+}" x-init="retrive()"
+@reload-data-table.window="retrive()"
+@update-course-datatable.window="retrive()">
 
     <table class="table w-full">
         <thead>
             <tr>
                 <td>ID</td>
-                <td>Name</td>
-                <td>Gender</td>
-                <td>Married Status</td>
-                <td>Date of Birth</td>
-                <td>Education Attainment</td>
-                <td>Position&Level</td>
+                <td>Classroom Teacher</td>
+                <td>Year Book</td>
+                <td>Program Period</td>
+                <td>Time Period</td>
+                <td>Class Room</td>
+                <td>Program Subjects</td>
                 <td>
                     <x-large-modal title="Create Course">
                         <x-slot name="trigger">
                             <button class="btn btn-sm btn-primary" @click="modalOpen=true">Create</button>
                         </x-slot>
                         <x-slot name="content">
-                            <div class="grid grid-cols-3 gap-5">
-                                <div class="flex flex-col gap-5">
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Course Year</label>
-                                        <div class="flex justify-between">
-                                            <select x-model="create_data.start_course" class="select select-bordered">
-                                                <option selected>Please Start Year</option>
-                                                <template x-for="i in course_years" :key="i">
-                                                    <option value="i" x-text="i"></option>
-                                                </template>
-                                            </select>
-                                             <select x-model="create_data.end_course" class="select select-bordered">
-                                                <option selected>Please End Year</option>
-                                                <template x-for="i in course_years" :key="i">
-                                                    <option value="i" x-text="i"></option>
-                                                </template>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Level/Grade (KH)</label>
-                                        <select x-model="create_data.start_course" class="w-full select select-bordered">
-                                            <option selected>Level/Grade</option>
-                                            <template x-for="i in 10" :key="i">
-                                                <option value="i" x-text="i"></option>
-                                            </template>
-                                        </select>
-                                    </div>
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Level/Grade (EN)</label>
-                                        <select x-model="create_data.start_course" class="w-full select select-bordered">
-                                            <option selected>Level/Grade</option>
-                                            <template x-for="i in 10" :key="i">
-                                                <option value="i" x-text="i"></option>
-                                            </template>
-                                        </select>
-                                    </div>
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Monthly Payment</label>
-                                        <input type="text" class="w-full input input-bordered">
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <div class="space-y-3">
-                                            <label class="block label-text-alt" for="">Time Period</label>
-                                            <div class="input-group">
-                                                <input type="time" class="input input-bordered">
-                                                <input type="time" class="input input-bordered">
-                                            </div>
-                                        </div>
-                                        <div class="space-y-3">
-                                            <label class="block label-text-alt" for="">Room</label>
-                                            <select x-model="create_data.start_course" class="w-full select select-bordered">
-                                            <option selected>Room</option>
-                                            <template x-for="i in 10" :key="i">
-                                                <option value="i" x-text="i"></option>
-                                            </template>
-                                        </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col gap-5">
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Staff Identity</label>
-                                        <input type="text" class="w-full input input-bordered">
-                                    </div>
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Staff Name</label>
-                                        <input type="text" class="w-full input input-bordered">
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <div class="space-y-3">
-                                            <label class="block label-text-alt" for="">Enroll Date</label>
-                                            <x-flatpickr />
-                                            {{-- <x-flatpickr model="usr.dob" /> --}}
-                                        </div>
-                                        <div class="space-y-3">
-                                            <label class="block label-text-alt" for="">Debt</label>
-                                            <input type="text" class="w-full input input-bordered">
-                                        </div>
-                                    </div>
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">As Salary</label>
-                                        <input type="text" class="w-full input input-bordered" disabled>
-                                    </div>
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">As Percentage</label>
-                                        <input type="text" class="w-full input input-bordered" disabled>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col gap-5">
-                                    <div class="space-y-3">
-                                        <label class="block label-text-alt" for="">Status</label>
-                                        <div class="flex gap-5">
-                                            <button class="btn btn-sm btn-outline btn-success">Active</button>
-                                            <button class="btn btn-sm btn-outline btn-error">Inactive</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('livewire.management.course.create')
                         </x-slot>
                     </x-large-modal>
                 </td>
@@ -174,24 +70,34 @@
         </thead>
         <tbody>
             <template x-for="(elem, index) in datatable.data" :key="elem.id">
-                <tr>
-                <td x-text="elem.email"></td>
-                <td x-text="elem.staff.name_en"></td>
-                <td x-text="elem.staff.is_female ? 'F':'M'"></td>
-                <td x-text="elem.staff.is_married ? 'Married':'Single'"></td>
-                <td x-text="elem.staff.date_of_birth"></td>
-                <td x-text="elem.staff.education_level"></td>
+            <tr>
+                <td x-text="elem.id"></td>
+                <td x-text="`${elem.detail.staff.name_en} (${elem.detail.staff.name_kh})`"></td>
+                <td x-text="elem.name"></td>
+                <td x-text="`${elem.detail.start_course}-${elem.detail.finish_course}`"></td>
+                <td x-text="`${elem.detail.start_session}-${elem.detail.finish_session}`"></td>
+                <td x-text="elem.detail.class_room"></td>
                 <td>
-                    <div x-show="!_.isEmpty(elem.staff.position)" class="flex items-center gap-2">
-                        <span class="uppercase" x-text="elem.staff.position.name"></span>
-                        <div class=" badge badge-secondary badge-xs">lvl : <span class="uppercase" x-text="elem.staff.level"></span></div>
+                    <div class="flex flex-wrap gap-5 p-4">
+                        <template x-for="subject in elem.subjects" :key="subject.id">
+                            <span class="badge badge-sm badge-info" x-text="`${subject.title.official_name} : ${subject.max_score}`"></span>
+                        </template>
                     </div>
                 </td>
                 <td>
-                    <div class="btn-group">
-                        <button class="btn btn-accent btn-xs">detail</button>
-                        <button @click="$dispatch('edit-usr-info',elem.id)" class="btn btn-info btn-xs">edit</button>
-                        <button @click="remove(elem.id)" class="btn btn-error btn-xs">delete</button>
+                    <div class="p-4">
+                        <div class="flex overflow-hidden rounded-lg">
+                            <button class="rounded-none btn btn-accent btn-xs">detail</button>
+                            <x-large-modal title="Create Course">
+                                <x-slot name="trigger">
+                                    <button @click="$dispatch('edit-course-info',elem.id)" class="rounded-none btn btn-info btn-xs">edit</button>
+                                </x-slot>
+                                <x-slot name="content">
+                                    @include('livewire.management.course.edit')
+                                </x-slot>
+                            </x-large-modal>
+                            <button @click="remove(elem.id)" class="rounded-none btn btn-error btn-xs">delete</button>
+                        </div>
                     </div>
                 </td>
             </tr>

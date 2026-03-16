@@ -76,9 +76,11 @@ class Edit extends Component
         $newStaff['level'] = $data['lvl'];
         $newStaff['dob'] = $data['dob'];
 
+        \App\Models\Staff\User::where('id',$userid)->update(['name'=>$data['name_en'],'email'=>$data['email']]);
+
         \App\Models\Staff::where('user_id',$userid)->update($newStaff);
 
-        $newStaffPhotograph['file_path'] = $data['img']['file_path'];
+        $newStaffPhotograph['file_path'] = $data['img']['file_path'] ?? '';
 
         \App\Models\Staff\Photograph::where('user_id',$userid)->update($newStaffPhotograph);
 
@@ -155,7 +157,7 @@ class Edit extends Component
             \App\Models\Staff\PhoneNumber::where(['user_id'=>$userid,'is_important'=>false])->update($newStaffPhoneNumberOpt);
         }
 
-        $file_temp = $data['img']['file_path'];
+        $file_temp = $data['img']['file_path'] ?? '';
 
         if(!Storage::disk('public')->exists('staff/photograph/' . $file_temp))
             Storage::disk('public')->copy('tmp/'.$file_temp,'staff/photograph/' . $file_temp);

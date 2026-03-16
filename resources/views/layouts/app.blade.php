@@ -47,7 +47,7 @@
                         <img src="{{ asset('snapchat.png') }}" alt="" class="w-8 h-8">
                         <a href="{{ route('dashboard') }}" class="text-xl font-bold">TQMS Process Module</a>
                       </div>
-                      <h3 class="font-bold font-sans text-xl">{{@$title}}</h3>
+                      <h3 class="font-sans text-xl font-bold">{{@$title}}</h3>
                       <div x-data="{
                             picked:'',
                             dropdown:false,
@@ -97,6 +97,7 @@
                       </div>
                   </div>
                   <div class="w-full h-full p-5 overflow-auto shadow-lg content">
+                    @include('layouts.links.header')
                     {{$slot}}
                   </div>
                 </div>
