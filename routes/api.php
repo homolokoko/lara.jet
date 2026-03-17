@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Shared\UploaderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\EziStyleOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('shared')->group(function(){
     Route::post('upload', [UploaderController::class, 'upload'])->name('shared.uploader.upload');
+    Route::post('single-files-upload', [UploaderController::class, 'singleFileUpload'])->name('shared.uploader.single-files-upload');
+    Route::post('multiple-files-upload', [UploaderController::class, 'multipleFilesUpload'])->name('shared.uploader.multiple-files-upload');
+});
+
+Route::prefix('line-guru')->group(function(){
+    Route::get('/output', [\App\Http\Controllers\Api\LineGuru\GarmentTrackingController::class, 'index']);
 });
 
 Route::prefix('admin')->group(function(){
+
+
 
     Route::prefix('product')->group(function(){
 
@@ -42,4 +51,11 @@ Route::prefix('admin')->group(function(){
         Route::get('translations', [DefectController::class, 'listAllTranslation'])->name('admin.defects.translations');
     });
 
+
 });
+
+Route::patch('/full-qc/{mode}/{report_view}/defect-analysis-transaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.defect-analysis-transcaction.report');
+Route::get('/full-qc/{mode}/{report_view}/defect-analysis-transaction', [\App\Http\Controllers\Inspector\FullQcController::class,'defectAnalysisTransaction'])->name('full-qc.get-defect-analysis-transcaction.report');
+
+Route::post('apparelezi-style-order-no', [EziStyleOrderController::class, 'search'])->name('search-ezi-style-order-no');
+

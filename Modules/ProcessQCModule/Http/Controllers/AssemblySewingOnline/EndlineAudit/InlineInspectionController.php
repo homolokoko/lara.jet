@@ -5,6 +5,8 @@ namespace Modules\ProcessQCModule\Http\Controllers\AssemblySewingOnline\EndlineA
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
+use Modules\ProcessQCModule\Entities\Inspection;
 
 class InlineInspectionController extends Controller
 {
@@ -14,7 +16,13 @@ class InlineInspectionController extends Controller
      */
     public function index()
     {
-        return view('processqcmodule::index');
+        $query = Inspection\LocationEntity::with([
+            'transactions.garment',
+            'endlineProfiles.items'
+        ])
+        ->where(['workstation_locates_type_id'=>'1','is_day_shift'=>true])
+        ->whereBetween('updated_at',[\Carbon\Carbon::parse('2025-05-26')->startOfDay(),\Carbon\Carbon::parse('2025-05-30')->endOfDay()]);
+        return response()->json($query->get());
     }
 
     /**
@@ -23,7 +31,7 @@ class InlineInspectionController extends Controller
      */
     public function create()
     {
-        return view('processqcmodule::create');
+        return response()->json([]);
     }
 
     /**
@@ -84,6 +92,15 @@ class InlineInspectionController extends Controller
 
     public function report()
     {
+        // $query = Inspection\LocationEntity::with([
+        //     'transactions'=>fn($q)
+        //         =>$q->whereBetween('created_at',[\Carbon\Carbon::parse('2025-05-26')->startOfDay(),\Carbon\Carbon::parse('2025-06-01')->endOfDay()]),
+        //     'transactions.garment',
+        //     ])->where(['is_day_shift'=>true,'workstation_locates_type_id'=>1]);
+        // $mapped = $query->where('id','13')->get()->map(function($lines){
+        //     return $lines;
+        // });
+        // return response()->json($mapped);
         return view('processqcmodule::templates.assembly-sewing-online.endline-audit.inline-inspection.report');
     }
 

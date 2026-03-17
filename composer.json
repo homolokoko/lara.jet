@@ -6,9 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "astrotomic/laravel-translatable": "^11.9",
+        "bkwld/cloner": "^3.14",
         "blade-ui-kit/blade-heroicons": "^1.5",
         "blade-ui-kit/blade-icons": "^1.8",
         "blade-ui-kit/blade-ui-kit": "^0.3.4",
+        "doctrine/dbal": "^3.10",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
@@ -18,9 +21,16 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.12",
         "mhmiton/laravel-modules-livewire": "^1.6",
-        "nwidart/laravel-modules": "^8.6"
+        "nwidart/laravel-modules": "^8.6",
+        "rappasoft/laravel-livewire-tables": "^2.15",
+        "spatie/image": "1",
+        "spatie/image-optimizer": "^1.8",
+        "spatie/laravel-image-optimizer": "^1.6",
+        "staudenmeir/eloquent-has-many-deep": "^1.14",
+        "vicklr/materialized-model": "^1.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.7",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",

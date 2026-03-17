@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Models\FullQc;
+
+use App\Models\Configure;
+use App\Models\FullQc\Item;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use function PHPUnit\Framework\isEmpty;
+
+class Profile extends Model
+{
+    use HasFactory;
+    use HasRelationships;
+
+    protected $table = 'fullqc_profile';
+    protected $fillable = ['no','mode','report_view','location_id','style_profile_id','purchase_order_id','inspected_pcs','repair_pcs','pass_pcs','reject_pcs','inspector_id','reject_rate'];
+    public $appends = ['date'];
+
+    public function getDateAttribute()
+    {
+        return \Carbon\Carbon::parse($this->updated_at)->format('Y-m-d');
+    }
+
+    public function items()
+    {
+        return $this
+            ->hasMany(
+                Item::class,
+                'fullqc_profile_id'
+            );
+    }
+
+    public function styleProfile()
+    {
+        return $this
+            ->belongsTo(
+                Configure\Style\Profile::class,
+                'style_profile_id'
+            );
+    }
+
+    public function style()
+    {
+        return $this
+            ->hasOneDeepFromRelations(
+                $this->styleProfile(),
+                (new Configure\Style\Profile)->styles()
+            );
+    }
+
+    public function location()
+    {
+        return $this
+            ->belongsTo(
+                Configure\WorkstationLocate::class,
+                'location_id'
+            );
+    }
+
+    public function purchaseOrder()
+    {
+        return $this
+            ->belongsTo(
+                Configure\PurchaseOrders::class,
+                'purchase_order_id'
+            );
+    }
+
+    public function inspector()
+    {
+        return $this
+            ->belongsTo(
+                \App\Models\User::class,
+                'inspector_id'
+            );
+    }
+
+    public function scopeStyle($query, $style)
+    {
+        $style_profile = Configure\Style\Profile::where('style_id',$style)->first();
+        return $query->where('style_profile_id',$style_profile->id);
+    }
+
+    public function scopeLocate($query, $locate)
+    {
+        return $query->where('location_id',$locate);
+    }
+
+    public function scopeInspector($query, $inspector)
+    {
+        return $query->where('inspector_id',$inspector);
+    }
+    public function scopeGetByDate($query,$date)
+    {
+        if(!$date){
+            return $query->whereDate('updated_at', \Carbon\Carbon::today());
+        }else{
+            $range = explode('to',$date['value']);
+            if(count($range) < 2) {
+                return $query->whereDate('updated_at', $date['value']);
+            }else{
+                $end = \Carbon\Carbon::parse($range[1])->endOfDay();
+                $start = \Carbon\Carbon::parse($range[0])->startOfDay();
+                return $query->whereBetween('updated_at',[$start,$end]);
+            }
+        }
+    }
+}
