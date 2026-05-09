@@ -37,7 +37,7 @@ class Create extends Component
                 'email' => $data['email']
             ],
             [
-                'password' => Hash::make(123),
+                'password' => Hash::make('123'),
                 'name' => $data['name_en'],
                 'email' => $data['email']
             ]

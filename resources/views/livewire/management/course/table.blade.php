@@ -44,7 +44,7 @@
     }
 }" x-init="retrive()" @reload-data-table.window="retrive()">
 
-    <table class="table w-full">
+    <table class="table w-full table-compact">
         <thead>
             <tr>
                 <td>ID</td>
@@ -60,26 +60,28 @@
         <tbody>
             <template x-for="(elem, index) in datatable.data" :key="elem.id">
                 <tr>
-                <td x-text="elem.email"></td>
-                <td x-text="elem.staff.name_en"></td>
-                <td x-text="elem.staff.is_female ? 'F':'M'"></td>
-                <td x-text="elem.staff.is_married ? 'Married':'Single'"></td>
-                <td x-text="elem.staff.date_of_birth"></td>
-                <td x-text="elem.staff.education_level"></td>
-                <td>
-                    <div x-show="!_.isEmpty(elem.staff.position)" class="flex items-center gap-2">
-                        <span class="uppercase" x-text="elem.staff.position.name"></span>
-                        <div class=" badge badge-secondary badge-xs">lvl : <span class="uppercase" x-text="elem.staff.level"></span></div>
-                    </div>
-                </td>
-                <td>
-                    <div class="btn-group">
-                        <button class="btn btn-accent btn-xs">detail</button>
-                        <button @click="$dispatch('edit-usr-info',elem.id)" class="btn btn-info btn-xs">edit</button>
-                        <button @click="remove(elem.id)" class="btn btn-error btn-xs">delete</button>
-                    </div>
-                </td>
-            </tr>
+                    <td x-text="elem.email"></td>
+                    <td x-text="elem.staff.name_en"></td>
+                    <td x-text="elem.staff.is_female ? 'F':'M'"></td>
+                    <td x-text="elem.staff.is_married ? 'Married':'Single'"></td>
+                    <td x-text="elem.staff.date_of_birth"></td>
+                    <td x-text="elem.staff.education_level"></td>
+                    <td>
+                        <div x-show="!_.isEmpty(elem.staff.position)" class="flex items-center gap-2">
+                            <span class="uppercase" x-text="elem.staff.position.name"></span>
+                            <div class=" badge badge-secondary badge-xs">lvl : <span class="uppercase"
+                                    x-text="elem.staff.level"></span></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-accent btn-xs">detail</button>
+                            <button @click="$dispatch('edit-usr-info',elem.id)"
+                                class="btn btn-info btn-xs">edit</button>
+                            <button @click="remove(elem.id)" class="btn btn-error btn-xs">delete</button>
+                        </div>
+                    </td>
+                </tr>
             </template>
         </tbody>
         <tfoot>
@@ -88,11 +90,14 @@
                     <div class="flex justify-between">
                         <div class="btn-group"></div>
                         <div class="btn-group">
-                            <button :disabled="datatable.current_page===1" @click="goPage(1)" class="btn btn-xs btn-secondary">First Page</button>
+                            <button :disabled="datatable.current_page===1" @click="goPage(1)"
+                                class="btn btn-xs btn-secondary">First Page</button>
                             <template x-for="(link, indx) in datatable.links">
-                                <button @click="goPage(link.page)" :disabled="link.active" class="btn btn-xs btn-secondary" x-html="link.label"></button>
+                                <button @click="goPage(link.page)" :disabled="link.active"
+                                    class="btn btn-xs btn-secondary" x-html="link.label"></button>
                             </template>
-                            <button :disabled="datatable.current_page===datatable.last_page" @click="goPage(datatable.last_page)" class="btn btn-xs btn-secondary">Last Page</button>
+                            <button :disabled="datatable.current_page===datatable.last_page"
+                                @click="goPage(datatable.last_page)" class="btn btn-xs btn-secondary">Last Page</button>
                         </div>
                     </div>
                 </td>

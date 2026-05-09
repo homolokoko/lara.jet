@@ -92,8 +92,10 @@
                 <div class="space-y-3">
                     <label class="block label-text-alt" for="">Gender</label>
                     <div class="btn-group">
-                        <button @click="usr.is_female=false" :class="{'btn-active':usr.is_female==false}" class="btn btn-sm btn-outline">Male</button>
-                        <button @click="usr.is_female=true" :class="{'btn-active':usr.is_female==true}" class="btn btn-sm btn-outline">Female</button>
+                        <button @click="usr.is_female=false" :class="{'btn-active':usr.is_female==false}"
+                            class="btn btn-sm btn-outline">Male</button>
+                        <button @click="usr.is_female=true" :class="{'btn-active':usr.is_female==true}"
+                            class="btn btn-sm btn-outline">Female</button>
                     </div>
                 </div>
                 <div class="space-y-3">
@@ -116,8 +118,10 @@
             <div class="space-y-3">
                 <label class="block label-text-alt" for="">Marry Status</label>
                 <div class="btn-group">
-                    <button @click="usr.is_married=false" :class="{'btn-active':usr.is_married===false}" class="btn btn-sm btn-outline">Single</button>
-                    <button @click="usr.is_married=true" :class="{'btn-active':usr.is_married===true}" class="btn btn-sm btn-outline">Married</button>
+                    <button @click="usr.is_married=false" :class="{'btn-active':usr.is_married===false}"
+                        class="btn btn-sm btn-outline">Single</button>
+                    <button @click="usr.is_married=true" :class="{'btn-active':usr.is_married===true}"
+                        class="btn btn-sm btn-outline">Married</button>
                 </div>
             </div>
             <div class="space-y-3">
@@ -167,7 +171,7 @@
         </div>
         <div class="flex flex-col gap-5">
             <h3 class="label">Current Address</h3>
-             <div class="space-y-3">
+            <div class="space-y-3">
                 <label class="block label-text-alt" for="">Street/Village</label>
                 <input x-model="usr.current_add.street" type="text" class="w-full input input-bordered">
             </div>
@@ -191,7 +195,7 @@
         </div>
         <div class="flex flex-col gap-5">
             <h3 class="label">Parent Career</h3>
-             <div class="space-y-3">
+            <div class="space-y-3">
                 <label class="block label-text-alt" for="">Father's Name</label>
                 <input x-model="usr.parent_info.dad_name" type="text" class="w-full input input-bordered">
             </div>
