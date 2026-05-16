@@ -23,44 +23,46 @@ class Student extends Component
     {
         $zips = (new GetValueTextList)->convert(Entities\Zip::get());
         $staffs = Staff::select('user_id as value','name_en as text')->get()->toArray();
+        $datatable = Profile::get();
+        dd($datatable->toArray());
         return compact('zips','staffs');
     }
 
     public function create($data)
     {
-        if(!isEmpty(Arr::get($data,'birth.state')))
+        if(!empty(Arr::get($data,'birth.state')))
         {
             $birth_state_name = Str::of(Arr::get($data,'birth.state'))->lower()->snake();
             $birth_state = Entities\State::firstOrCreate(['name'=>$birth_state_name],['name'=>$birth_state_name,'zip_id'=>Arr::get($data,'birth.zip')]);
         }
-        if(!isEmpty(Arr::get($data,'birth.city')))
+        if(!empty(Arr::get($data,'birth.city')))
         {
             $birth_city_name = Str::of(Arr::get($data,'birth.city'))->lower()->snake();
-            $birth_city = Entities\City::firstOrCreate(['name'=>$birth_city_name],['name'=>$birth_city_name,'zip_id'=>$birth_state->id]);
+            $birth_city = Entities\City::firstOrCreate(['name'=>$birth_city_name],['name'=>$birth_city_name,'state_id'=>$birth_state->id]);
         }
 
-        if(!isEmpty(Arr::get($data,'birth.street')))
+        if(!empty(Arr::get($data,'birth.street')))
         {
             $birth_street_name = Str::of(Arr::get($data,'birth.street'))->lower()->snake();
-            $birth_street = Entities\City::firstOrCreate(['name'=>$birth_street_name],['name'=>$birth_street_name,'zip_id'=>$birth_city->id]);
+            $birth_street = Entities\Street::firstOrCreate(['name'=>$birth_street_name],['name'=>$birth_street_name,'city_id'=>$birth_city->id]);
         }
-        if(!isEmpty(Arr::get($data,'cur.state')))
+        if(!empty(Arr::get($data,'cur.state')))
         {
             $current_state_name = Str::of(Arr::get($data,'cur.state'))->lower()->snake();
             $current_state = Entities\State::firstOrCreate(['name'=>$current_state_name],['name'=>$current_state_name,'zip_id'=>Arr::get($data,'cur.zip')]);
         }
-        if(!isEmpty(Arr::get($data,'cur.city')))
+        if(!empty(Arr::get($data,'cur.city')))
         {
             $current_city_name = Str::of(Arr::get($data,'cur.city'))->lower()->snake();
-            $current_city = Entities\City::firstOrCreate(['name'=>$current_city_name],['name'=>$current_city_name,'zip_id'=>$current_state->id]);
+            $current_city = Entities\City::firstOrCreate(['name'=>$current_city_name],['name'=>$current_city_name,'state_id'=>$current_state->id]);
         }
 
-        if(!isEmpty(Arr::get($data,'cur.street')))
+        if(!empty(Arr::get($data,'cur.street')))
         {
             $current_street_name = Str::of(Arr::get($data,'cur.street'))->lower()->snake();
-            $current_street = Entities\City::firstOrCreate(['name'=>$current_street_name],['name'=>$current_street_name,'zip_id'=>$current_city->id]);
+            $current_street = Entities\Street::firstOrCreate(['name'=>$current_street_name],['name'=>$current_street_name,'city_id'=>$current_city->id]);
         }
-        if(!isEmpty($data,'father.name'))
+        if(!empty(Arr::get($data,'father.name')))
         {
             $father = Relative::create([
                 'name'=>Arr::get($data,'father.name'),
@@ -70,7 +72,7 @@ class Student extends Component
             ]);
         }
 
-        if(!isEmpty($data,'mother.name'))
+        if(!empty(Arr::get($data,'mother.name')))
         {
             $mother = Relative::create([
                 'name'=>Arr::get($data,'mother.name'),
@@ -80,9 +82,9 @@ class Student extends Component
             ]);
         }
 
-        if(!isEmpty($data,'name_en') && !isEmpty($data,'gender') && !isEmpty(Arr::get($data,'dob')))
+        if(!empty(Arr::get($data,'name_en')) && !empty(Arr::get($data,'gender')) && !empty(Arr::get($data,'dob')))
         {
-            Profile::creat([
+            Profile::create([
                 'name_kh'=>Arr::get($data,'name_kh'),
                 'name_en'=>Arr::get($data,'name_en'),
                 'gender'=>Arr::get($data,'gender'),
@@ -99,11 +101,11 @@ class Student extends Component
             ]);
             return ['status'=>true,'message'=>'Created student successfull!'];
         }else{
-            if(isEmpty($data,'name_en'))
+            if(empty(Arr::get($data,'name_en')))
                 return ['status'=>false,'message'=>'Need to assign name for student.'];
-            if(isEmpty($data,'gender'))
+            if(empty(Arr::get($data,'gender')))
                 return ['status'=>false,'message'=>'Need to assign gender for student.'];
-            if(isEmpty($data,'dob'))
+            if(empty(Arr::get($data,'dob')))
                 return ['status'=>false,'message'=>'Need to assign date of birth for student.'];
         }
 
