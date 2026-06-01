@@ -3159,6 +3159,26 @@ select {
   animation: radiomark var(--animation-input, .2s)  ease-in-out;
   box-shadow: 0 0 0 4px hsl(var(--b1)) inset, 0 0 0 4px hsl(var(--b1)) inset, var(--focus-shadow);
 }
+.radio-primary {
+  --chkbg: var(--p);
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--p) / var(--tw-border-opacity, 1));
+}
+.radio-primary:hover {
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--p) / var(--tw-border-opacity, 1));
+}
+.radio-primary:focus-visible {
+  --focus-shadow: 0 0 0 2px hsl(var(--b1)), 0 0 0 4px hsl(var(--p));
+}
+.radio-primary:checked {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--p) / var(--tw-bg-opacity, 1));
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--p) / var(--tw-border-opacity, 1));
+  --tw-text-opacity: 1;
+  color: hsla(var(--pc) / var(--tw-text-opacity, 1));
+}
 .radio:disabled {
   cursor: not-allowed;
   opacity: .2;
@@ -3176,9 +3196,6 @@ select {
   to {
     box-shadow: 0 0 0 4px hsl(var(--b1)) inset, 0 0 0 4px hsl(var(--b1)) inset, var(--focus-shadow);
   }
-}
-.radio-mark {
-  display: none;
 }
 .range:focus-visible::-webkit-slider-thumb {
   box-shadow: 0 0 0 2px hsl(var(--b1)), 0 0 0 4px hsl(var(--range-shdw));
@@ -3872,6 +3889,11 @@ select {
   --tw-text-opacity: 1;
   color: hsla(var(--er) / var(--tw-text-opacity, 1));
 }
+.table-normal :where(th,td) {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 1rem;
+}
 .table-compact :where(th,td) {
   font-size: .875rem;
   line-height: 1.25rem;
@@ -4561,9 +4583,6 @@ select {
 .row-span-2 {
   grid-row: span 2 / span 2;
 }
-.row-span-1 {
-  grid-row: span 1 / span 1;
-}
 .row-start-1 {
   grid-row-start: 1;
 }
@@ -5158,9 +5177,6 @@ select {
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
 .grid-cols-5 {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
@@ -5169,9 +5185,6 @@ select {
 }
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
-}
-.grid-rows-3 {
-  grid-template-rows: repeat(3, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;

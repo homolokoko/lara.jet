@@ -23,13 +23,43 @@ class Student extends Component
     {
         $zips = (new GetValueTextList)->convert(Entities\Zip::get());
         $staffs = Staff::select('user_id as value','name_en as text')->get()->toArray();
-        $datatable = Profile::get();
-        dd($datatable->toArray());
-        return compact('zips','staffs');
+        $datatable = Profile::with([
+            'staff',
+            'motherInfo',
+            'fatherInfo',
+            'birthAddress.city',
+            'birthAddress.state',
+            'birthAddress.zip',
+            'birthAddress.country',
+            'currentAddress.city',
+            'currentAddress.state',
+            'currentAddress.zip',
+            'currentAddress.country',
+            ])->get()->toArray();
+        // return dd($datatable);
+        return compact('zips','staffs','datatable');
+    }
+
+    public function datatable($page,$per_page,$filter)
+    {
+        return Profile::with([
+            'staff',
+            'motherInfo',
+            'fatherInfo',
+            'birthAddress.city',
+            'birthAddress.state',
+            'birthAddress.zip',
+            'birthAddress.country',
+            'currentAddress.city',
+            'currentAddress.state',
+            'currentAddress.zip',
+            'currentAddress.country',
+            ])->paginate($per_page,['*'],'page',$page)->toArray();
     }
 
     public function create($data)
     {
+        return ;
         if(!empty(Arr::get($data,'birth.state')))
         {
             $birth_state_name = Str::of(Arr::get($data,'birth.state'))->lower()->snake();
