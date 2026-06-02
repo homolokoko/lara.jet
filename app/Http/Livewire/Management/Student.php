@@ -23,21 +23,7 @@ class Student extends Component
     {
         $zips = (new GetValueTextList)->convert(Entities\Zip::get());
         $staffs = Staff::select('user_id as value','name_en as text')->get()->toArray();
-        $datatable = Profile::with([
-            'staff',
-            'motherInfo',
-            'fatherInfo',
-            'birthAddress.city',
-            'birthAddress.state',
-            'birthAddress.zip',
-            'birthAddress.country',
-            'currentAddress.city',
-            'currentAddress.state',
-            'currentAddress.zip',
-            'currentAddress.country',
-            ])->get()->toArray();
-        // return dd($datatable);
-        return compact('zips','staffs','datatable');
+        return compact('zips','staffs');
     }
 
     public function datatable($page,$per_page,$filter)

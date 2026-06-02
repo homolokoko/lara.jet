@@ -4,7 +4,8 @@
         page:1,
         per_page:15,
         accord:false,
-        modalOpen:false,
+        view:false,
+        edit: false,
         selectedView:{},
         result:{
             name_kh:'',
@@ -57,19 +58,26 @@
                 });
         },
         viewDetail(param){
-            this.modalOpen = true;
-            this.selectedView = _.find(this.data.datatable,i=>i.id===param);
+            this.view = true;
+            this.selectedView = _.find(this.datatable.data,i=>i.id===param);
             console.log('select view', this.selectedView);
         },
         closeDetailView(){
-            this.modalOpen = false;
+            this.view = false;
             this.selectedView = {};
+        },
+        triggerPage(number){
+            this.$wire.datatable( number ?? this.page,this.per_page,this.filter)
+                .then((response) => { this.datatable = response;console.log('datatable',response); });
+        },
+        selectedPerpage(){
+            this.$wire.datatable(this.page,this.per_page,this.filter)
+                .then((response) => { this.datatable = response;console.log('datatable',response); });
         },
         init(){
             this.$wire.load()
                 .then((response)=>{ this.data = response });
-            this.$wire.datatable(this.page,this.per_page,this.filter)
-                .then((response) => { this.datatable = response;console.log('datatable',response); });
+            this.triggerPage(1);
         }
     }" class="border divide-y rounded-lg">
 
@@ -321,11 +329,42 @@
                 </template>
             </tbody>
             <tfoot>
-
+                <tr>
+                    <td colspan="9">
+                        <div class="flex gap-5 items-center">
+                            <div class="flex">
+                                <a @click="triggerPage(1)" :disabled="datatable.current_page==1"
+                                    class="btn btn-sm btn-secondary rounded-none">⇦first</a>
+                                <template x-for="(link,linkIndex) in datatable.links">
+                                    <a @click="triggerPage(link.page)" class="btn btn-sm btn-secondary rounded-none"
+                                        :disabled="link.active || !link.url" x-text="link.label"></a>
+                                </template>
+                                <a @click="triggerPage(datatable.last_page)"
+                                    :disabled="datatable.current_page==datatable.last_page"
+                                    class="btn btn-sm btn-secondary rounded-none">last⇨</a>
+                            </div>
+                            <div class="flex gap-2 items-center">
+                                <h3>Per page</h3>
+                                <select x-model="per_page" @change="selectedPerpage()" class="h-10 rounded-lg">
+                                    <option value>per page</option>
+                                    <option value=5>5</option>
+                                    <option value=10>10</option>
+                                    <option value=15>15</option>
+                                    <option value=25>25</option>
+                                    <option value=50>50</option>
+                                </select>
+                            </div>
+                            <div class="badge badge-md" x-text="`Current page : ${datatable.current_page}`"></div>
+                            <div class="badge badge-md" x-text="`From : ${datatable.from}`"></div>
+                            <div class="badge badge-md" x-text="`To : ${datatable.to}`"></div>
+                            <div class="badge badge-md" x-text="`Total : ${datatable.total}`"></div>
+                        </div>
+                    </td>
+                </tr>
             </tfoot>
         </table>
 
-        <x-modal.sub-content-sm-popup>
+        <x-modal.sub-content-sm-popup :active="'view'">
             <div class="border overflow-hidden rounded gap-5 divide-y ">
                 <div class="flex p-5 justify-between">
                     <h3 class="font-bold text-xl">PERSONAL INFORMATION</h3>
@@ -417,6 +456,152 @@
                                     <li>
                                         <label class="label-text-alt uppercase"
                                             x-text="`Name : ${selectedView.father_info.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Profession : ${selectedView.father_info.job}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Main Number : ${selectedView.father_info.main_number}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Seconday Number : ${selectedView.father_info.subs_number}`"></label>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Name : ${selectedView.mother_info.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Profession : ${selectedView.mother_info.job}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Main Number : ${selectedView.mother_info.main_number}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Seconday Number : ${selectedView.mother_info.subs_number}`"></label>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="flex justify-center items-center p-5">
+                    <button @click="closeDetailView()" class="btn btn-ghost">Close</button>
+                </div>
+            </div>
+        </x-modal.sub-content-sm-popup>
+
+        <x-modal.sub-content-sm-popup :active="'edit'">
+            <div class="border overflow-hidden rounded gap-5 divide-y ">
+                <div class="flex p-5 justify-between">
+                    <h3 class="font-bold text-xl">PERSONAL INFORMATION</h3>
+                    <button @click="closeDetailView()" class="btn btn-circle btn-sm btn-error">
+                        <x-heroicon-o-x class="w-5 h-5" />
+                    </button>
+                </div>
+                <table class="table table-normal w-full">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <label class="label-text-alt uppercase">Name</label>
+                                            <input type="button" x-model="edit.name_en" :value="selectedView.name_kh"
+                                                class="input input-bordered">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Name : ${selectedView.name_en}`"></label>
+                                        <div>
+                                            <label class="label-text-alt uppercase">Name</label>
+                                            <input type="button" x-model="edit.name_en" :value="selectedView.name_kh"
+                                                class="input input-bordered">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Sex : ${selectedView.gender}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Date Of Birth : ${selectedView.official_dob}`"></label>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>BIRTH PLACE</th>
+                            <th>CURRENT PLACE</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Village : ${selectedView.birth_address.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Commune : ${selectedView.birth_address.city.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`District : ${selectedView.birth_address.state.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Proving : ${selectedView.birth_address.zip.name}`"></label>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Village : ${selectedView.current_address.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Commune : ${selectedView.current_address.city.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`District : ${selectedView.current_address.state.name}`"></label>
+                                    </li>
+                                    <li>
+                                        <label class="label-text-alt uppercase"
+                                            x-text="`Proving : ${selectedView.current_address.zip.name}`"></label>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>FATHER INFORMATION</th>
+                            <th>MOTHER INFORMATION</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <label class="label-text-alt uppercase"
+                                                x-text="`Name : ${selectedView.father_info.name}`"></label>
+                                        </div>
                                     </li>
                                     <li>
                                         <label class="label-text-alt uppercase"
