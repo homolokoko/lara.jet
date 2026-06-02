@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class State extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasRelationships;
 
     protected $table = "state";
     protected $fillable = ["name","zip_id"];
@@ -22,6 +24,19 @@ class State extends Model
                 City::class,
                 'state_id'
             );
+    }
+
+    public function zip()
+    {
+        return $this->belongsTo(Zip::class,'zip_id');
+    }
+
+    public function country()
+    {
+        return $this->hasOneDeepFromRelations(
+            $this->zip(),
+            (new Zip)->country()
+        );
     }
 
     public function getNameAttribute($val)
