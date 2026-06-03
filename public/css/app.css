@@ -3791,6 +3791,21 @@ select {
   padding: 0;
   width: 4rem;
 }
+.input-md {
+  height: 3rem;
+  font-size: .875rem;
+  line-height: 1.25rem;
+  line-height: 2;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.input-sm {
+  height: 2rem;
+  font-size: .875rem;
+  line-height: 2rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+}
 .input-xs {
   height: 1.5rem;
   font-size: .75rem;
@@ -3798,19 +3813,6 @@ select {
   line-height: 1.625;
   padding-left: .5rem;
   padding-right: .5rem;
-}
-.menu-vertical {
-  flex-direction: column;
-}
-.menu-vertical :where(li) {
-  flex-direction: column;
-}
-.menu-horizontal {
-  display: inline-flex;
-  flex-direction: row;
-}
-.menu-horizontal :where(li) {
-  flex-direction: row;
 }
 .radio-md {
   height: 1.5rem;
@@ -3908,14 +3910,6 @@ select {
   border-color: transparent;
   --tw-text-opacity: 1;
   color: hsla(var(--er) / var(--tw-text-opacity, 1));
-}
-.menu-vertical :where(li.bordered>a),.menu-vertical :where(li.bordered>button),.menu-vertical :where(li.bordered>span) {
-  border-bottom-width: 0;
-  border-left-width: 4px;
-}
-.menu-horizontal :where(li.bordered>a),.menu-horizontal :where(li.bordered>button),.menu-horizontal :where(li.bordered>span) {
-  border-left-width: 0;
-  border-bottom-width: 4px;
 }
 .table-normal :where(th,td) {
   font-size: 1rem;
@@ -4928,6 +4922,10 @@ select {
 .max-h-full {
   max-height: 100%;
 }
+.max-h-fit {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
 .min-h-16 {
   min-height: 4rem;
 }
@@ -5072,6 +5070,9 @@ select {
 }
 .max-w-xl {
   max-width: 36rem;
+}
+.max-w-5xl {
+  max-width: 64rem;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -5425,9 +5426,6 @@ select {
 }
 .rounded-xl {
   border-radius: 0.75rem;
-}
-.rounded-sm {
-  border-radius: 0.125rem;
 }
 .rounded-b-lg {
   border-bottom-right-radius: 0.5rem;
@@ -7506,6 +7504,18 @@ select {
     max-width: 80rem;
   }
 
+  .md\:max-w-5xl {
+    max-width: 64rem;
+  }
+
+  .md\:max-w-6xl {
+    max-width: 72rem;
+  }
+
+  .md\:max-w-xl {
+    max-width: 36rem;
+  }
+
   .md\:flex-1 {
     flex: 1 1 0%;
   }
@@ -7615,6 +7625,14 @@ select {
 
   .lg\:hidden {
     display: none;
+  }
+
+  .lg\:max-w-5xl {
+    max-width: 64rem;
+  }
+
+  .lg\:max-w-6xl {
+    max-width: 72rem;
   }
 
   .lg\:flex-row {
