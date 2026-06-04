@@ -127,11 +127,10 @@ class Student extends Component
 
     public function updateRecord($data)
     {
-        dd($data);
         if(!empty(Arr::get($data,'birth_address.state.name')))
         {
             $birth_state_name = Str::of(Arr::get($data,'birth_address.state.name'))->lower()->snake();
-            $birth_state = Entities\State::firstOrCreate(['name'=>$birth_state_name],['name'=>$birth_state_name,'zip_id'=>Arr::get($data,'birth_address.zip.id')]);
+            $birth_state = Entities\State::firstOrCreate(['name'=>$birth_state_name],['name'=>$birth_state_name,'zip_id'=>Arr::get($data,'birth_address.zip')]);
         }
         if(!empty(Arr::get($data,'birth_address.city.name')))
         {
@@ -139,15 +138,15 @@ class Student extends Component
             $birth_city = Entities\City::firstOrCreate(['name'=>$birth_city_name],['name'=>$birth_city_name,'state_id'=>$birth_state->id]);
         }
 
-        if(!empty(Arr::get($data,'birth_address.street.name')))
+        if(!empty(Arr::get($data,'birth_address.name')))
         {
-            $birth_street_name = Str::of(Arr::get($data,'birth_address.street.name'))->lower()->snake();
+            $birth_street_name = Str::of(Arr::get($data,'birth_address.name'))->lower()->snake();
             $birth_street = Entities\Street::firstOrCreate(['name'=>$birth_street_name],['name'=>$birth_street_name,'city_id'=>$birth_city->id]);
         }
         if(!empty(Arr::get($data,'current_address.state.name')))
         {
             $current_state_name = Str::of(Arr::get($data,'current_address.state.name'))->lower()->snake();
-            $current_state = Entities\State::firstOrCreate(['name'=>$current_state_name],['name'=>$current_state_name,'zip_id'=>Arr::get($data,'cur.zip')]);
+            $current_state = Entities\State::firstOrCreate(['name'=>$current_state_name],['name'=>$current_state_name,'zip_id'=>Arr::get($data,'current_address.zip')]);
         }
         if(!empty(Arr::get($data,'current_address.city.name')))
         {
@@ -155,15 +154,15 @@ class Student extends Component
             $current_city = Entities\City::firstOrCreate(['name'=>$current_city_name],['name'=>$current_city_name,'state_id'=>$current_state->id]);
         }
 
-        if(!empty(Arr::get($data,'current_address.street.name')))
+        if(!empty(Arr::get($data,'current_address.name')))
         {
-            $current_street_name = Str::of(Arr::get($data,'current_address.street.name'))->lower()->snake();
+            $current_street_name = Str::of(Arr::get($data,'current_address.name'))->lower()->snake();
             $current_street = Entities\Street::firstOrCreate(['name'=>$current_street_name],['name'=>$current_street_name,'city_id'=>$current_city->id]);
         }
         if(!empty(Arr::get($data,'father_info.name')))
         {
-            $father = Relative::find(Arr::get($data,'father_id.'))
-                ->update([
+            $father = Relative::updateOrCreate(['id',Arr::get($data,'father_id')],
+            [
                 'name'=>Arr::get($data,'father_info.name'),
                 'job'=>Arr::get($data,'father_info.job'),
                 'main_number'=>Arr::get($data,'father_info.main_number'),
@@ -173,32 +172,30 @@ class Student extends Component
 
         if(!empty(Arr::get($data,'mother_info.name')))
         {
-            $mother = Relative::find(Arr::get($data,'mother_id.'))
-                ->update([
+            $mother = Relative::updateOrCreate(['id',Arr::get($data,'mother_id')],
+            [
                 'name'=>Arr::get($data,'mother_info.name'),
                 'job'=>Arr::get($data,'mother_info.job'),
                 'main_number'=>Arr::get($data,'mother_info.main_number'),
                 'subs_number'=>Arr::get($data,'mother_info.subs_number'),
             ]);
         }
-
-        if(!empty(Arr::get($data,'name_en')) && !empty(Arr::get($data,'gender')) && !empty(Arr::get($data,'dob')))
+        if(!empty(Arr::get($data,'name_en')) && !empty(Arr::get($data,'gender')) && !empty(Arr::get($data,'date_of_birth')))
         {
-            Profile::find(Arr::get($data,'id'))
+            Profile::where('id',Arr::get($data,'id'))
                 ->update([
                 'name_kh'=>Arr::get($data,'name_kh'),
                 'name_en'=>Arr::get($data,'name_en'),
                 'gender'=>Arr::get($data,'gender'),
-                'date_of_birth'=>Arr::get($data,'dob'),
+                'date_of_birth'=>Arr::get($data,'date_of_birth'),
                 'other'=>Arr::get($data,'other',null),
-                'room'=>Arr::get($data,'class_room',null),
+                'room'=>Arr::get($data,'room',null),
                 'staff_id'=>Arr::get($data,'staff',null),
                 'shift'=>Arr::get($data,'shift',null),
-                'father_id'=>$father ? $father->id:null,
-                'mother_id'=>$mother ? $mother->id:null,
+                'father_id'=>isset($father) ? $father->id:null,
+                'mother_id'=>isset($mother) ? $mother->id:null,
                 'birth_address_id'=> $birth_street ? $birth_street->id:null,
                 'current_address_id'=> $current_street ? $current_street->id:null,
-                ''
             ]);
             return ['status'=>true,'message'=>'Created student successfull!'];
         }else{
@@ -213,6 +210,6 @@ class Student extends Component
 
     public function deleteRecord($param)
     {
-
+        Profile::where('id',$param)->delete();
     }
 }

@@ -12,9 +12,9 @@
             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            class="relative w-full bg-white border shadow-lg border-neutral-200 max-w-7xl sm:rounded-lg max-h-fit">
+            class="relative w-full bg-white border shadow-lg border-neutral-200 max-w-7xl sm:rounded-lg">
             <input type="hidden" x-model="{{ $active }}" x-modelable="modalOpen" />
-            <div class="relative w-auto p-5">{{@$slot}}</div>
+            <div class="relative w-auto p-5 overflow-auto max-h-96">{{@$slot}}</div>
         </div>
     </div>
 </div>
