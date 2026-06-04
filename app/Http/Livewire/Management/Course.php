@@ -2,26 +2,27 @@
 
 namespace App\Http\Livewire\Management;
 
+use App\Library\GetValueTextList;
 use App\Models\Configure\SubjectTitle;
 use App\Models\Course as CourseModel;
 use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Course extends Component
 {
-    public array $staffs;
-
-    public function mount()
-    {
-        $this->staffs = Staff::get()
-            ->map(fn($elem)=>['value'=>$elem->id,'text'=>$elem->name_en.'('.$elem->name_kh.')'])->toArray();
-    }
-
     public function render()
     {
         return view('livewire.management.course');
+    }
+
+    public function load()
+    {
+        $staff = Staff::get()
+            ->map(fn($elem)=>['value'=>$elem->id,'text'=>$elem->name_en.'('.$elem->name_kh.')'])->toArray();
+        return ['staffs'=>$staff];
     }
 
     public function datatable($page,$per_page,$filter)
@@ -31,6 +32,7 @@ class Course extends Component
 
     public function submit($info,$subjects)
     {
+        dd(['info'=>$info,'subjects'=>$subjects]);
         $course = CourseModel\Header::create(['name'=>Arr::get($info,'name')]);
         $detail = CourseModel\Detail::create([
             'name'=>Arr::get($info,'name'),
