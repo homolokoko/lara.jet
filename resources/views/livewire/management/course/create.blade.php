@@ -78,7 +78,7 @@
                 </div>
                 <div class="space-y-3">
                     <label class="block label-text-alt" for="">Debt</label>
-                    <input x-model="createData.debt" type="text" class="w-full input input-bordered">
+                    <input x-model="createData.debt" type="text" class="w-full input input-bordered" disabled>
                 </div>
             </div>
             <div class="space-y-3">
@@ -106,7 +106,7 @@
             </div>
         </div>
     </div>
-    <div class=" p-5 border space-y-5 divide-y">
+    <div class="p-5 space-y-5 border divide-y ">
         <h3 class="text-lg font-bold">
             Subjects &Score For the Test
             <button @click="addCreateSubject" class="btn btn-xs btn-success">
@@ -134,7 +134,7 @@
             </template>
         </div>
     </div>
-    <div class="w-full align-middle text-center p-5 border">
+    <div class="w-full p-5 text-center align-middle border">
         <button @click="submitCreate()" class="btn btn-primary">Submit</button>
     </div>
 </div>

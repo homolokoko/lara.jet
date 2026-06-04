@@ -49,17 +49,16 @@
     showEditView(param){
         this.tab='edit';
         this.editData = _.find(this.datatable.data, i=>i.id===param);
-        this.editSubjects = this.editData.subjects;
         console.log('edit data', this.editData);
     },
     addCreateSubject(){
         this.createSubjects.push({full_score:'',name:''});
     },
     addEditSubject(){
-        this.createSubjects.push({full_score:'',name:''});
+        this.editData.subjects.push({full_score:'',name:''});
     },
     deleteCreateSubject(index){
-        _.pullAt(this.createSubjects,index)
+        _.pullAt(this.editData.subjects,index)
     },
     deleteEditSubject(index){
         _.pullAt(this.createSubjects,index)
@@ -69,7 +68,7 @@
             .then(()=>{ this.tab='table'; this.retrive();  })
     },
     async submitEdit(){
-        this.$wire.submit(this.editData,this.editSubjects)
+        this.$wire.updateRecord(this.editData)
             .then(()=>{ this.tab='table'; this.retrive();  })
     },
     init(){
@@ -83,7 +82,6 @@
         modalOpen=true;
     },
     createSubjects:[],
-    editSubjects:[],
     subjects:[],
     addSubject(){
         this.subjects.push({full_score:'',name:''});

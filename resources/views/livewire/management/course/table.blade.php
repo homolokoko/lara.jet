@@ -1,7 +1,6 @@
 <table class="table w-full table-compact">
     <thead>
         <tr>
-            <td class="border">ID</td>
             <td class="border border-black">Classroom Teacher</td>
             <td class="border border-black">Year Book</td>
             <td class="border border-black">Program Period</td>
@@ -14,7 +13,6 @@
     <tbody>
         <template x-for="(elem, index) in datatable.data" :key="elem.id">
             <tr>
-                <td class="border border-black" x-text="elem.id"></td>
                 <td class="border border-black" x-text="`${elem.detail.staff.name_en} (${elem.detail.staff.name_kh})`">
                 </td>
                 <td class="border border-black" x-text="elem.name"></td>
@@ -33,11 +31,11 @@
                 </td>
                 <td class="border border-black">
                     <div class="p-4">
-                        <div class="flex overflow-hidden rounded-lg">
-                            <button class="rounded-none btn btn-accent btn-xs">detail</button>
+                        <div class="flex overflow-hidden border divide-x rounded-lg">
+                            <button class="rounded-none btn btn-ghost btn-sm">👀</button>
                             <button @click="showEditView(elem.id)"
-                                class="rounded-none btn btn-info btn-xs">edit</button>
-                            <button @click="remove(elem.id)" class="rounded-none btn btn-error btn-xs">delete</button>
+                                class="rounded-none btn btn-ghost btn-sm">✏️</button>
+                            <button @click="remove(elem.id)" class="rounded-none btn btn-ghost btn-sm">🗑</button>
                         </div>
                     </div>
                 </td>

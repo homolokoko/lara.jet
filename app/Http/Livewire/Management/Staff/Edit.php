@@ -65,6 +65,7 @@ class Edit extends Component
 
     public function upgrade($data)
     {
+        dd($data);
         $userid = $data['id'];
 
         $newStaff['position_id'] = $data['position'];

@@ -38,7 +38,7 @@
             </div>
             <div class="space-y-3">
                 <label class="block label-text-alt" for="">Monthly Payment</label>
-                <input x-model="editData.monthly_payment" type="text" class="w-full input input-bordered">
+                <input x-model="editData.detail.monthly_payment" type="text" class="w-full input input-bordered">
             </div>
             <div class="flex justify-between">
                 <div class="space-y-3">
@@ -72,14 +72,14 @@
             </div>
             <div class="flex justify-between gap-3">
                 <div class="space-y-3">
-                    <label class="block label-text-alt" for="">Enroll Date</label>
+                    <label class="block label-text-alt" for="">Enroll Date <span x-text="editData.detail.enroll_date"></span></label>
                     <x-flatpickr model="editData.enroll_date" />
                     {{--
                     <x-flatpickr model="usr.dob" /> --}}
                 </div>
                 <div class="space-y-3">
                     <label class="block label-text-alt" for="">Debt</label>
-                    <input x-model="editData.debt" type="text" class="w-full input input-bordered">
+                    <input x-model="editData.debt" type="text" class="w-full input input-bordered" disabled>
                 </div>
             </div>
             <div class="space-y-3">
@@ -107,15 +107,15 @@
             </div>
         </div>
     </div>
-    <div class=" p-3 border space-y-5 divide-y">
-        <h3 class="text-lg font-bold block">
+    <div class="p-3 space-y-5 border divide-y ">
+        <h3 class="block text-lg font-bold">
             Subjects &Score For the Test
             <button @click="addEditSubject" class="btn btn-xs btn-success">
                 <x-heroicon-o-plus class="w-5 h-5" />Add Subject
             </button>
         </h3>
         <div class="grid grid-cols-3 gap-5">
-            <template x-for="(subject, index) in editSubjects" :key="index">
+            <template x-for="(subject, index) in editData.subjects" :key="index">
                 <div class="flex gap-1">
                     <div class="space-y-3">
                         <label class="block label-text-alt">Subject</label>
@@ -135,7 +135,8 @@
             </template>
         </div>
     </div>
-    <div class="w-full align-middle text-center p-3 border">
+    <div class="w-full p-3 text-center align-middle border gap-7">
+        <button @click="tab='table'" class="border border-black btn btn-ghost">Close</button>
         <button @click="submitEdit()" class="btn btn-primary">Submit</button>
     </div>
 </div>
