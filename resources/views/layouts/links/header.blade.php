@@ -5,4 +5,5 @@
     <li><a href="{{route('management.attendent')}}">Attendent</a></li>
     <li><a href="{{route('management.score')}}">Score</a></li>
     <li><a href="{{route('management.student')}}">Student</a></li>
+    <li><a href="{{route('management.tuition-fee')}}">Tuition Fee</a></li>
 </ul>
