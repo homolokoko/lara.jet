@@ -14,6 +14,6 @@ class TuitionFee extends Component
     public function load($page,$per_page,$filter)
     {
         $model = \App\Models\Student\Profile::class;
-        return $model::paginate($per_page,['*'],'page',$page)->toArray();
+        return $model::with('tuitionFee.course.detail.staff')->paginate($per_page,['*'],'page',$page)->toArray();
     }
 }

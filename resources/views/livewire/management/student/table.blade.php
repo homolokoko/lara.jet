@@ -38,15 +38,9 @@
                 <td class="border border-gray-500"><span x-text="elem.room">Class Room</span></td>
                 <td class="border border-gray-500"><span x-text="elem.staff.name">Mentor</span></td>
                 <td class="border border-gray-500">
-                    <button @click="viewRecord(elem.id)" class="btn btn-sm btn-info">
-                        <x-heroicon-o-search class="w-5 h-5" />
-                    </button>
-                    <button @click="editRecord(elem.id)" class="btn btn-sm btn-accent">
-                        <x-heroicon-o-pencil class="w-5 h-5" />
-                    </button>
-                    <button @click="deleteRecord(elem.id)" class="btn btn-sm btn-error">
-                        <x-heroicon-o-trash class="w-5 h-5" />
-                    </button>
+                    <button @click="viewRecord(elem.id)" class="btn btn-xs btn-ghost border border-black">👀</button>
+                    <button @click="editRecord(elem.id)" class="btn btn-xs btn-ghost border border-black">✏️</button>
+                    <button @click="deleteRecord(elem.id)" class="btn btn-xs btn-ghost border border-black">🗑</button>
                 </td>
             </tr>
         </template>
