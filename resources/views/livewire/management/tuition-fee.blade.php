@@ -5,13 +5,22 @@
         page:1,
         per_page:10,
         filter:{},
-        data:{},
+        data:{
+            tution_fee:{
+                course:{}
+            }
+        },
         datatable:{},
+        referCourses:[],
         load(){
             this.$wire.load(this.page,this.per_page,this.filter)
                 .then( response => this.datatable = response );
         },
-        addRecord(param){},
+        addRecord(param){
+            this.tab = 'add';
+            this.data = _.find(this.datatable.data, i => i.id === param);
+            console.log('data',this.data);
+        },
         viewRecord(param){
             this.tab = 'view';
             this.data = _.find(this.datatable.data, i => i.id === param);
@@ -20,11 +29,20 @@
         editRecord(param){
             this.tab = 'edit';
             this.data = _.find(this.datatable.data, i => i.id === param);
+            console.log('data',this.data);
         },
-        updateRecord(){},
+        updateRecord(){
+
+            console.log('update record',this.data);
+            this.$wire.updateRecord(this.data)
+                .then(()=>{});
+
+        },
         deleteRecord(param){},
         init(){
             this.load();
+            this.$wire.references()
+                .then((response)=>{ this.referCourses = response.courses; })
         }
     }">
         <div class="tabs tabs-boxed">
@@ -32,19 +50,24 @@
                 Data Source</a>
             <a class="tab" :class="{'tab-active':tab=='view'}">
                 View Tuition Fee Information</a>
+            <a class="tab" :class="{'tab-active':tab=='view'}">
+                Add Tuition Fee Information</a>
             <a class="tab" :class="{'tab-active':tab=='edit'}">
                 Edit Tuiiton Fee Information</a>
         </div>
 
-        <div x-show="tab=='table'">
+        <template x-if="tab=='table'">
             @include('livewire.management.tuition-fee.table')
-        </div>
-        <div x-show="tab=='view'">
+        </template>
+        <template x-if="tab=='view'">
             @include('livewire.management.tuition-fee.view')
-        </div>
-        <div x-show="tab=='edit'">
+        </template>
+        <template x-if="tab=='add'">
+            @include('livewire.management.tuition-fee.add')
+        </template>
+        <template x-if="tab=='edit'">
             @include('livewire.management.tuition-fee.edit')
-        </div>
+        </template>
 
     </div>
 

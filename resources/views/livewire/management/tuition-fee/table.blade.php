@@ -20,7 +20,7 @@
                 <td class="border border-black"><span x-text="elem.id"></span></td>
                 <td class="border border-black">
                     <div>
-                        <h3><span class="font-bold text-lg text-blue-400 block" x-text="elem.name_kh"></span>
+                        <h3><span class="font-bold text-lg text-primary block" x-text="elem.name_kh"></span>
                         </h3>
                         <h3><span class="font-bold text-md block" x-text="elem.name_en"></span></h3>
                     </div>
@@ -31,7 +31,7 @@
                 </td>
                 <td class="border border-black">
                     <div class="text-center">
-                        <h3><span class="font-bold text-lg text-blue-400 block"
+                        <h3><span class="font-bold text-lg text-primary block"
                                 x-text="elem.tuition_fee.course.detail.name"></span></h3>
                         <h3><span class="font-bold text-md block" x-text="elem.tuition_fee.course.detail.en_lvl"></span>
                         </h3>
@@ -39,8 +39,11 @@
                 </td>
                 <td class="border border-black">
                     <div class="text-center">
-                        <h3><span class="font-bold text-lg text-blue-400 block" x-text="elem.room"></span></h3>
-                        <h3><span class="font-bold text-md block" x-text="elem.shift_period"></span></h3>
+                        <span class="font-bold text-lg text-primary block" x-text="elem.room"></span>
+                        <span class="badge badge-secondary"
+                            x-text="`From : ${elem.tuition_fee.course.detail.start_session}`"></span>
+                        <span class="badge badge-accent"
+                            x-text="`Until : ${elem.tuition_fee.course.detail.finish_session}`"></span>
                     </div>
                 </td>
                 <td class="border border-black"><span x-text="elem.tuition_fee.course.detail.staff.name_en"></span></td>
@@ -58,7 +61,10 @@
                         x-text="elem.tuition_fee.is_paid ? elem.tuition_fee.next_time:''"></span></td>
                 <td class="border border-black">
                     <button @click="viewRecord(elem.id)" class="btn btn-xs btn-ghost border border-black">👀</button>
-                    <button @click="editRecord(elem.id)" class="btn btn-xs btn-ghost border border-black">✏️</button>
+                    <button x-show="!elem.tuition_fee" @click="addRecord(elem.id)"
+                        class="btn btn-xs btn-ghost border border-black">❓</button>
+                    <button x-show="elem.tuition_fee" @click="editRecord(elem.id)"
+                        class="btn btn-xs btn-ghost border border-black">✏️</button>
                     <button @click="deleteRecord(elem.id)" class="btn btn-xs btn-ghost border border-black">🗑</button>
                 </td>
             </tr>

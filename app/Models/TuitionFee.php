@@ -12,7 +12,7 @@ class TuitionFee extends Model
     use SoftDeletes;
 
     protected $table = 'tuition_fee';
-    protected $fillable = ['student_id','course_id','is_paid','is_by_bus'];
+    protected $fillable = ['student_id','course_id','is_paid','is_by_bus','fee_date'];
     public $appends = ['last_time','next_time'];
 
     public function student()
@@ -27,11 +27,11 @@ class TuitionFee extends Model
 
     public function getLastTimeAttribute()
     {
-        return \Carbon\Carbon::parse($this->created_at)->format('F jS, Y');
+        return $this->fee_date ? \Carbon\Carbon::parse($this->fee_date)->format('F jS, Y'):'Undecided';
     }
 
     public function getNextTimeAttribute()
     {
-        return \Carbon\Carbon::parse($this->created_at)->addMonth()->format('F jS, Y');
+        return $this->fee_date ? \Carbon\Carbon::parse($this->fee_date)->addMonth()->format('F jS, Y'):'Undecided';
     }
 }
