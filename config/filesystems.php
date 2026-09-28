@@ -56,6 +56,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'staff' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/staff'),
+            'url' => env('ASSET_URL', '').'/storage/staff',
+            'visibility' => 'public',
+        ],
+
+        'upload' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload'),
+            'url' => env('ASSET_URL', '').'/storage/upload',
+            'visibility' => 'public',
+        ],
+
         'product' => [
             'driver' => 'local',
             'root' => storage_path('app/public/product'),
@@ -67,6 +81,13 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/tmp/base64'),
             'url' =>env('ASSET_URL','').'/storage/tmp/base64',
+            'visibility' => 'public',
+        ],
+
+        'styleApperal' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/styleApperal'),
+            'url' => env('ASSET_URL', '').'/storage',
             'visibility' => 'public',
         ],
 

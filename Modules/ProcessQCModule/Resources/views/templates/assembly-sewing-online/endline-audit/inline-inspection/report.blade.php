@@ -1,4 +1,4 @@
 <x-app-layout>
     @include('processqcmodule::layouts.breadcrumbs.assembly-sewing-online.endline-audit.inline-inspection')
-    <h3>Process QC Module Assembly Sewing Online First Bulk Report</h3>
+    @livewire('processqcmodule::assembly-sewing-online.endline-audit.inline-inspection.report-component',  key('assembly-sewing-online.endline-audit.inline-inspection.report-component'))
 </x-app-layout>

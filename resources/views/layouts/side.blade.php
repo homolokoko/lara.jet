@@ -44,7 +44,7 @@
     </li>
     <!-- ----------------------- Process QC module ------------------------ -->
     <li>
-        <h3 class="text-lg font-bold p-3 {{ request()->routeIs('processqcmodule::*') ? 'bg-indigo-900':'' }}"> Process QC module </h3>
+        <h3 class="text-lg font-bold p-3  rounded-none {{ request()->routeIs('processqcmodule::*') ? 'alert alert-success':'alert' }}"> Process QC module </h3>
         <ul class="">
             <li>@include('layouts.process-qc.cutting')</li>
             <li>@include('layouts.process-qc.embellishment')</li>
@@ -60,7 +60,7 @@
 
     <!-- ------------------------------------- Compliance's Checklist and Product Safety -------------------------------  -->
     <li>
-        <h3 class="text-lg font-bold p-3 {{ request()->routeIs('complianceandproductsafety::*') ? 'bg-indigo-900':'' }}">Compliance's Checklist and Product Safety</h3>
+        <h3 class="text-lg font-bold p-3 rounded-none {{ request()->routeIs('complianceandproductsafety::*') ? 'alert alert-success':'alert' }}">Compliance's Checklist and Product Safety</h3>
         <ul class="px-5">
             <li><a href="{{ route('complianceandproductsafety::safety.humidity') }}" class="btn btn-xs {{ request()->routeIs('complianceandproductsafety::safety.humidity.*') ? 'btn-link':'btn-ghost' }}"> <x-heroicon-o-play class="w-5 h-5" /> Humidity  </a></li>
             <li><a href="{{ route('complianceandproductsafety::safety.pull-test') }}" class="btn btn-xs {{ request()->routeIs('complianceandproductsafety::safety.pull-test.*') ? 'btn-link':'btn-ghost' }}"> <x-heroicon-o-play class="w-5 h-5" /> Pull Test  </a></li>

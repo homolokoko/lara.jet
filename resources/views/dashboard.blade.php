@@ -1,6 +1,73 @@
 <x-app-layout>
 
     <div class="">
-      I am dashboard
+
+        <div class="alert">
+            <h3 class="px-3 py-1 text-2xl font-bold rounded-full text-primary">management</h3>
+        </div>
+        <div class="grid grid-cols-6 gap-5 p-7 ">
+
+            <a  href="{{route('management.attendent')}}"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/attendance.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Attenden&Score</button>
+            </a>
+            <a  href="{{route('management.staff')}}"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/teamwork.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Staff Management</button>
+            </a>
+            <a  href="{{route('management.course')}}"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/training.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Course Management</button>
+            </a>
+            <a  href="#" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/file.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Setup Management</button>
+            </a>
+            <a  href="#" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/team.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">User Management</button>
+            </a>
+            <a  href="#" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/seo-report.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Report Management</button>
+            </a>
+            <a  href="#" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/credit-card-premium.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Special Staff Payment</button>
+            </a>
+            <a  href="#" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/credit-card.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">General Staff Payment</button>
+            </a>
+            <a  href="#" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/fund.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Income</button>
+            </a>
+            <a  href="#" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/outcome.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Outcome</button>
+            </a>
+        </div>
+
     </div>
 </x-app-layout>

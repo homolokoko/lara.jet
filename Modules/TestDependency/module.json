@@ -1,0 +1,13 @@
+{
+    "name": "TestDependency",
+    "alias": "testdependency",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\TestDependency\\Providers\\TestDependencyServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

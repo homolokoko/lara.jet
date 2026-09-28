@@ -7,6 +7,11 @@
     <h3>  Assembly / Sewing Online  </h3>
 </div>
 <ul class="px-3">
+    <li>
+        <a href="{{route('processqcmodule::assembly/sewing-online.inline-defect')}}"
+        class=" btn btn-xs btn-ghost {{ request()->routeIs('processqcmodule::assembly/sewing-online.inline-defect.*') ? 'btn-link':'btn-ghost' }}">
+        Inline Defect</a>
+    </li>
     <li>@include('layouts.process-qc.assembly-sewing-online.inline-audit')</li>
     <li>@include('layouts.process-qc.assembly-sewing-online.sewing-inspection')</li>
     <li>@include('layouts.process-qc.assembly-sewing-online.endline-audit')</li>

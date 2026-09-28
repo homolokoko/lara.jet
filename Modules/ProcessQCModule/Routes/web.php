@@ -1,5 +1,11 @@
 <?php
 
+    use Modules\ProcessQCModule\Http\Controllers\AssemblySewingOnline\EndlineAudit;
+
+    use Modules\ProcessQCModule\http\Controllers\AssemblySewingOnline\InlineDefectController;
+use Modules\ProcessQCModule\Http\Controllers\AssemblySewingOnline\EndlineAudit\InlineInspectionController;
+use Modules\ProcessQCModule\Http\Livewire\AssemblySewingOnline\EndlineAudit\InlineInspectionComponent;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +60,14 @@ Route::prefix('processqcmodule')->group(function() {
 
     Route::prefix('assembly/sewing-online')->group(function(){
 
+
+        Route::prefix('inline-defect')->group(function(){
+            Route::get('/setup', [InlineDefectController::class, 'setup'])->name('processqcmodule::assembly/sewing-online.inline-defect.setup');
+            Route::get('/report', [InlineDefectController::class, 'report'])->name('processqcmodule::assembly/sewing-online.inline-defect.report');
+            Route::get('/inspector', [InlineDefectController::class, 'inspector'])->name('processqcmodule::assembly/sewing-online.inline-defect.inspector');
+            Route::get('/', fn()=>redirect()->route('processqcmodule::assembly/sewing-online.inline-defect.setup'))->name('processqcmodule::assembly/sewing-online.inline-defect');
+        });
+
         Route::prefix('inline-audit')->group(function(){
 
             Route::prefix('inline')->group(function(){
@@ -86,9 +100,9 @@ Route::prefix('processqcmodule')->group(function() {
         Route::prefix('endline-audit')->group(function(){
             Route::prefix('inline-inspection')->group(function(){
                 Route::get('/', fn()=>redirect()->route('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection.setup'))->name('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection');
-                Route::get('/setup', 'AssemblySewingOnline\EndlineAudit\InlineInspectionController@setup')->name('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection.setup');
-                Route::get('/report', 'AssemblySewingOnline\EndlineAudit\InlineInspectionController@report')->name('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection.report');
-                Route::get('/inspector', 'AssemblySewingOnline\EndlineAudit\InlineInspectionController@inspector')->name('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection.inspector');
+                Route::get('/setup', [EndlineAudit\InlineInspectionController::class,'setup'])->name('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection.setup');
+                Route::get('/report', [EndlineAudit\InlineInspectionController::class,'report'])->name('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection.report');
+                Route::get('/inspector', [EndlineAudit\InlineInspectionController::class,'inspector'])->name('processqcmodule::assembly/sewing-online.endline-audit.inline-inspection.inspector');
             });
         });
 

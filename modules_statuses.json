@@ -7,5 +7,9 @@
     "ComplianceAndProductSafety": true,
     "ProductDevelopment": true,
     "FinalAuditInspection": true,
-    "ProcessQCModule": true
+    "ProcessQCModule": true,
+    "TestDependency": true,
+    "CountryCatalog": true,
+    "Product": true,
+    "SchoolManagement": true
 }
