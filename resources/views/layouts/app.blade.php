@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="{{ asset('snapchat.png') }}">
+    <link rel="icon" href="{{ asset('task-management.png') }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="dist/css/tabulator.min.css" rel="stylesheet">
@@ -50,9 +50,9 @@
         <div class="flex w-full h-full divide-x">
             <div class="flex flex-col w-full divide-y main">
                 <div class="flex justify-between w-full p-5 shadow-lg nav">
-                    <div class="flex">
-                        <img src="{{ asset('snapchat.png') }}" alt="" class="w-8 h-8">
-                        <a href="{{ route('dashboard') }}" class="text-xl font-bold">TQMS Process Module</a>
+                    <div class="flex gap-5">
+                        <img src="{{ asset('task-management.png') }}" alt="" class="w-8 h-8">
+                        <a href="{{ route('dashboard') }}" class="text-xl font-bold">{{ config('app.name') }}</a>
                     </div>
                     <h3 class="font-sans text-xl font-bold">{{@$title}}</h3>
                     <div x-data="{
