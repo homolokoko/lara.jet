@@ -45,13 +45,13 @@
                 .then((response)=>{ this.referCourses = response.courses; })
         }
     }">
-        <div class="tabs tabs-boxed">
+        <div class="tabs tabs-boxed rounded-none">
             <a @click="tab='table'" class="tab" :class="{'tab-active':tab=='table'}">
                 Data Source</a>
+            <a class="tab" :class="{'tab-active':tab=='add'}">
+                Add Tuition Fee Information</a>
             <a class="tab" :class="{'tab-active':tab=='view'}">
                 View Tuition Fee Information</a>
-            <a class="tab" :class="{'tab-active':tab=='view'}">
-                Add Tuition Fee Information</a>
             <a class="tab" :class="{'tab-active':tab=='edit'}">
                 Edit Tuiiton Fee Information</a>
         </div>
