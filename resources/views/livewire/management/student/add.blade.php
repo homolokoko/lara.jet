@@ -32,8 +32,8 @@
                     <x-flatpickr model="result.dob" />
                 </td>
                 <td class="space-y-3">
-                    <label for="" class="label-text-alt">Other</label>
-                    <input type="text" x-model="result.other" class="block w-full input input-bordered">
+                    <label for="" class="label-text-alt">Indentity</label>
+                    <input type="text" x-model="result.identity" class="block w-full input input-bordered">
                 </td>
                 <td rowspan="2" class="space-y-3">
                     <label for="" class="label-text-alt">Shift</label>

@@ -108,6 +108,7 @@ class Student extends Component
                 'room'=>Arr::get($data,'class_room',null),
                 'staff_id'=>Arr::get($data,'staff',null),
                 'shift'=>Arr::get($data,'shift',null),
+                'identity'=>Arr::get($data,'identity',null),
                 'father_id'=>$father ? $father->id:null,
                 'mother_id'=>$mother ? $mother->id:null,
                 'birth_address_id'=> $birth_street ? $birth_street->id:null,
@@ -161,7 +162,7 @@ class Student extends Component
         }
         if(!empty(Arr::get($data,'father_info.name')))
         {
-            $father = Relative::updateOrCreate(['id',Arr::get($data,'father_id')],
+            $father = Relative::updateOrCreate(['id'=>Arr::get($data,'father_id')],
             [
                 'name'=>Arr::get($data,'father_info.name'),
                 'job'=>Arr::get($data,'father_info.job'),
@@ -172,7 +173,7 @@ class Student extends Component
 
         if(!empty(Arr::get($data,'mother_info.name')))
         {
-            $mother = Relative::updateOrCreate(['id',Arr::get($data,'mother_id')],
+            $mother = Relative::updateOrCreate(['id'=>Arr::get($data,'mother_id')],
             [
                 'name'=>Arr::get($data,'mother_info.name'),
                 'job'=>Arr::get($data,'mother_info.job'),
@@ -190,10 +191,11 @@ class Student extends Component
                 'date_of_birth'=>Arr::get($data,'date_of_birth'),
                 'other'=>Arr::get($data,'other',null),
                 'room'=>Arr::get($data,'room',null),
-                'staff_id'=>Arr::get($data,'staff',null),
-                'shift'=>Arr::get($data,'shift',null),
+                'staff_id'=>Arr::get($data,'staff_id',null),
                 'father_id'=>isset($father) ? $father->id:null,
                 'mother_id'=>isset($mother) ? $mother->id:null,
+                'shift'=>Arr::get($data,'shift',null),
+                'identity'=>Arr::get($data,'identity',null),
                 'birth_address_id'=> $birth_street ? $birth_street->id:null,
                 'current_address_id'=> $current_street ? $current_street->id:null,
             ]);
