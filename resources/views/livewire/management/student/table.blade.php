@@ -1,11 +1,11 @@
 <table class="table w-full table-compact">
     <thead>
         <tr>
+            <td class="border border-gray-500">Identity</td>
             <td class="border border-gray-500" class="border border-gray-500">Kh Name</td>
             <td class="border border-gray-500">En Name</td>
             <td class="border border-gray-500">Gender</td>
             <td class="border border-gray-500">Date Of Birth</td>
-            <td class="border border-gray-500">Other</td>
             <td class="border border-gray-500">Shift</td>
             <td class="border border-gray-500">Class Room</td>
             <td class="border border-gray-500">Mentor</td>
@@ -18,9 +18,7 @@
                 <td class="border border-gray-500" colspan="9">
                     <div class=" w-full text-center">
                         <template x-for="i in 5">
-                            <button class="animate-spin">
-                                ⌛︎
-                            </button>
+                            <button class="animate-spin">⌛︎</button>
                         </template>
                     </div>
                 </td>
@@ -28,12 +26,12 @@
         </template>
         <template x-for="(elem, index) in datatable.data" x-bind:key="elem.id">
             <tr>
+                <td class="border border-gray-500"><span x-text="elem.identity">Identity</span></td>
                 <td class="border border-gray-500"><span x-text="elem.name_kh">Kh Name</span></td>
                 <td class="border border-gray-500"><span x-text="elem.name_en">En Name</span></td>
                 <td class="border border-gray-500"><span class="uppercase" x-text="elem.gender">Gender</span>
                 </td>
                 <td class="border border-gray-500"><span x-text="elem.official_dob">DoB</span></td>
-                <td class="border border-gray-500"><span>Other</span></td>
                 <td class="border border-gray-500"><span x-text="elem.shift_period"></td>
                 <td class="border border-gray-500"><span x-text="elem.room">Class Room</span></td>
                 <td class="border border-gray-500"><span x-text="elem.staff.name">Mentor</span></td>

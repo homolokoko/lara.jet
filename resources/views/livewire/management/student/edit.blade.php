@@ -100,9 +100,8 @@
                             </div>
                         </li>
                         <li>
-                            <label for="" class="label-text-alt uppercase block">Other</label>
-                            <textarea x-model="editInfo.other" cols="30" rows="5"
-                                class="textarea textarea-bordered w-full"></textarea>
+                            <label for="" class="label-text-alt uppercase block">Identity</label>
+                            <input x-model="editInfo.identity" class="input input-bordered w-full" />
                         </li>
                     </ul>
                 </td>

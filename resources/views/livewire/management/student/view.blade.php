@@ -11,10 +11,10 @@
                 <td>
                     <ul>
                         <li>
-                            <label class="label-text-alt uppercase" x-text="`Name : ${selectedView.name_kh}`"></label>
+                            <label class="label-text-alt uppercase" x-text="`Khmer : ${selectedView.name_kh}`"></label>
                         </li>
                         <li>
-                            <label class="label-text-alt uppercase" x-text="`Name : ${selectedView.name_en}`"></label>
+                            <label class="label-text-alt uppercase" x-text="`English : ${selectedView.name_en}`"></label>
                         </li>
                     </ul>
                 </td>

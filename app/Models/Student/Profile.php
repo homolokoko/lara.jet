@@ -15,7 +15,7 @@ class Profile extends Model
     use SoftDeletes;
 
     protected $table = 'student_profile';
-    protected $fillable = ['name_kh','name_en','gender','date_of_birth','shift','staff_id','room','other','mother_id','father_id','birth_address_id','current_address_id'];
+    protected $fillable = ['name_kh','name_en','gender','date_of_birth','shift','staff_id','room','other','mother_id','father_id','birth_address_id','current_address_id','identity'];
     protected $appends = ['shift_period','official_dob'];
 
     public function staff()
