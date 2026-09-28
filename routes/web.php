@@ -48,6 +48,7 @@ Route::middleware([
         Route::get('/attendent',fn()=>view('management.attendent'))->name('management.attendent');
         Route::get('/score',fn()=>view('management.score'))->name('management.score');
         Route::get('/student',fn()=>view('management.student'))->name('management.student');
+        Route::get('/tuition',fn()=>view('management.tuition'))->name('management.tuition');
         Route::get('/tuition-fee',fn()=>view('management.tuition-fee'))->name('management.tuition-fee');
     });
 

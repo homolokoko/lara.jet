@@ -73,6 +73,18 @@
                     <img class="w-24" src="{{asset('menu/outcome.png')}}">
                 </div><p class="font-bold uppercase tracking-wider text-xs">Outcome</p>
             </a>
+            <a  href="{{route('management.tuition')}}" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/tuition.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Tuition</button>
+            </a>
+            <a  href="{{route('management.tuition-fee')}}" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/fee.png')}}">
+                </div><button class="font-bold uppercase tracking-wider text-xs">Fee</button>
+            </a>
         </div>
 
     </div>

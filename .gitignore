@@ -24,3 +24,5 @@ yarn-error.log
 /resources/views/test/
 /resources/views/livewire/test/
 /resources/views/components/test/
+/public/app.css
+/public/app.js
