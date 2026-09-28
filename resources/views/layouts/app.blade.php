@@ -121,8 +121,8 @@
     @livewireScripts
     <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
-<footer>
+{{-- <footer>
     @include('layouts.links.header')
-</footer>
+</footer> --}}
 
 </html>

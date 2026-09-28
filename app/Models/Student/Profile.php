@@ -2,6 +2,7 @@
 
 namespace App\Models\Student;
 
+use App\Models\TuitionFee;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,11 @@ class Profile extends Model
     public function fatherInfo()
     {
         return $this->belongsTo(Relative::class,'father_id');
+    }
+
+    public function tuitionFee()
+    {
+        return $this->hasOne(TuitionFee::class,'student_id');
     }
 
     public function birthAddress()

@@ -31,12 +31,11 @@
                 </td>
                 <td class="border border-black">
                     <div class="p-4">
-                        <div class="flex overflow-hidden border divide-x rounded-lg">
-                            <button class="rounded-none btn btn-ghost btn-sm">👀</button>
-                            <button @click="showEditView(elem.id)"
-                                class="rounded-none btn btn-ghost btn-sm">✏️</button>
-                            <button @click="remove(elem.id)" class="rounded-none btn btn-ghost btn-sm">🗑</button>
-                        </div>
+                        <button @click="viewRecord(elem.id)"
+                            class="btn btn-xs btn-ghost border border-black">👀</button>
+                        <button @click="showEditView(elem.id)"
+                            class="btn btn-xs btn-ghost border border-black">✏️</button>
+                        <button @click="remove(elem.id)" class="btn btn-xs btn-ghost border border-black">🗑</button>
                     </div>
                 </td>
             </tr>
