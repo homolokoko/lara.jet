@@ -4,7 +4,7 @@
     <div class="flex items-center justify-center h-full">
 
         <div class="py-5 border-2 px-7 border-neutral rounded-xl">
-            <div class="flex justify-center"><img src="{{ asset('snapchat.png') }}" alt="" class="w-8 h-8"></div>
+            <div class="flex justify-center"><img src="{{ asset('task-management.png') }}" alt="" class="w-8 h-8"></div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
