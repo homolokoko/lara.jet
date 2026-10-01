@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="{{ asset('snapchat.png') }}">
+    <link rel="icon" href="{{ asset('task-management.png') }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -37,8 +37,10 @@
     <div class="flex w-full h-full divide-x">
         <div class="flex flex-col w-full divide-y main">
             <div class="flex justify-between w-full p-5 shadow-lg nav">
-                <img class="w-10 h-10" src="{{asset('snapchat.png')}}" alt="">
-                <h3 class="font-bold font-sans text-xl">{{@$title}}</h3>
+                <div class="flex gap-5">
+                    <img class="w-10 h-10" src="{{asset('task-management.png')}}" alt="">
+                    <a class="text-xl font-bold">{{ config('app.name') }}</a>
+                </div>
                 <div x-data="{
                             picked:'',
                             dropdown:false,
