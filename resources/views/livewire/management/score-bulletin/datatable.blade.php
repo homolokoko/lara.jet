@@ -107,7 +107,12 @@
                 <template x-for="(elem, index) in datatable.data" :key="elem.id">
                     <tr>
                         <th class="border">
-                            <button x-text="`#${elem.student.identity}`" class="btn btn-xs btn-link" @click="$dispatch('display-bullet-mark-detail',elem.id)">Id</button>
+                            <div class="flex gap-1">
+                                <button @click="$dispatch('display-bullet-mark-detail',elem.id)" class="btn btn-xs btn-accent btn-outline btn-circle">👁</button>
+                                <button @click="$dispatch('display-bullet-mark-modify',elem.id)" class="btn btn-xs btn-success btn-outline btn-circle">🖋️</button>
+                                <button @click="$dispatch('display-bullet-mark-delete',elem.id)" class="btn btn-xs btn-error btn-outline btn-circle">🗑</button>
+                            </div>
+                            <span x-text="`#${elem.student.identity}`" class="label-text-alt text-center">Id</span>
                         </th>
                         <td class="border"><span x-text="`${elem.student.name_kh} ${elem.student.name_en}`">Name</span></td>
                         <td class="border"><span x-text="`${elem.missed} / ${elem.presented}`">A/P</span></td>
