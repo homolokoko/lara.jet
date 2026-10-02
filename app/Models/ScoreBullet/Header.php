@@ -53,7 +53,7 @@ class Header extends Model
 
     public function getMonthLabelAttribute()
     {
-        return Helper::getMonth($this->shift);
+        return Helper::getMonth($this->month);
     }
 
 }
