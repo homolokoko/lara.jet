@@ -26,11 +26,32 @@
             this.$wire.getSourceFilter()
                 .then(response=>this.source=response)
         },
+        async deleteItem(id){
+            await swal.fire({
+                icon:'question',
+                title:'Delete this item!',
+                text:'Are you sure, must delete this item ?',
+                showDenyButton: true
+            }).then(async (result)=>{
+                if(result.isConfirmed){
+                    await this.$wire.deleteItem(id)
+                        .then(()=>{
+                            swal.fire({
+                                icon: 'success',
+                                title: 'Deleted',
+                                timer: 1500,
+                                timerProgressBar: true,
+                                showConfirmButton: false
+                            }).then(()=>{ this.retrievedata() });
+                        });
+                }
+            });
+        },
         init(){
             this.retrievedata();
             this.getSourceFilter();
         }
-    }">
+    }" @display-bullet-mark-delete.window="deleteItem(event.detail)">
 
         <table class="table table-compact w-full table-zebra">
             <thead>
@@ -89,7 +110,7 @@
                     </td>
                 </tr>
             </thead>
-            <tbody x-show="isLoading" class=" animate-ping">
+            <tbody x-show="isLoading" class=" animate-pulse">
                 <template x-for="i in 15">
                     <tr>
                         <td class="p-3 border"></td>

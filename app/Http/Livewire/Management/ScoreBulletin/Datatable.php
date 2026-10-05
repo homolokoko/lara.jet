@@ -54,4 +54,9 @@ class Datatable extends Component
         $courses = (new GetValueTextList)->convert(Course::get());
         return ['shifts'=>$shifts,'courses'=>$courses,'months'=>$months,'types'=>$types,'years'=>$years];
     }
+
+    public function deleteItem($id)
+    {
+        Header::where('id',$id)->delete();
+    }
 }
