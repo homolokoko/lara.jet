@@ -21,7 +21,7 @@ class Student extends Component
 
     public function load()
     {
-        $zips = (new GetValueTextList)->convert(Entities\Zip::get());
+        $zips = (new GetValueTextList)->convert(Entities\Zip::where('country_id',30)->get());
         $staffs = Staff::select('user_id as value','name_en as text')->get()->toArray();
         return compact('zips','staffs');
     }

@@ -50,6 +50,7 @@ Route::middleware([
         Route::get('/student',fn()=>view('management.student'))->name('management.student');
         Route::get('/tuition',fn()=>view('management.tuition'))->name('management.tuition');
         Route::get('/tuition-fee',fn()=>view('management.tuition-fee'))->name('management.tuition-fee');
+        Route::get('/score-bulletin',fn()=>view('management.score-bulletin'))->name('management.score-bulletin');
     });
 
     Route::get('/full-qc/{mode}/{report_view}/form',[\App\Http\Controllers\Inspector\FullQcController::class,'form'])->name('full-qc.form');
