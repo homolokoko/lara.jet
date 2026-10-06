@@ -36,20 +36,18 @@ class CertificateScoring extends Component
 
     public function getRelatedStudent($filter)
     {
-        dd(
-            array(
-                empty($filter['shift']),
-                empty($filter['month']),
-                empty($filter['year'])
-            )
-        );
         $query = Profile::with('staff')->where('staff_id',auth()->user()->id);
         if(!empty($filter)){
             if(!empty(Arr::get($filter,'shift'))){
                 $query->where('shift',Arr::get($filter,'shift'));
             }
         }
-        if(empty(Arr::get($filter,'month'))){
+        $validates = array(
+                empty($filter['shift']),
+                empty($filter['month']),
+                empty($filter['year'])
+            );
+        if(in_array(true,$validates)){
             return [];
         }else{
             return $query->get()->map(fn($item)=>[

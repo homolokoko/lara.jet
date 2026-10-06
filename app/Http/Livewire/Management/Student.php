@@ -45,7 +45,7 @@ class Student extends Component
             ])->paginate($per_page,['*'],'page',$page)->toArray();
     }
 
-    public function create()
+    public function _create()
     {
         $englishNames = [
             "Sokha", "Bopha", "Chantha", "Dara", "Sophea", "Vanna", "Sina", "Rith", "Narith", "Piseth",
@@ -126,7 +126,7 @@ class Student extends Component
                 'is_female'=>rand(0,1),
                 'dob'=>\Carbon\Carbon::parse(join('-',[rand(1980,2020),str_pad(rand(1,12), 2, '0', STR_PAD_LEFT),str_pad(rand(1,30), 2, '0', STR_PAD_LEFT)])),
                 'class_room'=>rand(1,10),
-                'staff'=>Arr::random([1680,1681,1679,1683]),
+                'staff'=>rand(1,2),
                 'shift'=>rand(1,4),
                 'identity'=>'ACE'.strval(Arr::random(range(10000,99999))),
                 'cur'=>[
@@ -159,7 +159,7 @@ class Student extends Component
 
     }
 
-    public function _create($data)
+    public function create($data)
     {
         if(!empty(Arr::get($data,'birth.state')))
         {

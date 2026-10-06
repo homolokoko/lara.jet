@@ -14,10 +14,7 @@ class ChangeColumnTypeInStudentProfileTable extends Migration
     public function up()
     {
         Schema::table('student_profile', function (Blueprint $table) {
-            $table->dropColumn('gender');
-        });
-        Schema::table('student_profile', function (Blueprint $table) {
-            $table->integer('shift')->change()->nullable();
+            $table->integer('shift')->nullable();
             $table->boolean('is_female')->nullable();
         });
     }
