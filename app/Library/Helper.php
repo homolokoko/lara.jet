@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Helper{
 
+
     public function getType($val=null)
     {
         $collection = collect([
@@ -80,6 +81,12 @@ class Helper{
         $current_year = \Carbon\Carbon::now()->year;
         $ranges = range($current_year,$current_year+10);
         return collect($ranges)->map(fn($item)=>(($item-1).'-'.$item));
+    }
+
+
+    public function getLevel()
+    {
+        return range(1,6);
     }
 
 }

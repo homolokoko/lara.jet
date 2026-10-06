@@ -11,19 +11,8 @@
                     <input type="text" x-model="result.name_en" class="block w-full input input-bordered">
                 </td>
                 <td class="space-y-3">
-                    <label for="" class="label-text-alt">Gender</label>
-                    <div>
-                        <div class="flex items-center gap-4">
-                            <input id="male" x-model="result.gender" value="m" class=" radio radio-primary radio-md"
-                                type="radio" name="gender">
-                            <label for="male" class=" badge badge-outline badge-ghost">Male</label>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <input id="female" x-model="result.gender" value="f" class=" radio radio-primary radio-md"
-                                type="radio" name="gender">
-                            <label for="female" class=" badge badge-outline badge-ghost">Female</label>
-                        </div>
-                    </div>
+                    <label for="" class="label-text-alt">Female?</label>
+                    <div><input type="checkbox" x-model="result.is_female" class="checkbox checkbox-accent"></div>
                 </td>
             </tr>
             <tr>
@@ -37,27 +26,14 @@
                 </td>
                 <td rowspan="2" class="space-y-3">
                     <label for="" class="label-text-alt">Shift</label>
-                    <div>
-                        <div class="flex items-center gap-4">
-                            <input id="i" x-model="result.shift" value="i" class=" radio radio-primary radio-md"
-                                type="radio" name="shift">
-                            <label for="i" class=" badge badge-outline badge-ghost">07:30-10:30</label>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <input id="ii" x-model="result.shift" value="ii" class=" radio radio-primary radio-md"
-                                type="radio" name="shift">
-                            <label for="ii" class=" badge badge-outline badge-ghost">01:30-04:30</label>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <input id="iii" x-model="result.shift" value="iii" class=" radio radio-primary radio-md"
-                                type="radio" name="shift">
-                            <label for="iii" class=" badge badge-outline badge-ghost">05:30-06:30</label>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <input id="iv" x-model="result.shift" value="iv" class=" radio radio-primary radio-md"
-                                type="radio" name="shift">
-                            <label for="iv" class=" badge badge-outline badge-ghost">06:30-07:30</label>
-                        </div>
+                    <div class="flex flex-col gap-2">
+                        <template x-for="item in data.shifts" :key="item.value">
+                            <button @click="result.shift=item.value"
+                                x-text="item.text"
+                                :class="{'btn-active':result.shift===item.value}"
+                                class="btn btn-sm btn-ghost">
+                            </button>
+                        </template>
                     </div>
                 </td>
             </tr>
@@ -65,7 +41,7 @@
                 <td class="space-y-3">
                     <label for="" class="label-text-alt">Class Room</label>
                     <div>
-                        <select x-model="result.class_room" class="w-full select select-bordered">
+                        <select x-model="result.room" class="w-full select select-bordered">
                             <option selected>Room</option>
                             <template x-for="i in 10" :key="i">
                                 <option :value="i" x-text="i"></option>

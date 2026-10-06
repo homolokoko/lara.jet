@@ -12,10 +12,10 @@
         result:{
             name_kh:'',
             name_en:'',
-            gender:'',
+            is_female:false,
             dob:'',
             other:'',
-            class_room:'',
+            room:'',
             staff:'',
             shift:'',
             birth:{

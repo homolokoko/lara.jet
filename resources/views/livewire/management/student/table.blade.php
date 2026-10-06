@@ -29,7 +29,7 @@
                 <td class="border border-gray-500"><span x-text="elem.identity">Identity</span></td>
                 <td class="border border-gray-500"><span x-text="elem.name_kh">Kh Name</span></td>
                 <td class="border border-gray-500"><span x-text="elem.name_en">En Name</span></td>
-                <td class="border border-gray-500"><span class="uppercase" x-text="elem.gender">Gender</span>
+                <td class="border border-gray-500"><span class="uppercase" x-text="elem.is_female ? 'F':'M'">Gender</span>
                 </td>
                 <td class="border border-gray-500"><span x-text="elem.official_dob">DoB</span></td>
                 <td class="border border-gray-500"><span x-text="elem.shift_period"></td>

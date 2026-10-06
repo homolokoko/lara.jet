@@ -24,27 +24,14 @@
                         </li>
                         <li class="space-y-3">
                             <label for="" class="label-text-alt uppercase block">Shift</label>
-                            <div>
-                                <div class="flex items-center gap-4">
-                                    <input id="i" x-model="editInfo.shift" value="i"
-                                        class=" radio radio-primary radio-md" type="radio" name="shift">
-                                    <label for="i" class=" badge badge-outline badge-ghost">07:30-10:30</label>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <input id="ii" x-model="editInfo.shift" value="ii"
-                                        class=" radio radio-primary radio-md" type="radio" name="shift">
-                                    <label for="ii" class=" badge badge-outline badge-ghost">01:30-04:30</label>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <input id="iii" x-model="editInfo.shift" value="iii"
-                                        class=" radio radio-primary radio-md" type="radio" name="shift">
-                                    <label for="iii" class=" badge badge-outline badge-ghost">05:30-06:30</label>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <input id="iv" x-model="editInfo.shift" value="iv"
-                                        class=" radio radio-primary radio-md" type="radio" name="shift">
-                                    <label for="iv" class=" badge badge-outline badge-ghost">06:30-07:30</label>
-                                </div>
+                            <div class="flex flex-col gap-2">
+                                <template x-for="item in data.shifts" :key="item.value">
+                                    <button @click="editInfo.shift=item.value"
+                                        x-text="item.text"
+                                        :class="{'btn-active':editInfo.shift===item.value}"
+                                        class="btn btn-sm btn-ghost">
+                                    </button>
+                                </template>
                             </div>
                         </li>
                         <li>
@@ -75,21 +62,9 @@
                 <td>
                     <ul class="space-y-4">
                         <li>
-                            <div class="space-y-2">
-                                <label class="label-text-alt uppercase block"
-                                    x-text="`Sex : ${editInfo.gender}`"></label>
-                                <div>
-                                    <div class="flex items-center gap-4">
-                                        <input id="male" x-model="editInfo.gender" value="m"
-                                            class=" radio radio-primary radio-md" type="radio" name="gender">
-                                        <label for="male" class=" badge badge-outline badge-ghost">Male</label>
-                                    </div>
-                                    <div class="flex items-center gap-4">
-                                        <input id="female" x-model="editInfo.gender" value="f"
-                                            class=" radio radio-primary radio-md" type="radio" name="gender">
-                                        <label for="female" class=" badge badge-outline badge-ghost">Female</label>
-                                    </div>
-                                </div>
+                            <div>
+                                <label for="" class="label-text-alt">Female?</label>
+                                <div><input type="checkbox" x-model="result.is_female" :checked="editInfo.is_female" class="checkbox checkbox-accent"></div>
                             </div>
                         </li>
                         <li>
