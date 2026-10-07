@@ -10,8 +10,7 @@
             final_at:null,
             shift:1,
             month: new Date().getMonth(),
-            year: new Date().getFullYear(),
-            study_period: `${new Date().getFullYear()-1}-${new Date().getFullYear()}`
+            year: new Date().getFullYear()
         },
         sourceData:{},
         async getSourceData(){
@@ -19,11 +18,33 @@
                 .then(response=>this.sourceData=response);
         },
         async getReletedStudent(){
+            this.formData = [];
             await this.$wire.getRelatedStudent(this.filterData)
                 .then(response=>this.formData=response);
         },
         async submitItem(){
             await this.$wire.submitItem(this.filterData,this.formData)
+                .then(()=>{
+                    swal.fire({
+                        icon:'success',
+                        title:'Success',
+                        showConfirmButton:false,
+                        timer:1500,
+                        timerProgressBar: true
+                    }).then(()=>{this.getReletedStudent()});
+                });
+        },
+        async updateDetail(student_id,is_absent){
+            await this.$wire.updateDetail(student_id,is_absent)
+                .then(()=>{
+                    swal.fire({
+                        icon:'success',
+                        title:'Updated',
+                        timer: 1500,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+                });
         },
         async init(){
             this.getSourceData();
@@ -33,8 +54,8 @@
     <table class="table table-compact">
         <tr>
             <td class="border bg-accent"><p class="uppercase text-xs">Level</p></td>
-            <td colspan="" class="border bg-accent">
-                <select x-model="filterData.lvl" class="select select-xs select-bordered w-full">
+            <td class="border bg-accent">
+                <select x-model="filterData.lvl" @change="getReletedStudent()" class="select select-xs select-bordered w-full">
                     <option value="">-</option>
                     <template x-for="value in sourceData.levels" :key="value">
                         <option :value="value" x-text="value"></option>
@@ -42,8 +63,8 @@
                 </select>
             </td>
             <td class="border bg-accent"><p class="uppercase text-xs">Final Graded</p></td>
-            <td colspan="" class="border bg-accent">
-                <select x-model="filterData.final_at" class="select select-bordered select-xs w-full">
+            <td class="border bg-accent">
+                <select x-model="filterData.final_at" @change="getReletedStudent()" class="select select-bordered select-xs w-full">
                     <option value="">-</option>
                     <template x-for="item in sourceData.months" :key="item.value">
                         <option :value="item.value" x-text="item.text"></option>
@@ -78,7 +99,7 @@
                 </select>
             </td>
             <td class="border bg-accent"><p class="uppercase text-xs">Institution</p></td>
-            <td colspan="" class="border bg-accent">
+            <td class="border bg-accent">
                 <input type="text" x-model="filterData.institution" class="input input-bordered input-xs w-full">
             </td>
         </tr>
@@ -101,7 +122,7 @@
         </tr>
         <template x-for="(elem, index) in formData" :key="elem.id">
             <tr>
-                <td><input type="checkbox" x-model="elem.is_absent" :checked="elem.is_absent" class="checkbox checkbox-xs checkbox-accent"></td>
+                <td><input @change="updateDetail(elem.id,elem.is_absent)" type="checkbox" x-model="elem.is_absent" :checked="elem.is_absent" class="checkbox checkbox-xs checkbox-accent"></td>
                 <td colspan="2"><p class="uppercase text-xs" x-text="elem.identity">Id</p></td>
                 <td colspan="2"><p class="uppercase text-xs" x-text="`${elem.name_en} ${elem.name_kh}`">Name</p></td>
                 <td><p class="uppercase text-xs" x-text="elem.is_female ? 'F':'M'">Gender</p></td>
@@ -109,11 +130,10 @@
                 <td><p class="uppercase text-xs" x-text="elem.shift_period">Gender</p></td>
                 <td colspan="2"><p class="uppercase text-xs" x-text="elem.staff.name">Id</p></td>
                 <td><p class="uppercase text-xs" x-text="_.find(sourceData.months,i=>i.value==filterData.final_at).text">Id</p></td>
-                <td>
-                    <div class="badge badge-lg uppercase"
-                        x-text="elem.status ? 'Completed':'Missed'"
-                        :class="{'badge-error':!elem.status,'badge-success':elem.status}">
-                    </div>
+                <td><p class="badge text-xs" :class="{
+                        'badge-error': elem.is_empty,
+                        'badge-success': !elem.is_empty,
+                    }" x-text="elem.is_empty ? 'Incomeplete':'Complete'">Status</p>
                 </td>
             </tr>
         </template>
