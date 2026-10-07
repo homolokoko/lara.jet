@@ -15,7 +15,7 @@ class Profile extends Model
     use SoftDeletes;
 
     protected $table = 'student_profile';
-    protected $fillable = ['name_kh','name_en','gender','date_of_birth','shift','staff_id','room','other','mother_id','father_id','birth_address_id','current_address_id','identity'];
+    protected $fillable = ['name_kh','name_en','is_female','date_of_birth','shift','staff_id','room','other','mother_id','father_id','birth_address_id','current_address_id','identity'];
     protected $appends = ['shift_period','official_dob'];
 
     public function staff()
@@ -55,22 +55,6 @@ class Profile extends Model
 
     public function getShiftPeriodAttribute()
     {
-        switch($this->shift):
-            case 'i':
-                return '07:30-10:30';
-                break;
-            case 'ii':
-                return '01:30-04:30';
-                break;
-            case 'iii':
-                return '05:30-06:30';
-                break;
-            case 'iv':
-                return '06:30-07:30';
-                break;
-            default :
-                return 'Undecided';
-                break;
-        endswitch;
+        return \App\Library\Helper::getShift($this->shift);
     }
 }

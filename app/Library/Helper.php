@@ -7,6 +7,19 @@ use Illuminate\Support\Facades\Storage;
 
 class Helper{
 
+
+    public function getType($val=null)
+    {
+        $collection = collect([
+            ['value'=>1,'text'=>'Monthly'],
+            ['value'=>2,'text'=>'Semester'],
+            ['value'=>3,'text'=>'Final']
+        ]);
+        if(!$val || $val===0)
+            return $collection;
+        return $collection->filter(fn($item)=>$item['value']===$val)->first()['text'];
+    }
+
     public function getShift($val=null)
     {
         $collection = collect([
@@ -55,6 +68,25 @@ class Helper{
         if(!$val || $val===0)
             return $collection;
         return $collection->filter(fn($item)=>$item['value']===$val)->first()['text'];
+    }
+
+    public function getYear()
+    {
+        $current_year = \Carbon\Carbon::now()->year;
+        return range($current_year,$current_year+10);
+    }
+
+    public function getStudyPeriod()
+    {
+        $current_year = \Carbon\Carbon::now()->year;
+        $ranges = range($current_year,$current_year+10);
+        return collect($ranges)->map(fn($item)=>(($item-1).'-'.$item));
+    }
+
+
+    public function getLevel()
+    {
+        return range(1,6);
     }
 
 }

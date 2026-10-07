@@ -91,6 +91,12 @@
                     <img class="w-24" src="{{asset('menu/results.png')}}">
                 </div><button class="text-xs font-bold tracking-wider uppercase">Bullet Marks</button>
             </a>
+            <a  href="{{route('management.certificate-scoring')}}" disabled="true"
+                class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
+                <div class="p-5 overflow-hidden rounded-xl">
+                    <img class="w-24" src="{{asset('menu/paper-document.png')}}">
+                </div><button class="text-xs font-bold tracking-wider uppercase">Grading Certification</button>
+            </a>
         </div>
 
     </div>
