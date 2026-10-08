@@ -51,7 +51,7 @@
     },
     async show(id){
         await this.$wire.show(id)
-            .then(async (response)=>{ console.log('dsaf',response);this.usr = await response; })
+            .then(response=>this.usr = response);
     },
     async upgrade(){
         await this.$wire.upgrade(this.usr)
@@ -71,6 +71,8 @@
             .then(async (response)=>{
                 this.zips= await response.zips;
                 this.positions= await response.positions;
+                this.levels = await response.levels;
+                this.edu_levels = await response.edu_levels;
             });
     }
 }" @edit-usr-info.window="show(event.detail)">
@@ -88,14 +90,10 @@
             <div class="space-y-3">
                 <label class="block label-text-alt" for="">Education Attainment</label>
                 <select x-model="usr.edu_lvl" class="select select-bordered">
-                    <option selected>Please Select Level</option>
-                    <option value="i">Secondary Education (Grades 7-9)</option>
-                    <option value="ii">Upper Secondary (Grades 10-12)</option>
-                    <option value="iii">Diploma</option>
-                    <option value="iv">Associate Degree</option>
-                    <option value="v">Bachelor's Degree</option>
-                    <option value="vi">Master's Degree</option>
-                    <option value="vii">Doctorate/Ph.D.</option>
+                    <option value="">-</option>
+                    <template x-for="item in edu_levels" :key="item.value">
+                        <option :value="item.value" x-text="item.text">Please Select Level</option>
+                    </template>
                 </select>
             </div>
         </div>
@@ -108,9 +106,9 @@
             <div class="flex gap-5">
                 <div class="space-y-3">
                     <label class="block label-text-alt" for="">Gender</label>
-                    <div class="btn-group">
-                        <button @click="usr.is_female=false" :class="{'btn-active':usr.is_female==false}" class="btn btn-sm btn-outline">Male</button>
-                        <button @click="usr.is_female=true" :class="{'btn-active':usr.is_female==true}" class="btn btn-sm btn-outline">Female</button>
+                    <div class="flex gap-3">
+                        <button @click="usr.is_female=0" :class="{'btn-active':usr.is_female==0}" class="btn btn-sm btn-outline btn-ghost">M</button>
+                        <button @click="usr.is_female=1" :class="{'btn-active':usr.is_female==1}" class="btn btn-sm btn-outline btn-ghost">F</button>
                     </div>
                 </div>
                 <div class="space-y-3">
@@ -132,26 +130,33 @@
             <x-single-file-upload disk="" model="usr.img" />
             <div class="space-y-3">
                 <label class="block label-text-alt" for="">Marry Status</label>
-                <div class="btn-group">
-                    <button @click="usr.is_married=false" :class="{'btn-active':usr.is_married===false}" class="btn btn-sm btn-outline">Single</button>
-                    <button @click="usr.is_married=true" :class="{'btn-active':usr.is_married===true}" class="btn btn-sm btn-outline">Married</button>
+                <div class="flex gap-3">
+                    <button @click="usr.is_married=0" :class="{'btn-active':usr.is_married==0}" class="btn btn-sm btn-outline btn-ghost">Single</button>
+                    <button @click="usr.is_married=1" :class="{'btn-active':usr.is_married==1}" class="btn btn-sm btn-outline btn-ghost">Married</button>
                 </div>
             </div>
             <div class="space-y-3">
-                <label class="block label-text-alt" for="">Position&Level</label>
-                <div class="flex gap-5">
-                    <select x-model="usr.position" class="select select-bordered">
-                        <option selected>Please Select Position</option>
-                        <template x-for="(elem, index) in positions" :key="elem.value">
-                            <option :value="elem.value" x-text="elem.text"></option>
-                        </template>
-                    </select>
-                    <select x-model="usr.lvl" class="select select-bordered">
-                        <option selected>Please Select Level</option>
-                        <option value="i">I</option>
-                        <option value="ii">II</option>
-                        <option value="iii">III</option>
-                    </select>
+                <div>
+                    <div class="flex gap-5">
+                        <div class="space-y-3">
+                            <label class="block label-text-alt" for="">Position</label>
+                            <select x-model="usr.position" class="select select-bordered">
+                                <option value="">-</option>
+                                <template x-for="(elem, index) in positions" :key="elem.value">
+                                    <option :value="elem.value" x-text="elem.text"></option>
+                                </template>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block label-text-alt" for="">Level</label>
+                            <select x-model="usr.lvl" class="select select-bordered">
+                                <option value="">-</option>
+                                <template x-for="i in levels" :key="i">
+                                    <option :value="i" x-text="i"></option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

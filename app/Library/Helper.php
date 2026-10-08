@@ -89,4 +89,20 @@ class Helper{
         return range(1,6);
     }
 
+    public function getEducationLevel($val=null)
+    {
+        $collection = collect([
+            ['value'=>1,'text'=>'Secondary Education (Grades 7-9)'],
+            ['value'=>2,'text'=>'Upper Secondary (Grades 10-12)'],
+            ['value'=>3,'text'=>'Diploma'],
+            ['value'=>4,'text'=>'Associate Degree'],
+            ['value'=>5,'text'=>'Bachelor\'s Degree'],
+            ['value'=>6,'text'=>'Master\'s Degree'],
+            ['value'=>7,'text'=>'Doctorate/Ph.D.'],
+        ]);
+        if(!$val || $val===0)
+            return $collection;
+        return $collection->filter(fn($item)=>$item['value']===$val)->first()['text'];
+    }
+
 }

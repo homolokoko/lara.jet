@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Library\Helper;
 use App\Models\Staff\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,28 +30,6 @@ class Staff extends Model
 
     public function getEducationLevelAttribute()
     {
-        switch($this->edu_lvl):
-            case 'i':
-                return 'Secondary Education (Grades 7-9)';
-                break;
-            case 'ii':
-                return 'Upper Secondary (Grades 10-12)';
-                break;
-            case 'iii':
-                return 'Diploma';
-                break;
-            case 'iv':
-                return 'Associate Degree';
-                break;
-            case 'v':
-                return 'Bachelor\'s Degree';
-                break;
-            case 'vi':
-                return 'Master\'s Degree';
-                break;
-            case 'vii':
-                return 'Doctorate/Ph.D.';
-                break;
-        endswitch;
+        return Helper::getEducationLevel($this->edu_lvl);
     }
 }

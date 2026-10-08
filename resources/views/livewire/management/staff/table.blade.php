@@ -54,6 +54,7 @@
                 <td>Date of Birth</td>
                 <td>Education Attainment</td>
                 <td>Position&Level</td>
+                <td>Level</td>
                 <td>Action</td>
             </tr>
         </thead>
@@ -66,13 +67,8 @@
                     <td x-text="elem.staff.is_married ? 'Married':'Single'"></td>
                     <td x-text="elem.staff.date_of_birth"></td>
                     <td x-text="elem.staff.education_level"></td>
-                    <td>
-                        <div x-show="!_.isEmpty(elem.staff.position)" class="flex items-center gap-2">
-                            <span class="uppercase" x-text="elem.staff.position.name"></span>
-                            <div class=" badge badge-secondary badge-xs">lvl : <span class="uppercase"
-                                    x-text="elem.staff.level"></span></div>
-                        </div>
-                    </td>
+                    <td><p class="capitalize" x-text="elem.staff.position.name"></p></td>
+                    <td><p x-text="elem.staff.level"></p></td>
                     <td>
                         <button @click="viewRecord(elem.id)"
                             class="btn btn-xs btn-ghost border border-black">👀</button>
@@ -85,7 +81,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="8">
+                <td colspan="9">
                     <div class="flex justify-between">
                         <div class="btn-group"></div>
                         <div class="btn-group">

@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Management\Staff;
 
-use Illuminate\Support\Facades\Hash;
 use App\Library\GetValueTextList;
+use App\Library\Helper;
 use App\Models\Staff\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -24,8 +25,10 @@ class Create extends Component
         $zips = GetValueTextList::convert(
             \Modules\CountryCatalog\Entities\Zip::where('country_id', 30)->get()
         );
+        $levels = Helper::getLevel();
+        $edu_levels = Helper::getEducationLevel();
 
-        return compact('zips','positions');
+        return compact('zips','positions','levels','edu_levels');
     }
 
     public function save($data)
