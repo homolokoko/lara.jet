@@ -44,10 +44,10 @@
                 <td class="border"><p class="uppercase font-semibold text-xs" x-text="bulletMark.course.name"></p></td>
                 <td class="border"><p class="uppercase text-xs">Type</p></td>
                 <td class="border"><p class="uppercase font-semibold text-xs" x-text="bulletMark.type_label"></p></td>
-                <td class="border"><p class="uppercase text-xs">Presented</p></td>
-                <td class="border"><p class="uppercase font-semibold text-xs" x-text="bulletMark.presented"></p></td>
-                <td class="border"><p class="uppercase text-xs">Absented</p></td>
-                <td class="border"><p class="uppercase font-semibold text-xs" x-text="bulletMark.missed"></p></td>
+                <td class="border"><p class="uppercase text-xs">Leave</p></td>
+                <td class="border"><p class="uppercase font-semibold text-xs" x-text="bulletMark.time_of_leave"></p></td>
+                <td class="border"><p class="uppercase text-xs">Absence</p></td>
+                <td class="border"><p class="uppercase font-semibold text-xs" x-text="bulletMark.time_of_absence"></p></td>
                 <td class="border"><p class="uppercase text-xs">Year</p></td>
                 <td class="border"><p class="uppercase font-semibold text-xs" x-text="bulletMark.year"></p></td>
             </tr>

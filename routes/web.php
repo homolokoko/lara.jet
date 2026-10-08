@@ -39,6 +39,7 @@ Route::middleware([
 
 
     Route::prefix('/management')->group(function(){
+        Route::get('/users',\App\Http\Livewire\Management\Users::class)->name('management.users');
         Route::get('/buyer',fn()=>view('management.buyer'))->name('management.buyer');
         Route::get('/style',fn()=>view('management.style'))->name('management.style');
         Route::get('/purchase-order',fn()=>view('management.purchase-order'))->name('management.purchase-order');

@@ -58,7 +58,7 @@
                 <tr>
                     <td><span class="uppercase font-semibold">Id</span></td>
                     <td><span class="uppercase font-semibold">Name</span></td>
-                    <td><span class="uppercase font-semibold">A/P</span></td>
+                    <td><span class="uppercase font-semibold">L/A</span></td>
                     <td><span class="uppercase font-semibold">Course</span></td>
                     <td><span class="uppercase font-semibold">Shift</span></td>
                     <td><span class="uppercase font-semibold">Type</span></td>
@@ -136,7 +136,7 @@
                             <span x-text="`#${elem.student.identity}`" class="label-text-alt text-center">Id</span>
                         </th>
                         <td class="border"><span x-text="`${elem.student.name_kh} ${elem.student.name_en}`">Name</span></td>
-                        <td class="border"><span x-text="`${elem.missed} / ${elem.presented}`">A/P</span></td>
+                        <td class="border"><span x-text="`${elem.time_of_leave} / ${elem.time_of_absence}`">A/P</span></td>
                         <td class="border"><span x-text="elem.course.name">Course</span></td>
                         <td class="border"><span x-text="elem.shift_label">Shift</span></td>
                         <td class="border"><span x-text="elem.type_label">Type</span></td>

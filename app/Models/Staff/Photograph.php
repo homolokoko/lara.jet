@@ -11,7 +11,7 @@ class Photograph extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'staff_photograph';
-    protected $fillable = ['user_id', 'file_path'];
+    protected $fillable = ['staff_id', 'file_path'];
     public $appends = ['url'];
 
     public function getUrlAttribute()
