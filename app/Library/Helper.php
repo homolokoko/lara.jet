@@ -73,7 +73,7 @@ class Helper{
     public function getYear()
     {
         $current_year = \Carbon\Carbon::now()->year;
-        return range($current_year,$current_year+10);
+        return range($current_year-10,$current_year+10);
     }
 
     public function getStudyPeriod()

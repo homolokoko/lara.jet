@@ -43,7 +43,7 @@ Route::middleware([
         Route::get('/buyer',fn()=>view('management.buyer'))->name('management.buyer');
         Route::get('/style',fn()=>view('management.style'))->name('management.style');
         Route::get('/purchase-order',fn()=>view('management.purchase-order'))->name('management.purchase-order');
-
+        Route::get('/attendence',\App\Http\Livewire\Management\Attendance\Index::class)->name('management.attendence.index');
         Route::get('/user', \App\Http\Livewire\Management\User\Index::class)->name('management.user.index');
         Route::get('/staff',fn()=>view('management.staff'))->name('management.staff');
         Route::get('/course',fn()=>view('management.course'))->name('management.course');
