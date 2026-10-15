@@ -40,8 +40,8 @@
             <a  href="{{ route('management.user.index') }}" disabled="true"
                 class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
                 <div class="p-5 overflow-hidden rounded-xl">
-                    <img class="w-24" src="{{asset('menu/seo-report.png')}}">
-                </div><p class="text-xs font-bold tracking-wider uppercase">Report Management</p>
+                    <img class="w-24" src="{{asset('menu/team.png')}}">
+                </div><p class="text-xs font-bold tracking-wider uppercase">User Management</p>
             </a>
             <a  href="#" disabled="true"
                 class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
