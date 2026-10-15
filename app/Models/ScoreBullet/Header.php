@@ -16,7 +16,7 @@ class Header extends Model
     use SoftDeletes;
 
     protected $table = 'score_bullet_header';
-    protected $fillable = ['user_id','student_id','course_id','shift','type','month','year','presented','missed'];
+    protected $fillable = ['user_id','student_id','course_id','shift','type','month','year','time_of_leave','time_of_absence'];
 
     public $appends = ['shift_label','type_label','month_label'];
 
