@@ -42,7 +42,7 @@
         await this.$wire.datatable(this.page,this.per_page,this.filter)
             .then(async (response)=>{ this.datatable = await response; })
     }
-}" x-init="retrive()" @reload-data-table.window="retrive()">
+}" x-init="retrive()" @reload-data-table.window="retrive()" class="w-full overflow-auto">
 
     <table class="table w-full table-compact">
         <thead>
@@ -61,14 +61,14 @@
         <tbody>
             <template x-for="(elem, index) in datatable.data" :key="elem.id">
                 <tr>
-                    <td x-text="elem.email"></td>
-                    <td x-text="elem.staff.name_en"></td>
-                    <td x-text="elem.staff.is_female ? 'F':'M'"></td>
-                    <td x-text="elem.staff.is_married ? 'Married':'Single'"></td>
-                    <td x-text="elem.staff.date_of_birth"></td>
-                    <td x-text="elem.staff.education_level"></td>
-                    <td><p class="capitalize" x-text="elem.staff.position.name"></p></td>
-                    <td><p x-text="elem.staff.level"></p></td>
+                    <td x-text="elem.email">ID</td>
+                    <td x-text="`${elem.name} ${elem.locale}`">Name</td>
+                    <td x-text="elem.detail.is_female ? 'F':'M'">Is Female</td>
+                    <td x-text="elem.detail.is_married ? 'Married':'Single'">Is Married</td>
+                    <td x-text="elem.detail.dob">DOB</td>
+                    <td x-text="elem.detail.edu_lvl">Education Level</td>
+                    <td><p class="capitalize" x-text="">position</p></td>
+                    <td><p x-text="elem.detail.lvl">Level</p></td>
                     <td>
                         <button @click="viewRecord(elem.id)"
                             class="btn btn-xs btn-ghost border border-black">👀</button>

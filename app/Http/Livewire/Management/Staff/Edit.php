@@ -4,11 +4,15 @@ namespace App\Http\Livewire\Management\Staff;
 
 use App\Library\GetValueTextList;
 use App\Library\Helper;
-use App\Models\Staff\User;
+use App\Models\Member\Role;
+use App\Models\User;
+use App\Models\Member\{Address,Relative,Phonenumber,Detail,RelativePhonenumber};
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Modules\CountryCatalog\Entities\{Street,City,State};
 
 class Edit extends Component
 {
@@ -19,55 +23,89 @@ class Edit extends Component
 
     public function show($id)
     {
-        $user = \App\Models\Staff\User::find($id);
-        return [
-            'id'=>$user->id,
-            'email'=>$user->email,
-            'name_en'=>$user->name,
-            'name_kh'=>$user->staff->name_kh,
-            'is_female'=>$user->staff->is_female,
-            'is_married'=>$user->staff->is_married,
-            'dob'=>$user->staff->dob,
-            'lvl'=>$user->staff->level,
-            'edu_lvl'=>$user->staff->edu_lvl,
-            'position'=>$user->staff->position_id,
-            'img'=>$user->photograph,
-            'tel_main'=> $user->phoneNumbers->where('is_important',true)->first()->phone_number,
-            'tel_opt'=> $user->phoneNumbers->where('is_important',false)->first()->phone_number,
-            'parent_info'=>$user->parentCareer,
-            'birth_add'=>$user->addresses->where('is_current',false)->map(fn($i)=>[
-                'id'=>$i->id,
-                'street'=>$i->street->name,
-                'city'=>$i->city->name,
-                'state'=>$i->state->name,
-                'zip'=>$i->zip_id
-            ])->first(),
-            'current_add'=>$user->addresses->where('is_current',true)->map(fn($i)=>[
-                'id'=>$i->id,
-                'street'=>$i->street->name,
-                'city'=>$i->city->name,
-                'state'=>$i->state->name,
-                'zip'=>$i->zip_id
-            ])->first(),
-        ];
+        $data = User::with(
+            'roles',
+            'phonenumbers',
+            'addresses.street',
+            'addresses.city',
+            'addresses.state',
+            'addresses.zip',
+            'photograph',
+            'relatives.phonenumbers'
+        )->find($id)->toArray();
+
+        return $data;
     }
 
     public function getRelatedList()
     {
-        $positions = GetValueTextList::convert(
-            \App\Models\Staff\Position::get()
-        );
         $zips = GetValueTextList::convert(
             \Modules\CountryCatalog\Entities\Zip::where('country_id', 30)->get()
         );
+        $roles = GetValueTextList::convert(\App\Models\Member\Role::get());
         $levels = Helper::getLevel();
         $edu_levels = Helper::getEducationLevel();
 
-        return compact('zips','positions','levels','edu_levels');
+        return compact('zips','roles','levels','edu_levels');
     }
 
     public function upgrade($data)
     {
+        $user = User::with(
+            'roles',
+            'detail',
+            'relatives',
+            'addresses.street',
+            'addresses.city',
+            'addresses.state',
+            'addresses.zip',
+            'phonenumbers'
+        )->find($data['id']);
+
+        dd(['user'=>$user->toArray(),'data'=>$data]);
+        $user->update([
+            'name'=>$data['name'],
+            'locale'=>$data['locale'],
+        ]);
+
+        foreach((Arr::get('addresses') as $address):
+            $zip_id = Arr::get($address,'zip_id') ? Arr::get($address,'zip_id') : Arr::get($address,'zip.id');
+            $state_name = Str::of(Arr::get($address,'state.name'))->snake()->lower();
+            $city_name = Str::of(Arr::get($address,'city.name'))->snake()->lower();
+            $street_name = Str::of(Arr::get($address,'street.name'))->snake()->lower();
+            $newState = State::updateOrCreate(
+                ['name' => $state_name],
+                ['zip_id' => $zip_id, 'name' => $state_name]
+            );
+            $newCity = City::updateOrCreate(
+                ['name' => $city_name],
+                ['state_id' => $newState->id, 'name' => $city_name]
+            );
+            $newStreet = Street::updateOrCreate(
+                ['name' => $street_name],
+                ['city_id' => $newCity->id, 'name' => $street_name]
+            );
+            $addressUpdate = Address::updateOrCreate(
+                ['user_id'=>$user->id,'is_current'=>Arr::get($address,'is_current')],
+                ['street_id'=>$newStreet->id]
+            );
+        endforeach;
+
+        foreach(Arr::get($data,'relatives') as $relative):
+            $relativeUpdate = Relative::updateOrCreate(
+                ['who_they'=>Arr::get($relative,'who_they'),'user_id'=>$user->id],
+                ['name'=>Arr::get($relative,'name'),'career'=>Arr::get($relative,'career'),'is_current'=>Arr::get($relative,'is_current')]
+            );
+            foreach(Arr::get($relative,'phonenumbers') as $phone):
+                $relativePhonenumberUpdate = RelativePhonenumber::updateOrCreate(
+                    ['user_relative_id'=>$relativeUpdate->id,'id'=>Arr::get($phone,'id')],
+                    ['number'=>Arr::get($phone,'number')]
+                );
+            endforeach;
+        endforeach;
+
+        return;
+
         $userid = $data['id'];
 
         $newStaff['position_id'] = $data['position'];
