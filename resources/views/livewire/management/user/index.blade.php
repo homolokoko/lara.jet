@@ -28,6 +28,10 @@
         this.$wire.reviewData(id)
             .then(response=>this.data = response);
     },
+    choosePage(page){
+        this.page=page;
+        this.getrecords();
+    },
     async getresponsible(){
         await this.$wire.getresponsible()
             .then(async response=>this.responsibles=await response);

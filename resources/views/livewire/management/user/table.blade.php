@@ -21,7 +21,7 @@
         <td colspan="6" class="border">
             <div class="flex">
                 <template x-for="link in datatable.links">
-                    <button class="btn btn-ghost btn-xs" x-text="link.label"></button>
+                    <button @click="choosePage(link.page)" :disabled="link.active" class="btn btn-ghost btn-xs" x-text="link.label"></button>
                 </template>
             </div>
         </td>
