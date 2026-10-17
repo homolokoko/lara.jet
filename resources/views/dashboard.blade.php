@@ -13,7 +13,7 @@
                     <img class="w-24" src="{{asset('menu/attendance.png')}}">
                 </div><p class="text-xs font-bold tracking-wider uppercase">Attendance</p>
             </a>
-            <a
+            <a href="{{ route('management.staff') }}"
                 class="flex flex-col items-center p-3 space-y-3 rounded-lg bg-base-50">
                 <div class="p-5 overflow-hidden rounded-xl">
                     <img class="w-24" src="{{asset('menu/teamwork.png')}}">

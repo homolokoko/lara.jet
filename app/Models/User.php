@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Member\{Detail,PhoneNumber,Relative,Address,Photograph};
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Vicklr\MaterializedModel\Traits\HasMaterializedPaths;
 
 
 class User extends Authenticatable
@@ -20,6 +22,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+    use HasMaterializedPaths;
 
     /**
      * The attributes that are mass assignable.
@@ -63,4 +66,43 @@ class User extends Authenticatable
     ];
 
     protected $guard_name = 'web';
+
+    // 'parent_id' column name
+    protected string $parentColumn = 'parent_id';
+
+    // 'depth' column name
+    protected string $depthColumn = 'depth';
+
+    // 'path' column name
+    protected string $pathColumn = 'path';
+
+    // guard attributes from mass-assignment
+    protected $guarded = array('id', 'parent_id', 'depth', 'path', 'weight');
+
+
+    public function detail()
+    {
+        return $this->hasOne(Detail::class, 'user_id');
+    }
+
+    public function photograph()
+    {
+        return $this->hasOne(Photograph::class,'user_id');
+    }
+
+    public function phonenumbers()
+    {
+        return $this->hasMany(Phonenumber::class,'user_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class,'user_id');
+    }
+
+    public function relatives()
+    {
+        return $this->hasMany(Relative::class,'user_id');
+    }
+
 }

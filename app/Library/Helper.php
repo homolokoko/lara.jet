@@ -105,4 +105,15 @@ class Helper{
         return $collection->filter(fn($item)=>$item['value']===$val)->first()['text'];
     }
 
+    public function getRelative($val=null)
+    {
+        $collection = collect([
+            ['value'=>1,'text'=>'Mother'],
+            ['value'=>2,'text'=>'Father'],
+        ]);
+        if(!$val || $val===0)
+            return $collection;
+        return $collection->filter(fn($item)=>$item['value']===$val)->first()['text'];
+    }
+
 }
