@@ -15,7 +15,7 @@ class CraeteUsersRelativePhonenumbersTable extends Migration
     {
         Schema::create('users_relative_phonenumbers',function (Blueprint $table){
             $table->id();
-            $table->foreignId('user_relative_id')->constrained('users_relative')->cascadeOnDelete();
+            $table->foreignId('user_relative_id');
             $table->bigInteger('number');
             $table->softDeletes();
         });

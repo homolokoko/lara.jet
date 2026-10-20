@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Management\User;
 
 use App\Library\GetValueTextList;
-use App\Models\Member\Profile;
+use App\Models\User;
 use Error;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
@@ -19,12 +19,12 @@ class Index extends Component
 
     public function getresponsible()
     {
-        return Profile::get()->map(fn($item)=>['value'=>$item->id,'text'=>$item->locale.' '.$item->name])->toArray();
+        return User::get()->map(fn($item)=>['value'=>$item->id,'text'=>$item->locale.' '.$item->name])->toArray();
     }
 
     public function getrecords($page,$perpage,$filter)
     {
-        return Profile::with('parent')->paginate($perpage,'*','page',$page)->toArray();
+        return User::with('parent')->paginate($perpage,'*','page',$page)->toArray();
     }
 
     public function createData($data)
@@ -42,14 +42,16 @@ class Index extends Component
             'Benjamin', 'Katherine', 'Samuel', 'Christine', 'Gregory', 'Debra', 'Alexander', 'Rachel', 'Patrick', 'Carolyn',
             'Frank', 'Janet', 'Raymond', 'Catherine', 'Jack', 'Maria', 'Dennis', 'Heather', 'Jerry', 'Diane',
         ];
-        $responsible = 1695;
+        $responsible = 1;
 
-        for($i=1;$i<=100;$i++){
+        for($i=1;$i<=2;$i++){
+            $last_name = Arr::random($names);
+            $first_name = Arr::random($names);
             $this->_createData([
                 'responsible'=>$responsible,
                 'email'=>'ACE'. array_rand(range(10000,99999)),
-                'name'=>Arr::random($names).' '.Arr::random($names),
-                'locale'=>Arr::random($names).' '.Arr::random($names),
+                'name'=>"$last_name $first_name",
+                'locale'=>"$last_name $first_name",
             ]);
         }
 
@@ -66,13 +68,14 @@ class Index extends Component
             if($validator->fails()){
                 return ['fail'=>true,'messages'=>$validator];
             }else{
-                $root = Profile::find($data['responsible']);
-                $child = Profile::create([
+                $root = User::find($data['responsible']);
+                $child = User::create([
                     'password' => Hash::make('123'),
                     'name' => $data['name'],
                     'locale' => $data['locale'],
                     'email' => $data['email']
                 ]);
+                $child->syncRoles('admin');
                 if($root)
                     $child->makeChildOf($root);
                 return ['fail'=>false,'messages'=>'Success'];

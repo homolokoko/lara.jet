@@ -30,11 +30,11 @@ class AddColumnsIntoUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $this->dropColumn('locale');
-            $this->dropColumn('parent_id');
-            $this->dropColumn('path');
-            $this->dropColumn('dept');
-            $this->dropColumn('weight');
+            $table->dropColumn('locale');
+            $table->dropColumn('parent_id');
+            $table->dropColumn('path');
+            $table->dropColumn('dept');
+            $table->dropColumn('weight');
         });
     }
 }

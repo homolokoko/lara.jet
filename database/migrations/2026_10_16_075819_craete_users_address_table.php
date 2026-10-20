@@ -15,7 +15,7 @@ class CraeteUsersAddressTable extends Migration
     {
         Schema::create('users_adress',function (Blueprint $table){
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id');
             $table->bigInteger('street_id');
             $table->boolean('is_current');
             $table->softDeletes();

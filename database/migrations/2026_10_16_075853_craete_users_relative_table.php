@@ -15,7 +15,7 @@ class CraeteUsersRelativeTable extends Migration
     {
         Schema::create('users_relative',function (Blueprint $table){
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id');
             $table->integer('who_they');
             $table->string('name');
             $table->string('career');

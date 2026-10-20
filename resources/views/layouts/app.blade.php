@@ -37,9 +37,9 @@
 <header class="border">
 
     <div x-data="{show_nav:false}">
-        <div x-show="show_nav" class="w-1/4 h-full py-5 overflow-auto shadow-lg side">
+        {{-- <div x-show="show_nav" class="w-1/4 h-full py-5 overflow-auto shadow-lg side">
             @include('layouts.side')
-        </div>
+        </div> --}}
     </div>
 </header>
 
