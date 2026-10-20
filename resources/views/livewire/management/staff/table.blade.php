@@ -67,13 +67,11 @@
                     <td x-text="elem.detail.is_married ? 'Married':'Single'">Is Married</td>
                     <td x-text="elem.detail.dob">DOB</td>
                     <td x-text="elem.detail.edu_lvl">Education Level</td>
-                    <td><p class="capitalize" x-text="">position</p></td>
+                    <td><p class="capitalize" x-text="_.first(elem.roles).name">position</p></td>
                     <td><p x-text="elem.detail.lvl">Level</p></td>
                     <td>
-                        <button @click="viewRecord(elem.id)"
-                            class="btn btn-xs btn-ghost border border-black">👀</button>
-                        <button @click="$dispatch('edit-usr-info',elem.id)"
-                            class="btn btn-xs btn-ghost border border-black">✏️</button>
+                        <button @click="viewRecord(elem.id)" class="btn btn-xs btn-ghost border border-black">👀</button>
+                        <button @click="$dispatch('edit-usr-info',elem.id)" class="btn btn-xs btn-ghost border border-black">✏️</button>
                         <button @click="remove(elem.id)" class="btn btn-xs btn-ghost border border-black">🗑</button>
                     </td>
                 </tr>

@@ -10,14 +10,19 @@
         editInfo:{},
         selectedView:{},
         result:{
-            name_kh:'',
-            name_en:'',
-            is_female:false,
+            name:'',
+            locale:'',
+            detail:{
+                dob:'',
+                room:null,
+
+            },
             dob:'',
             other:'',
             room:'',
             staff:'',
             shift:'',
+            is_female:false,
             birth:{
                 street:'',
                 city:'',
@@ -66,6 +71,23 @@
         editRecord(param){
             this.tab = 'edit';
             this.editInfo = _.find(this.datatable.data,i=>i.id===param);
+            if(_.isEmpty(this.editInfo.addresses))
+                this.editInfo.addresses = [
+                    {is_current:false},
+                    {is_current:true}
+                ];
+            if(_.isEmpty(this.editInfo.relatives))
+                this.editInfo.relatives = [
+                    {
+                        who_they:{value:1,text:'Mother'},
+                        phonenumbers:[{number:''},{number:''}]
+                    },
+                    {
+                        who_they:{value:2,text:'Father'},
+                        phonenumbers:[{number:''},{number:''}]
+                    },
+                ]
+            console.log('edit info', this.editInfo);
         },
         async updateRecord(){
             await this.$wire.updateRecord(this.editInfo)
@@ -123,17 +145,12 @@
         <div class="tabs tabs-boxed">
             <a @click="tab='table'" class="tab" :class="{'tab-active':tab=='table'}">
                 Data Source</a>
-            <a @click="tab='add'" class="tab" :class="{'tab-active':tab=='add'}">
-                Create Person Information</a>
             <a class="tab" :class="{'tab-active':tab=='edit'}">
                 Edit Person Information</a>
         </div>
 
         <div x-show="tab=='table'">
             @include('livewire.management.student.table')
-        </div>
-        <div x-show="tab=='add'">
-            @include('livewire.management.student.add')
         </div>
         <div x-show="tab=='edit'">
             @include('livewire.management.student.edit')
@@ -155,49 +172,11 @@
                                 <ul>
                                     <li>
                                         <label class="label-text-alt uppercase"
-                                            x-text="`Name : ${selectedView.name_kh}`"></label>
+                                            x-text="`Locate : ${selectedView.locale}`"></label>
                                     </li>
                                     <li>
                                         <label class="label-text-alt uppercase"
-                                            x-text="`Name : ${selectedView.name_en}`"></label>
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Sex : ${selectedView.gender}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Date Of Birth : ${selectedView.official_dob}`"></label>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>BIRTH PLACE</th>
-                            <th>CURRENT PLACE</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Village : ${selectedView.birth_address.name}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Commune : ${selectedView.birth_address.city.name}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`District : ${selectedView.birth_address.state.name}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Proving : ${selectedView.birth_address.zip.name}`"></label>
+                                            x-text="`Name : ${selectedView.name}`"></label>
                                     </li>
                                 </ul>
                             </td>
@@ -205,71 +184,57 @@
                                 <ul>
                                     <li>
                                         <label class="label-text-alt uppercase"
-                                            x-text="`Village : ${selectedView.current_address.name}`"></label>
+                                            x-text="`Sex : ${selectedView.detail.is_female ? 'F':'M'}`"></label>
                                     </li>
                                     <li>
                                         <label class="label-text-alt uppercase"
-                                            x-text="`Commune : ${selectedView.current_address.city.name}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`District : ${selectedView.current_address.state.name}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Proving : ${selectedView.current_address.zip.name}`"></label>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>FATHER INFORMATION</th>
-                            <th>MOTHER INFORMATION</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Name : ${selectedView.father_info.name}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Profession : ${selectedView.father_info.job}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Main Number : ${selectedView.father_info.main_number}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Seconday Number : ${selectedView.father_info.subs_number}`"></label>
-                                    </li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Name : ${selectedView.mother_info.name}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Profession : ${selectedView.mother_info.job}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Main Number : ${selectedView.mother_info.main_number}`"></label>
-                                    </li>
-                                    <li>
-                                        <label class="label-text-alt uppercase"
-                                            x-text="`Seconday Number : ${selectedView.mother_info.subs_number}`"></label>
+                                            x-text="`Date Of Birth : ${selectedView.detail.dob}`"></label>
                                     </li>
                                 </ul>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="flex gap-5">
+                    <template x-for="address in selectedView.addresses">
+                        <div class="space-y-5">
+                            <h3 class="text-xs uppercase font-semibold" x-text="address.is_current ? 'Current Place':'Birth Place'"></h3>
+                            <div>
+                                <label for="" class="label-text-alt uppercase">Street</label>
+                                <p x-text="address.street.name"></p>
+                            </div>
+                            <div>
+                                <label for="" class="label-text-alt uppercase">City</label>
+                                <p x-text="address.city.name"></p>
+                            </div>
+                            <div>
+                                <label for="" class="label-text-alt uppercase">State</label>
+                                <p x-text="address.state.name"></p>
+                            </div>
+                            <div>
+                                <label for="" class="label-text-alt uppercase">Zip</label>
+                                <p x-text="address.zip.name"></p>
+                            </div>
+                        </div>
+                    </template>
+                    <template x-for="relative in selectedView.relatives">
+                        <div class="space-y-5">
+                            <h3 class="text-xs font-semibold uppercase" x-text="relative.who_they.text"></h3>
+                            <div>
+                                <label for="" class="label-text-alt uppercase">Name</label>
+                                <p x-text="relative.name"></p>
+                            </div>
+                            <div>
+                                <label for="" class="label-text-alt uppercase">Career</label>
+                                <p x-text="relative.career"></p>
+                            </div>
+                            <h3 class="text-xs font-semibold uppercase">Phone Numbers</h3>
+                            <template x-for="phone in relative.phonenumbers">
+                                <p x-text="phone.number"></p>
+                            </template>
+                        </div>
+                    </template>
+                </div>
                 <div class="flex justify-center items-center p-5">
                     <button @click="closeDetailView()" class="btn btn-ghost">Close</button>
                 </div>

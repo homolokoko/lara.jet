@@ -50,18 +50,8 @@ class Edit extends Component
 
     public function upgrade($data)
     {
-        $user = User::with(
-            'roles',
-            'detail',
-            'relatives',
-            'addresses.street',
-            'addresses.city',
-            'addresses.state',
-            'addresses.zip',
-            'phonenumbers'
-        )->find($data['id']);
+        $user = User::find($data['id']);
 
-        dd(['user'=>$user->toArray(),'data'=>$data]);
         $user->update([
             'name'=>Arr::get($data,'name'),
             'locale'=>Arr::get($data,'locale'),

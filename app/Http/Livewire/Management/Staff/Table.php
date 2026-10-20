@@ -13,7 +13,7 @@ class Table extends Component
 
     public function datatable($page,$per_page,$filter)
     {
-        return \App\Models\Member\Profile::with(
+        return \App\Models\User::with(
             'detail',
             'roles',
             'phonenumbers',
@@ -23,11 +23,11 @@ class Table extends Component
             'addresses.zip',
             'photograph',
             'relatives.phonenumbers'
-        )->orderBy('id','asc')->paginate($per_page,['*'],'page',$page)->toArray();
+        )->where('id','!=',auth()->user()->id)->orderBy('id','asc')->paginate($per_page,['*'],'page',$page)->toArray();
     }
 
     public function remove($id)
     {
-        return \App\Models\Member\Profile::where('id',$id)->delete();
+        return \App\Models\User::where('id',$id)->delete();
     }
 }

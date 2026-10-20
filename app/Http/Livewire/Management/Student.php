@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Management;
 
 use App\Library\GetValueTextList;
 use App\Library\Helper;
-use App\Models\Staff;
+use App\Models\User;
 use App\Models\Student\{Profile,Relative};
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -23,25 +23,23 @@ class Student extends Component
     public function load()
     {
         $zips = (new GetValueTextList)->convert(Entities\Zip::where('country_id',30)->get());
-        $staffs = Staff::select('user_id as value','name_en as text')->get()->toArray();
+        $staffs = (new GetValueTextList)->convert(User::get());
         $shifts = Helper::getShift();
         return compact('zips','staffs','shifts');
     }
 
     public function datatable($page,$per_page,$filter)
     {
-        return Profile::with([
-            'staff',
-            'motherInfo',
-            'fatherInfo',
-            'birthAddress.city',
-            'birthAddress.state',
-            'birthAddress.zip',
-            'birthAddress.country',
-            'currentAddress.city',
-            'currentAddress.state',
-            'currentAddress.zip',
-            'currentAddress.country',
+        return User::with([
+            'detail',
+            'roles',
+            'phonenumbers',
+            'addresses.street',
+            'addresses.city',
+            'addresses.state',
+            'addresses.zip',
+            'photograph',
+            'relatives.phonenumbers'
             ])->paginate($per_page,['*'],'page',$page)->toArray();
     }
 
@@ -243,6 +241,8 @@ class Student extends Component
 
     public function updateRecord($data)
     {
+        dd($data);
+
         if(!empty(Arr::get($data,'birth_address.state.name')))
         {
             $birth_state_name = Str::of(Arr::get($data,'birth_address.state.name'))->lower()->snake();
