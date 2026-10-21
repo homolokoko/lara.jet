@@ -5,6 +5,7 @@ namespace Modules\CountryCatalog\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Modules\CountryCatalog\Entities;
 
@@ -16,6 +17,43 @@ class CountryCatalogController extends Controller
      */
     public function index()
     {
+        // $names = [
+        //     'Coco', 'Mimi', 'Lulu', 'Bobo', 'Nana', 'Kiki', 'Titi', 'Momo', 'Fifi', 'Gigi',
+        //     'Dodo', 'Zuzu', 'Lola', 'Luna', 'Bella', 'Daisy', 'Milo', 'Max', 'Leo', 'Charlie',
+        //     'Buddy', 'Rocky', 'Teddy', 'Oscar', 'Simba', 'Nemo', 'Ruby', 'Rosie', 'Lily', 'Molly',
+        //     'Sophie', 'Ginger', 'Pepper', 'Cookie', 'Muffin', 'Peanut', 'Biscuit', 'Waffles', 'Honey', 'Sugar',
+        //     'Mochi', 'Boba', 'Panda', 'Bear', 'Koko', 'Popo', 'Pipi', 'Lili', 'Nini', 'Vivi',
+        //     'Zizi', 'Juju', 'Jojo', 'Toto', 'Yoyo', 'Soso', 'Roro', 'Cici', 'Didi', 'Bibi',
+        //     'Pepe', 'Tutu', 'Susu', 'Kuku', 'Mumu', 'Wawa', 'Lala', 'Tata', 'Baba', 'Gaga',
+        //     'Sunny', 'Happy', 'Lucky', 'Shadow', 'Tiger', 'Bailey', 'Cleo', 'Zoe', 'Mia', 'Ella',
+        //     'Ava', 'Emma', 'Nora', 'Jack', 'Toby', 'Finn', 'Ollie', 'Louie', 'Sammy', 'Benny',
+        //     'Poppy', 'Penny', 'Hazel', 'Olive', 'Willow', 'Maple', 'Cherry', 'Berry', 'Candy', 'Jelly',
+        // ];
+        // $zips = \App\Library\Helper::getState();
+        // foreach($zips as $key=>$value){
+        //     $zip = Entities\Zip::create(['country_id'=>39,'name'=>$value]);
+        //     for($j=0;$j<5;$j++){
+        //         $state1 = Arr::random($names);
+        //         $state2 = Arr::random($names);
+        //         $state3 = Arr::random($names);
+        //         $state4 = Arr::random($names);
+        //         $state = Entities\State::create(['zip_id'=>$zip->id,'name'=>"$state1$state2 $state3$state4"]);
+        //         for($k=0;$k<5;$k++){
+        //             $city1 = Arr::random($names);
+        //             $city2 = Arr::random($names);
+        //             $city3 = Arr::random($names);
+        //             $city4 = Arr::random($names);
+        //             $city = Entities\City::create(['state_id'=>$state->id,'name'=>"$city1$city2 $city3$city4"]);
+        //             for($l=0;$l<5;$l++){
+        //                 $street1 = Arr::random($names);
+        //                 $street2 = Arr::random($names);
+        //                 $street3 = Arr::random($names);
+        //                 $street4 = Arr::random($names);
+        //                 $street = Entities\Street::create(['city_id'=>$city->id,'name'=>"$street1$street2 $street3$street4"]);
+        //             }
+        //         }
+        //     }
+        // }
         return view('countrycatalog::index');
     }
 
