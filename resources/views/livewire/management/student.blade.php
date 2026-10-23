@@ -66,6 +66,50 @@
         editRecord(param){
             this.tab = 'edit';
             this.editInfo = _.find(this.datatable.data,i=>i.id===param);
+            if(_.isEmpty(this.editInfo.detail))
+                this.editInfo.detail = {
+                    dob:null,
+                    room:null,
+                    shift:null,
+                    is_female:null,
+                };
+            if(_.isEmpty(this.editInfo.addresses))
+                this.editInfo.addresses = [
+                    {
+                        is_current:false,
+                        street:{name:''},
+                        city:{name:''},
+                        state:{name:''},
+                        zip_id:null
+                    },
+                    {
+                        is_current:true,
+                        street:{name:''},
+                        city:{name:''},
+                        state:{name:''},
+                        zip_id:null
+                    },
+                ];
+            if(_.isEmpty(this.editInfo.relatives))
+                this.editInfo.relatives = [
+                    {
+                        is_current:true,
+                        who_they:{value:1,text:'Mother'},
+                        phonenumbers:[
+                            {number:''},
+                            {number:''},
+                        ],
+                    },
+                    {
+                        is_current:true,
+                        who_they:{value:2,text:'Father'},
+                        phonenumbers:[
+                            {number:''},
+                            {number:''},
+                        ],
+                    },
+                ];
+
         },
         async updateRecord(){
             await this.$wire.updateRecord(this.editInfo)
@@ -113,18 +157,29 @@
             this.$wire.datatable(this.page,this.per_page,this.filter)
                 .then((response) => { this.datatable = response;console.log('datatable',response); });
         },
-        init(){
-            this.$wire.load()
+        selectedPage(page){
+            this.page = page;
+            this.datatable();
+        },
+        async load(){
+            await this.$wire.load()
                 .then((response)=>{ this.data = response });
-            this.triggerPage(1);
+        },
+        async datatable(){
+            await this.$wire.datatable(this.page,this.per_page,this.filter)
+                .then((response) => {this.datatable = response;});
+        },
+        init(){
+            this.load();
+            this.datatable();
         }
     }" class="border divide-y rounded-lg">
 
         <div class="tabs tabs-boxed">
             <a @click="tab='table'" class="tab" :class="{'tab-active':tab=='table'}">
                 Data Source</a>
-            <a @click="tab='add'" class="tab" :class="{'tab-active':tab=='add'}">
-                Create Person Information</a>
+            {{-- <a @click="tab='add'" class="tab" :class="{'tab-active':tab=='add'}">
+                Create Person Information</a> --}}
             <a class="tab" :class="{'tab-active':tab=='edit'}">
                 Edit Person Information</a>
         </div>
@@ -132,9 +187,9 @@
         <div x-show="tab=='table'">
             @include('livewire.management.student.table')
         </div>
-        <div x-show="tab=='add'">
+        {{-- <div x-show="tab=='add'">
             @include('livewire.management.student.add')
-        </div>
+        </div> --}}
         <div x-show="tab=='edit'">
             @include('livewire.management.student.edit')
         </div>
