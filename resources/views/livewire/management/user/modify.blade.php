@@ -3,7 +3,7 @@
     <div class="p-5 form-control">
         <div class="space-y-2 form-control">
             <label for="" class="label-text-alt">ID</label>
-            <input x-model="data.email" type="text" class="input input-sm input-bordered w-full" />
+            <input x-model="data.email" readonly type="text" class="input input-sm input-bordered w-full" />
         </div>
         <div class="space-y-2 form-control">
             <label for="" class="label-text-alt">Name</label>

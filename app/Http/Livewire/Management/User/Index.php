@@ -24,10 +24,10 @@ class Index extends Component
 
     public function getrecords($page,$perpage,$filter)
     {
-        return User::with('parent')->paginate($perpage,'*','page',$page)->toArray();
+        return User::with('parent','roles')->paginate($perpage,'*','page',$page)->toArray();
     }
 
-    public function createData($data)
+    public function _createData($data)
     {
 
         $names = [
@@ -42,23 +42,61 @@ class Index extends Component
             'Benjamin', 'Katherine', 'Samuel', 'Christine', 'Gregory', 'Debra', 'Alexander', 'Rachel', 'Patrick', 'Carolyn',
             'Frank', 'Janet', 'Raymond', 'Catherine', 'Jack', 'Maria', 'Dennis', 'Heather', 'Jerry', 'Diane',
         ];
-        $responsible = 1;
+        $root = User::find(1);
 
-        for($i=1;$i<=2;$i++){
+        $last_name = Arr::random($names);
+        $first_name = Arr::random($names);
+        $principle = User::create([
+            'email'=>'ACE'. array_rand(range(10000,99999)),
+            'name'=>"$last_name $first_name",
+            'locale'=>"$last_name $first_name",
+            'password' => Hash::make('123'),
+        ]);
+        $principle->syncRoles(4);
+        if($root)
+            $principle->makeChildOf($root);
+
+        for($i=1;$i<3;$i++){
             $last_name = Arr::random($names);
             $first_name = Arr::random($names);
-            $this->_createData([
-                'responsible'=>$responsible,
+            $vice = User::create([
                 'email'=>'ACE'. array_rand(range(10000,99999)),
                 'name'=>"$last_name $first_name",
                 'locale'=>"$last_name $first_name",
+                'password' => Hash::make('123'),
             ]);
+            $vice->syncRoles(5);
+            $vice->makeChildOf($principle);
+            for($j=1;$j<5;$j++){
+                $last_name = Arr::random($names);
+                $first_name = Arr::random($names);
+                $senior = User::create([
+                    'email'=>'ACE'. array_rand(range(10000,99999)),
+                    'name'=>"$last_name $first_name",
+                    'locale'=>"$last_name $first_name",
+                    'password' => Hash::make('123'),
+                ]);
+                $senior->syncRoles(8);
+                $senior->makeChildOf($vice);
+                for($k=1;$k<10;$k++){
+                    $last_name = Arr::random($names);
+                    $first_name = Arr::random($names);
+                    $member = User::create([
+                        'email'=>'ACE'. array_rand(range(10000,99999)),
+                        'name'=>"$last_name $first_name",
+                        'locale'=>"$last_name $first_name",
+                        'password' => Hash::make('123'),
+                    ]);
+                    $member->syncRoles(7);
+                    $member->makeChildOf($senior);
+                }
+            }
         }
 
 
     }
 
-    public function _createData($data)
+    public function createData($data,$role)
     {
         try{
             $validator = Validator::make($data, [
@@ -75,7 +113,7 @@ class Index extends Component
                     'locale' => $data['locale'],
                     'email' => $data['email']
                 ]);
-                $child->syncRoles('admin');
+                $child->syncRoles($role);
                 if($root)
                     $child->makeChildOf($root);
                 return ['fail'=>false,'messages'=>'Success'];
@@ -88,7 +126,7 @@ class Index extends Component
 
     public function reviewData($id)
     {
-        return Profile::find($id)->toArray();
+        return User::find($id)->toArray();
     }
 
     public function updateData($data)
@@ -106,7 +144,6 @@ class Index extends Component
                 $child->update([
                     'name' => $data['name'],
                     'locale' => $data['locale'],
-                    'email' => $data['email']
                 ]);
                 if($root)
                     $child->first()->makeChildOf($root);

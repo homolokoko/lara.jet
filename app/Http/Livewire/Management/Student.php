@@ -4,9 +4,8 @@ namespace App\Http\Livewire\Management;
 
 use App\Library\GetValueTextList;
 use App\Library\Helper;
-use App\Models\Staff;
 use App\Models\User;
-use App\Models\Member\{Detail,Phonenumber,Relative,RelativePhonenumber,Address};
+use App\Models\Student\{Profile,Relative};
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -34,14 +33,15 @@ class Student extends Component
     {
         return User::with([
             'detail',
-            'parent',
-            'relatives.phonenumbers',
+            'roles',
             'phonenumbers',
             'addresses.street',
             'addresses.city',
             'addresses.state',
             'addresses.zip',
-            ])->where('parent_id',auth()->user()->id)->paginate($per_page,['*'],'page',$page)->toArray();
+            'photograph',
+            'relatives.phonenumbers'
+            ])->paginate($per_page,['*'],'page',$page)->toArray();
     }
 
     public function _create()
